@@ -1,0 +1,13 @@
+{
+  "name": "ResearchDate",
+  "version": "0.0.1",
+  "dependencies": {
+    "jsSHA": "^2.0.2"
+  },
+  "overrides": {
+    "jsSHA": {
+      "arch": [ "client" ]
+    }
+  },
+  "private": true
+}
