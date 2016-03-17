@@ -1,3 +1,8 @@
 template(name='Home')
-  div(class='home')
-  | Find me in app/client/templates/home/home
+    div(class='home')
+        input(type='file' name='artifact')
+        form(id='artifact-form' method='post')
+            div(id='hash-container')
+                p SHA256 hash is:
+                    input(type='text' name='hash' value='#{artifactHash}' readonly)
+
