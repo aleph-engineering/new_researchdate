@@ -8,3 +8,8 @@ Router.route '/',
   name: 'home'
   controller: 'HomeController'
   where: 'client'
+
+Router.route '/timestamp',
+  name: 'timestamp'
+  controller: 'TimestampController'
+  where: 'server'

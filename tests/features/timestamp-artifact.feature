@@ -7,11 +7,11 @@ Feature: Timestamp an artifact
 
 
   Background:
-    Given I am on the site
+    Given I am on the homepage
 
 
   Scenario: Timestamp an artifact
-    Given I provide the digital artifact
-    When I click the button "Timestamp"
+    Given I provide the digital artifact "TEST.txt"
+    When I submit the form
     Then the site returns to me a timestamp
     And returns the encrypted hash
