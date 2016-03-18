@@ -2,16 +2,10 @@
   "name": "ResearchDate",
   "version": "0.0.1",
   "dependencies": {
-    "jsSHA": "^2.0.2",
-    "semantic": "semantic-ui#^2.1.8"
+    "jsSHA": "^2.0.2"
   },
   "overrides": {
     "jsSHA": {
-      "arch": [
-        "client"
-      ]
-    },
-    "semantic": {
       "arch": [
         "client"
       ]

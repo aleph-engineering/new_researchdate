@@ -45,6 +45,7 @@ jquery@1.11.4
 launch-screen@1.0.4
 livedata@1.0.15
 logging@1.0.8
+materialize:materialize@0.97.5
 meteor@1.1.10
 meteor-base@1.0.1
 minifiers@1.1.7
@@ -59,7 +60,6 @@ mquandalle:jade-compiler@0.4.5
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
 ordered-dict@1.0.4
-pfafman:filesaver@0.2.2
 promise@0.5.1
 random@1.0.5
 reactive-dict@1.1.3
