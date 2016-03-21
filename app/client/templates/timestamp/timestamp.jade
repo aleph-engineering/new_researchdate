@@ -1,0 +1,16 @@
+template(name='timestamp')
+  div(class='timestamp row')
+    div(class='file-field input-field')
+      div(class='btn')
+        span File
+        input(type='file' name='artifact')
+      div(class='file-path-wrapper')
+        input(class='file-path validate' type='text' placeholder='Choose the file you want to timestamp')
+    form(id='artifact-form' method='post' action='timestamp' class='col s12')
+      div(id='hash-container' class='row')
+        div(class='input-field')
+          label(for='hash' class='active') SHA256 Hash
+          input(type='text' id='hash' name='hash' value='#{artifactHash}' readonly)
+      div(class='row')
+        button(type='submit' class='btn waves-effect waves-light' name='timestamp') Timestamp
+          //i(class='material-icons right') send
