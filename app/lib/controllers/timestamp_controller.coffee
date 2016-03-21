@@ -28,10 +28,11 @@
   onRerun: ->
     @next()
   onBeforeAction: ->
-#    TODO Redirect when the method isn't POST
-#    if @request.method == 'POST'
-    @next()
-
+    if @request.method == 'POST'
+      @next()
+    else
+      @response.statusCode = 403
+      @response.end 'Not allowed'
 
 # The same thing as providing a function as the second parameter. You can
 # also provide a string action name here which will be looked up on a Controller
@@ -55,6 +56,8 @@
           'Content-Disposition': "attachment; filename=" + filename
         resp.writeHead 200, headers
         return resp.end resultBuffer
+
   onAfterAction: ->
   onStop: ->
+
 )
