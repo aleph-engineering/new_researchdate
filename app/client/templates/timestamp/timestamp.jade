@@ -6,7 +6,7 @@ template(name='timestamp')
         input(type='file' name='artifact')
       div(class='file-path-wrapper')
         input(class='file-path validate' type='text' placeholder='Choose the file you want to timestamp')
-    form(id='artifact-form' method='post' action='timestamp' class='col s12')
+    form(id='artifact-form' method='post' action="{{pathFor 'timestamp'}}" class='col s12')
       div(id='hash-container' class='row')
         div(class='input-field')
           label(for='hash' class='active') SHA256 Hash
