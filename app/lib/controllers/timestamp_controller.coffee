@@ -49,7 +49,11 @@
       if error
         console.log "Error!!"
       else
-        resultBuffer = new Buffer(result)
+        arr = Object.keys(result).map((key) ->
+          result[key]
+        )
+        resultBuffer = new Buffer(arr)
+
         filename = 'encrypted_hash.tsr'
         headers =
           'Content-Type': 'application/timestamp-reply',
@@ -59,5 +63,4 @@
 
   onAfterAction: ->
   onStop: ->
-
 )
