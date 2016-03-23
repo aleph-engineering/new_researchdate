@@ -1,6 +1,3 @@
-/**
- * Created by marian on 3/16/16.
- */
 module.exports = {
     offline: true,
     watch: true,
