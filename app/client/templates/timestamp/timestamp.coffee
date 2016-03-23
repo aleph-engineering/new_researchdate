@@ -17,19 +17,11 @@ Template.timestamp.events {
           bytesString = String.fromCharCode.apply(null, new Uint8Array(chunk));
           shaObj.update bytesString
         success: ->
-#TODO Show spinner while is generating the hash (for large files, it may take a while)
+#TODO (Marian Morgalo) Show spinner while is generating the hash (for large files, it may take a while)
           hash = shaObj.getHash('HEX')
           console.log 'HASH: ' + hash
           Session.set 'artifactHash', hash
       })
-#  'submit #artifact-form': (e) ->
-#    e.preventDefault
-#    hash = $(e.target).find('[name="hash"]').val()
-#    Meteor.call 'server/timestamp', hash, (error, result) ->
-#      if !error
-#        console.log "Success!!"
-#      else
-
 }
 
 Template.timestamp.helpers {
