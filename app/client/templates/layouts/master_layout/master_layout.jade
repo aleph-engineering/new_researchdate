@@ -1,7 +1,9 @@
 template(name='MasterLayout')
+
     nav(class='light-blue lighten-1' role='navigation')
         div(class='nav-wrapper container')
-            a(class='brand-logo' href='/') ResearchDate
+            a(class='brand-logo' href='{{ pathFor "home" }}') ResearchDate
+
     div(class='container')
         +yield
     div(class='ui inverted vertical footer segment')
