@@ -27,3 +27,8 @@ mquandalle:bower
 http
 froatsnook:request
 materialize:materialize
+meteorhacks:npm
+
+
+npm-container
+meteorhacks:async
