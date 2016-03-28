@@ -1,3 +1,4 @@
 .idea/
 *.log
+app/packages/npm-container/.npm/
 
