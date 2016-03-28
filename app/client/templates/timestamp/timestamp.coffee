@@ -1,7 +1,8 @@
 if Meteor.isClient
   Session.setDefault 'artifactHash', 'NONE'
+  busy = new ReactiveVar false
 
-Template.timestamp.events {
+Template.Timestamp.events {
   'change input[type="file"]': (e) ->
     Session.set 'artifactHash', ''
 
@@ -9,6 +10,7 @@ Template.timestamp.events {
     if files.length == 0
       Session.set 'artifactHash', 'NONE'
     else
+      busy.set true
       shaObj = new jsSHA('SHA-256', 'BYTES')
       file = files[0]
       parseFile(file, {
@@ -21,17 +23,20 @@ Template.timestamp.events {
           hash = shaObj.getHash('HEX')
           console.log 'HASH: ' + hash
           Session.set 'artifactHash', hash
+          busy.set false
       })
 }
 
-Template.timestamp.helpers {
+Template.Timestamp.helpers {
   artifactHash: ->
     Session.get 'artifactHash'
+  busy: ->
+    busy.get()
 }
 
 # Timestamp: Lifecycle Hooks
-Template.timestamp.onCreated ->
+Template.Timestamp.onCreated ->
 
-Template.timestamp.onRendered ->
+Template.Timestamp.onRendered ->
 
 Template.timestamp.onDestroyed ->
