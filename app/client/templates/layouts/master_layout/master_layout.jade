@@ -1,14 +1,16 @@
 template(name='MasterLayout')
+    +if isBusy
+        +Loading
+    +else
+        nav(class='light-blue lighten-1' role='navigation')
+            div(class='nav-wrapper container')
+                a(class='brand-logo' href='{{ pathFor "home" }}') ResearchDate
 
-    nav(class='light-blue lighten-1' role='navigation')
-        div(class='nav-wrapper container')
-            a(class='brand-logo' href='{{ pathFor "home" }}') ResearchDate
-
-    div(class='container')
-        +yield
-    div(class='ui inverted vertical footer segment')
-    footer(class='page-footer orange')
         div(class='container')
-            div(class='footer-copyright')
-                div(class='container') Made by
-                    a(class='orange-text text-lighten-3' href='http://aleph.engineering') Aleph Engineering
+            +yield
+        div(class='ui inverted vertical footer segment')
+        footer(class='page-footer orange')
+            div(class='container')
+                div(class='footer-copyright')
+                    div(class='container') Made by
+                        a(class='orange-text text-lighten-3' href='http://aleph.engineering') Aleph Engineering

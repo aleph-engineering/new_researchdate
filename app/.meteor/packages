@@ -32,4 +32,6 @@ meteorhacks:npm
 
 npm-container
 meteorhacks:async
+reactive-var
+pcel:loading
 anti:i18n
