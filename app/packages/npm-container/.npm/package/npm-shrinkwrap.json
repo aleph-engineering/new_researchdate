@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "asn1": {
-      "version": "0.2.3"
+      "version": "http://nexus.aleph/nexus/content/repositories/npm/asn1/-/asn1-0.2.3.tgz"
     }
   }
 }
