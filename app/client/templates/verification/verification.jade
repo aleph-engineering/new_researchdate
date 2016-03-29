@@ -1,0 +1,8 @@
+template(name='Verification')
+  div(class='verification row')
+    div(class='file-field input-field')
+     div(class='btn')
+      span {{i18n 'hash'}}
+      input(type='file' name='artifact')
+     div(class='file-path-wrapper')
+       input(class='file-path validate' type='text' placeholder='Search Timestamp by file hash')

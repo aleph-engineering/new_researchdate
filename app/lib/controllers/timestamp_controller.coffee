@@ -47,7 +47,7 @@
         resultBuffer = new Buffer arr
 
         # Construct the http response for generated timestamping, in the form of a file
-        filename = 'encrypted_hash.tsr'
+        filename = 'hash.tsr'
         headers =
           'Content-Type': 'application/timestamp-reply',
           'Content-Disposition': "attachment; filename=" + filename
