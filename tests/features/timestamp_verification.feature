@@ -9,6 +9,7 @@ Feature: Timestamp verification
   Background:
     Given I am on the homepage
 
+
   Scenario: Successful verification
     Given I provide a encrypted_hash "hash.tsr"
     When I click the "Verify" button

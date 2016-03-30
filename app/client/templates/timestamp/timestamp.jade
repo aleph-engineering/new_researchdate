@@ -3,7 +3,7 @@ template(name='Timestamp')
         div(class='file-field input-field')
             div(class='btn')
                 span File
-                input(type='file' name='artifact')
+                input(type='file' name='artifact' id='generate_input')
             div(class='file-path-wrapper')
                 input(class='file-path validate' type='text' placeholder='Choose the file you want to timestamp')
         form(id='artifact-form' method='post' action="{{pathFor 'timestamp'}}" class='col s12')
