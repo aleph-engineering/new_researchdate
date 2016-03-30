@@ -2,10 +2,10 @@ template(name='Verification')
   div(class='verification row')
     div(class='file-field input-field')
       div(class='btn')
-        span {{i18n 'hash'}}
-        input(type='file' name='artifact')
+        span {{i18n 'verification.hash'}}
+        input(type='file' name='artifact' id='verify-input')
       div(class='file-path-wrapper')
-       input(class='file-path validate' type='upload' id= 'verify_input' placeholder='Drop your file')
+       input(class='file-path validate' type='text' placeholder="{{i18n 'verification.placeholder'}}")
 
 
 
