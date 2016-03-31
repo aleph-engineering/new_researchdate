@@ -1,7 +1,3 @@
-STREAMING_CHUNK_SIZE = 1024 * 1024 #1 Mb
-createHash = require 'sha.js'
-
-
 Session.setDefault 'artifactHash', 'NONE'
 
 Template.Timestamp.events {
@@ -13,20 +9,14 @@ Template.Timestamp.events {
             Session.set 'artifactHash', 'NONE'
         else
             isBusy.set true
-            sha256 = createHash('sha256')
             file = files[0]
-            parseFile(file, {
-                binary: true,
-                chunk_size: STREAMING_CHUNK_SIZE,
-                chunk_read_callback: (chunk) ->
-                    chunkBuffer = new Buffer(chunk)
-                    sha256.update chunkBuffer
-                success: ->
-                    hash = sha256.digest('hex')
-                    console.log 'HASH: ' + hash
-                    Session.set 'artifactHash', hash
+            generateDigest file, (error, result) ->
+                if error
+#                    TODO (Marian Morgalo): Show a message to the user if an error occurs
+                    console.log error
+                else
+                    Session.set 'artifactHash', result
                     isBusy.set false
-            })
 }
 
 Template.Timestamp.helpers {
