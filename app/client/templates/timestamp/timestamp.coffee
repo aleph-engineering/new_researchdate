@@ -1,3 +1,5 @@
+jsSHA = require 'jssha'
+
 Session.setDefault 'artifactHash', 'NONE'
 
 Template.Timestamp.events {
