@@ -18,6 +18,7 @@
   "homepage": "https://github.com/aleph-engineering/new_researchdate#readme",
   "dependencies": {
     "asn1": "^0.2.3",
-    "jssha": "^2.0.2"
+    "buffer": "^4.5.1",
+    "sha.js": "^2.4.5"
   }
 }

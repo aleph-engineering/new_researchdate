@@ -1,4 +1,6 @@
-jsSHA = require 'jssha'
+STREAMING_CHUNK_SIZE = 1024 * 1024 #1 Mb
+createHash = require 'sha.js'
+
 
 Session.setDefault 'artifactHash', 'NONE'
 
@@ -11,15 +13,16 @@ Template.Timestamp.events {
             Session.set 'artifactHash', 'NONE'
         else
             isBusy.set true
-            shaObj = new jsSHA('SHA-256', 'BYTES')
+            sha256 = createHash('sha256')
             file = files[0]
             parseFile(file, {
-                binary: true
+                binary: true,
+                chunk_size: STREAMING_CHUNK_SIZE,
                 chunk_read_callback: (chunk) ->
-                    bytesString = String.fromCharCode.apply(null, new Uint8Array(chunk));
-                    shaObj.update bytesString
+                    chunkBuffer = new Buffer(chunk)
+                    sha256.update chunkBuffer
                 success: ->
-                    hash = shaObj.getHash('HEX')
+                    hash = sha256.digest('hex')
                     console.log 'HASH: ' + hash
                     Session.set 'artifactHash', hash
                     isBusy.set false
