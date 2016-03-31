@@ -13,6 +13,10 @@ i18n.map 'en', loading:
 i18n.map 'en', verification:
     hash: 'Hash'
     placeholder: 'Drop your file'
+  original_file: 'Original file'
+  tsr_file: 'Tsr File'
+  placeholder: 'Drop your file'
+  btn_verify: 'Verify'
 
 i18n.map 'en', timestamp:
     file: 'File'

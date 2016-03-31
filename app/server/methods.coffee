@@ -29,3 +29,6 @@ Meteor.methods
         catch e
             console.log e
             throw e
+
+  'server/verify': (tsr, origin)->
+    console.log arguments

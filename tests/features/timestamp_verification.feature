@@ -1,4 +1,3 @@
-@dev
 Feature: Timestamp verification
 
   As a visitor to the site,
@@ -9,7 +8,7 @@ Feature: Timestamp verification
   Background:
     Given I am on the homepage
 
-
+  @dev
   Scenario: Successful verification
     Given I provide a encrypted_hash "hash.tsr"
     When I click the "Verify" button
