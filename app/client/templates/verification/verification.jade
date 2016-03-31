@@ -1,12 +1,4 @@
 template(name='Verification')
-    div(class='verification row')
-        div(class='file-field input-field')
-            div(class='btn')
-                span {{i18n 'verification.hash'}}
-                input(type='file' name='artifact' id='verify-input')
-            div(class='file-path-wrapper')
-                input(class='file-path validate' type='text' placeholder="{{i18n 'verification.placeholder'}}")
-
   fieldset(data-role='controlgroup')
     form(id='verify-form' method='post' class='col s12')
       div(class='file-field input-field')

@@ -11,8 +11,6 @@ i18n.map 'en', loading:
 
 # FEATURES TEMPLATES
 i18n.map 'en', verification:
-    hash: 'Hash'
-    placeholder: 'Drop your file'
   original_file: 'Original file'
   tsr_file: 'Tsr File'
   placeholder: 'Drop your file'
