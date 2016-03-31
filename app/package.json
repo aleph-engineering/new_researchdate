@@ -1,0 +1,22 @@
+{
+  "name": "research_date",
+  "version": "1.0.0",
+  "description": "ResearchDate is a webapp that lets you timestamp your most important documents so you can later prove that they existed at a specific point in time.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleph-engineering/new_researchdate.git"
+  },
+  "keywords": [
+    "timestamp"
+  ],
+  "author": "Aleph Engineering",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/aleph-engineering/new_researchdate/issues"
+  },
+  "homepage": "https://github.com/aleph-engineering/new_researchdate#readme",
+  "dependencies": {
+    "asn1": "^0.2.3"
+  }
+}
