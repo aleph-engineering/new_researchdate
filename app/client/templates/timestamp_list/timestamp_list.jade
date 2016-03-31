@@ -7,9 +7,8 @@ template(name='TimestampList')
                 tr
                     th {{i18n 'timestampList.hash_result'}}
                     th {{i18n 'timestampList.creation_date'}}
-
             tbody
                 each timestamp in latestTimestamps
                     tr
                         td(class='hash-cell') #{timestamp.hash}
-                        td #{timestamp.creationDate.toLocaleDateString}
+                        td #{timestamp.creationDate.toLocaleString}
