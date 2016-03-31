@@ -31,3 +31,4 @@ pcel:loading
 anti:i18n
 standard-minifier-css
 standard-minifier-js
+practicalmeteor:mocha
