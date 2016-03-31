@@ -1,4 +1,4 @@
-defaultMsg = 'Please wait while we finish the operation'
+defaultMsg = i18n('loading.message')
 Session.setDefault 'waitMessage', defaultMsg
 spinner = Blaze.toHTML(Template.Spinner)
 
