@@ -1,4 +1,4 @@
-@watch
+@dev
 Feature: Timestamp verification
 
   As a visitor to the site,
