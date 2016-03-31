@@ -1,8 +1,10 @@
 Template.Verification.events {
   'submit #verify-form': (e) ->
     e.preventDefault()
-    Meteor.call 'server/verify', 909, 123, (error, result) ->
-#      console.log 'regreso'
+    tsr = $(e.target).find('#tsr-hash-input').get(0).files
+    console.log tsr[0]
+    origin = $(e.target).find('#original-file-input').get(0).files
+    Meteor.call 'server/verify', tsr[0], origin[0], (error, result) ->
 
 }
 
