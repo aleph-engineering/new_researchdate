@@ -1,0 +1,15 @@
+template(name='TimestampList')
+
+    div(class='row')
+
+        table(id='timestamp-list')
+            thead
+                tr
+                    th {{i18n 'timestampList.hash_result'}}
+                    th {{i18n 'timestampList.creation_date'}}
+
+            tbody
+                each timestamp in latestTimestamps
+                    tr
+                        td(class='hash-cell') #{timestamp.hash}
+                        td #{timestamp.creationDate.toLocaleDateString}
