@@ -1,5 +1,3 @@
-jsSHA = require 'jssha'
-
 Session.setDefault 'artifactHash', 'NONE'
 
 Template.Timestamp.events {
@@ -12,7 +10,6 @@ Template.Timestamp.events {
         else
             isBusy.set true
             file = files[0]
-            hashGenerate(file)
             generateDigest file, (error, result) ->
                 if error
 #                    TODO (Marian Morgalo): Show a message to the user if an error occurs

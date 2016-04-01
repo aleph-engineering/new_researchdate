@@ -9,9 +9,8 @@ Template.Verification.events {
         origin = $(e.target).find('#original-file-input').get(0).files
         for_now = $(e.target).find('#result-input')
         for_now[0].value = 'Verification True'
-        hashGenerate origin[0], (error, result) ->
-            console.log result
-
+        generateDigest file, (error, result) ->
+#          TODO (Helen Garcia Gonzalez): Write code here for call method 'server/verify'
         Meteor.call 'server/verify', tsr[0], origin[0], (error, result) ->
 
 }
