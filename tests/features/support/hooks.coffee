@@ -3,6 +3,7 @@ module.exports = ->
         server.execute ->
 # TODO: Uncomment: Timestamps.remove {}
 
+
     @Before ->
         @generalUpload = (id, filename) =>
             browser.chooseFile id, './tests/media/'.concat filename

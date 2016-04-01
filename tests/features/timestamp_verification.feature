@@ -10,9 +10,10 @@ Feature: Timestamp verification
 
   @dev
   Scenario: Successful verification
-    Given I provide a encrypted_hash "hash.tsr"
-    When I click the "Verify" button
-    Then a message pops up saying that the verification was successful
+    Given I provide a encrypted hash "hash.tsr"
+    And I provide the original artifact "TEST.txt"
+    When I submit the verify form
+    Then I can see a message saying that the verification was successful
 
 
   Scenario: Unsuccessful verification

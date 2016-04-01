@@ -1,16 +1,20 @@
 template(name='Verification')
-  fieldset(data-role='controlgroup')
-    form(id='verify-form' method='post' class='col s12')
-      div(class='file-field input-field')
-        div(class='btn')
-          span {{i18n 'verification.tsr_file'}}
-          input(type='file' name='tsr' id='tsr-hash-input')
-        div(class='file-path-wrapper')
-          input(class='file-path validate' type='text' placeholder="{{i18n 'verification.placeholder'}}")
-        div(class='btn')
-          span {{i18n 'verification.original_file'}}
-          input(type='file' name='original' id='original-file-input')
-        div(class='file-path-wrapper')
-          input(class='file-path validate' type='text' placeholder="{{i18n 'verification.placeholder'}}")
-      div(class='row')
-        button(type='submit' class='btn waves-effect waves-light' name='verify') {{i18n 'verification.btn_verify'}}
+    fieldset(data-role='controlgroup')
+        form(id='verify-form' method='post' class='col s12')
+            div(class='file-field input-field')
+                div(class='btn')
+                    span {{i18n 'verification.tsr_file'}}
+                    input(type='file' name='tsr' id='tsr-hash-input')
+                div(class='file-path-wrapper')
+                    input(class='file-path validate' type='text' placeholder="{{i18n 'verification.placeholder'}}")
+            div(class='file-field input-field')
+                div(class='btn')
+                    span {{i18n 'verification.original_file'}}
+                    input(type='file' name='original' id='original-file-input')
+                div(class='file-path-wrapper')
+                    input(class='file-path validate' type='text' placeholder="{{i18n 'verification.placeholder'}}")
+            div(class='file-field input-field')
+                div(class='file-path-wrapper')
+                    input(class='file-path validate' type='text' id='result-input')
+            div(class='row')
+                button(type='submit' class='btn waves-effect waves-light' id='verify') {{i18n 'verification.btn_verify'}}
