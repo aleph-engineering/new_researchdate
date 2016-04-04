@@ -1,8 +1,7 @@
 Meteor.methods
 
     'server/timestamp': (hash) ->
-        hashBuffer = new Buffer hash, 'hex'
-        tsqBuffer = generateTimestampRequest hashBuffer
+        tsqBuffer = generateTimestampRequest hash
 
         @unblock()
 
