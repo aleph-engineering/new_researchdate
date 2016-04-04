@@ -1,0 +1,5 @@
+{
+  "server": "https://freetsa.org/",
+  "crt": "https://tsa.crt",
+  "pem": "https://cacert.pem"
+}
