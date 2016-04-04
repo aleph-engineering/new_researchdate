@@ -22,8 +22,10 @@ Meteor.methods
 # Perform the request to the TSA using the built options
                 response = request.postSync 'https://freetsa.org/tsr', requestOptions
 
+
             date = new Date()
-            Timestamps.insert creationDate: date, hash: hash
+            # TODO:(Helen Garcia Glez) Replace server when selection TSA implemented.
+            Timestamps.insert creationDate: date, hash: hash, server: 'https://freetsa.org/'
 
             return response.body
         catch e
