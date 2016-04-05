@@ -31,6 +31,7 @@ Meteor.methods
             console.log e
             throw e
 
+
     'server/verify': (tsr, origin)->
         console.log tsr.lastModified
         console.log origin.lastModified

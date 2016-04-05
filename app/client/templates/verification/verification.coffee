@@ -1,5 +1,3 @@
-jsSHA = require 'jssha'
-
 hashGenerate = @hashGenerate
 
 Template.Verification.events {
@@ -15,6 +13,7 @@ Template.Verification.events {
                 console.log error
             else
                 console.log result
+
 #          TODO (Helen Garcia Gonzalez): Write code here for call method 'server/verify'
 #        Meteor.call 'server/verify', tsr[0], origin[0], (error, result) ->
 
