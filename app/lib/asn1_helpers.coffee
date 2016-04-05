@@ -20,3 +20,10 @@ tsReponse = require './asn1/timestamp_response'
 @parseTimestampResponse = (responseBuffer) ->
     response = tsReponse.TimestampResponse.decode responseBuffer, 'der'
     return response
+
+@getHashFromResponse = (response) ->
+    hash = null
+    if response && (response.status.status == 'granted' || response.status.status == 'grantedWithMods')
+        hashBuffer = new Buffer(response.timeStampToken.content.encapContentInfo.eContent.messageImprint.hashedMessage)
+        hash = hashBuffer.toString 'hex'
+    return hash
