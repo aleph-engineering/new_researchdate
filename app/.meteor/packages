@@ -33,3 +33,5 @@ standard-minifier-css
 standard-minifier-js
 practicalmeteor:mocha
 practicalmeteor:chai
+practicalmeteor:sinon
+velocity:meteor-stubs
