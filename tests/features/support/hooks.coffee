@@ -1,7 +1,7 @@
 module.exports = ->
     clearServer = ->
         server.execute ->
-# TODO: Uncomment: Timestamps.remove {}
+            Timestamps.remove {}
 
 
     @Before ->
