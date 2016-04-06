@@ -39,14 +39,17 @@ module.exports = ->
 
 
     @Then /^The recent timestamps list is as expected: it shows the last "(\d+)" timestamps ordered in descendant order by creation date$/, (timestampCount) ->
-        latestTimestamps = server.execute ->
+        TIMESTAMP_LIST_COUNT = require('../../../app/lib/system_parameters').TIMESTAMP_LIST_COUNT
+
+        latestTimestamps = server.execute((count) ->
             Timestamps.find({},
                 {
                     fields: {hash: yes, creationDate: yes},
                     sort: {creationDate: -1},
-                    limit: SystemParameters.TIMESTAMP_LIST_COUNT
+                    limit: count
                 }
             ).fetch()
+        , TIMESTAMP_LIST_COUNT)
 
         # Assert the timestamps count the expected quantity
         timestampCount = parseInt timestampCount
