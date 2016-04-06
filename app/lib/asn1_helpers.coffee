@@ -22,8 +22,24 @@ tsReponse = require './asn1/timestamp_response'
     return response
 
 @getHashFromResponse = (response) ->
-    hash = null
-    if response && (response.status.status == 'granted' || response.status.status == 'grantedWithMods')
-        hashBuffer = new Buffer(response.timeStampToken.content.encapContentInfo.eContent.messageImprint.hashedMessage)
-        hash = hashBuffer.toString 'hex'
-    return hash
+    return fillHashBufferAndConvert response if responseAndResponseStatus response
+    null
+
+responseStatusIsGranted = (response) ->
+    return response.status.status is 'granted'
+    false
+
+responseStatusIsGrantedWithMods = (response) ->
+    return response.status.status is 'grantedWithMods'
+    false
+
+fillHashBufferAndConvert = (response) ->
+    timeStampTokenContent = response.timeStampToken.content
+    eContent = timeStampTokenContent.encapContentInfo.eContent
+    hashBuffer = new Buffer(eContent.messageImprint.hashedMessage)
+    hashBuffer.toString 'hex'
+
+responseAndResponseStatus = (response) ->
+    responseStatus = (responseStatusIsGranted response || responseStatusIsGrantedWithMods response)
+    return response && responseStatus
+    false
