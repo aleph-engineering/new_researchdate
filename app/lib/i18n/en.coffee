@@ -25,3 +25,4 @@ i18n.map 'en', timestamp:
 i18n.map 'en', timestampList:
     hash_result: 'Hash Result'
     creation_date: 'Creation Date'
+    timestamp_server: 'Server used'

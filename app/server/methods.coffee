@@ -1,8 +1,9 @@
+asn1_helpers = require '../lib/asn1_helpers'
+
 Meteor.methods
 
     'server/timestamp': (hash) ->
-        hashBuffer = new Buffer hash, 'hex'
-        tsqBuffer = generateTimestampRequest hashBuffer
+        tsqBuffer = asn1_helpers.generateTimestampRequest hash
 
         @unblock()
 
@@ -22,14 +23,12 @@ Meteor.methods
 # Perform the request to the TSA using the built options
                 response = request.postSync 'https://freetsa.org/tsr', requestOptions
 
+
             date = new Date()
-            Timestamps.insert creationDate: date, hash: hash
+            # TODO:(Helen Garcia Glez) Replace server when selection TSA implemented.
+            Timestamps.insert creationDate: date, hash: hash, server: 'https://freetsa.org/'
 
             return response.body
         catch e
             console.log e
             throw e
-
-    'server/verify': (tsr, origin)->
-        console.log tsr.lastModified
-        console.log origin.lastModified

@@ -1,4 +1,7 @@
+digest = require '../../lib/digest_generator'
+
 Session.setDefault 'artifactHash', 'NONE'
+
 
 Template.Timestamp.events {
     'change input[type="file"]': (e) ->
@@ -10,7 +13,7 @@ Template.Timestamp.events {
         else
             isBusy.set true
             file = files[0]
-            generateDigest file, (error, result) ->
+            digest.generateDigest file, (error, result) ->
                 if error
 #                    TODO (Marian Morgalo): Show a message to the user if an error occurs
                     console.log error

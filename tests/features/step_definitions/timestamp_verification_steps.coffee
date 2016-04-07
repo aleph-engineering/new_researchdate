@@ -1,8 +1,6 @@
 module.exports = ->
     'use strict'
 
-    @And = @Given
-
     @Given /^I provide a encrypted hash "([^"]*)"$/, (filename) ->
         @generalUpload('#tsr-hash-input', filename)
 

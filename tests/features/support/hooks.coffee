@@ -3,6 +3,7 @@ module.exports = ->
         server.execute ->
             Timestamps.remove {}
 
+    @And = @Given
 
     @Before ->
         @generalUpload = (id, filename) =>

@@ -34,4 +34,5 @@ standard-minifier-js
 practicalmeteor:mocha
 practicalmeteor:chai
 practicalmeteor:sinon
+promise
 velocity:meteor-stubs
