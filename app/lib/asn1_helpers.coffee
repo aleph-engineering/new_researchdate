@@ -1,7 +1,8 @@
 ## ASN.1 structure for the timestamp request and response defined in RFC 3161
 tsRequest = require './asn1/timestamp_request'
-tsReponse = require './asn1/timestamp_response'
+tsResponse = require './asn1/timestamp_response'
 hashes = require './asn1/hash_helpers'
+tsr_helpers = require './tsr_helpers'
 
 
 generateTimestampRequest = (hash) ->
@@ -19,8 +20,8 @@ generateTimestampRequest = (hash) ->
     return output
 
 parseTimestampResponse = (responseBuffer) ->
-    response = tsReponse.TimestampResponse.decode responseBuffer, 'der'
-    return response
+    response = tsResponse.TimestampResponse.decode responseBuffer, 'der'
+    return new tsr_helpers.TSRWrapper response
 
 
 asn1_helpers = exports
