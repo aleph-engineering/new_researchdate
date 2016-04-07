@@ -1,23 +1,26 @@
 hashGenerate = @hashGenerate
 
 Template.Verification.events {
+
     'submit #verify-form': (e) ->
         e.preventDefault()
         tsr = $(e.target).find('#tsr-hash-input').get(0).files
-        file = $(e.target).find('#original-file-input').get(0).files
-        console.log file
-        #        for_now = $(e.target).find('#result-input')
-        #        for_now[0].value = 'Verification True'
-        generateDigest file[0], (error, result) ->
+        origin = $(e.target).find('#original-file-input').get(0).files
+        generateDigest origin[0], (error, result)->
             if error
                 console.log error
             else
-                console.log result
+                if tsr.length > 0
+                    file = tsr[0]
+                    reader = new FileReader()
+                    reader.onload = (evt) ->
+                        if evt.target.error == null
+                            responseBuffer = new Buffer evt.target.result
+                            verifyTimestamp(result, responseBuffer)
 
-#          TODO (Helen Garcia Gonzalez): Write code here for call method 'server/verify'
-#        Meteor.call 'server/verify', tsr[0], origin[0], (error, result) ->
-
+                    reader.readAsArrayBuffer file
 }
+
 
 Template.Verification.helpers {}
 
@@ -27,4 +30,5 @@ Template.Verification.onCreated ->
 Template.Verification.onRendered ->
 
 Template.Verification.onDestroyed ->
+
 
