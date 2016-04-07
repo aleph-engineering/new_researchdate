@@ -27,6 +27,7 @@
     "meteor-node-stubs": "^0.2.1",
     "sha.js": "^2.4.5",
     "vm-browserify": "0.0.4"
+    "dropify": "^0.2.0",
   },
   "devDependencies": {
     "mocha": "^2.4.5",

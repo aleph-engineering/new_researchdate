@@ -1,20 +1,18 @@
 template(name='Verification')
-    fieldset(data-role='controlgroup')
+    div(class='verification')
+        h4 {{i18n 'verification.title'}}
         form(id='verify-form' method='post' class='col s12')
             div(class='file-field input-field')
-                div(class='btn')
-                    span {{i18n 'verification.tsr_file'}}
-                    input(type='file' name='tsr' id='tsr-hash-input')
+                div(class='btn' class='light-blue lighten-1')
+                    i(class="mdi-content-add")
+                    input(type='file' name='tsr' id='tsr-hash-input' required)
                 div(class='file-path-wrapper')
-                    input(class='file-path validate' type='text' placeholder="{{i18n 'verification.placeholder'}}")
+                    input(class='file-path validate' type='text' placeholder="{{i18n 'verification.tsr_file'}}")
             div(class='file-field input-field')
-                div(class='btn')
-                    span {{i18n 'verification.original_file'}}
-                    input(type='file' name='original' id='original-file-input')
+                div(class='btn' class='light-blue lighten-1')
+                    i(class="mdi-content-add")
+                    input(type='file' name='original' id='original-file-input' required)
                 div(class='file-path-wrapper')
-                    input(class='file-path validate' type='text' placeholder="{{i18n 'verification.placeholder'}}")
-            div(class='file-field input-field')
-                div(class='file-path-wrapper')
-                    input(class='file-path validate' type='text' id='result-input')
+                    input(class='file-path validate' type='text' placeholder="{{i18n 'verification.original_file'}}")
             div(class='row')
-                button(type='submit' class='btn waves-effect waves-light' id='verify') {{i18n 'verification.btn_verify'}}
+                button(type='submit' class='btn waves-effect waves-light' id='verify' class='light-blue lighten-1') {{i18n 'verification.btn_verify'}}

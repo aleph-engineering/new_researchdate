@@ -18,7 +18,7 @@ verifyTimestamp = (artifactHash, responseBuffer)->
         verify.update signedContentBuffer
         return false unless verify.verify cert.publicKey, cert.signature
 
-    return true
+    true
 
 
 exports.verifyTimestamp = verifyTimestamp

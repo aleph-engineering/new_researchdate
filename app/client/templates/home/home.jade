@@ -1,5 +1,8 @@
 template(name='Home')
-    div(class='home')
-        +Timestamp
+    div(class="row home")
+        div(class="col m6")
+            +Timestamp
+        div(class="col s4 m6")
+            +Verification
+    div(class="row")
         +TimestampList
-        +Verification

@@ -36,3 +36,5 @@ practicalmeteor:chai
 practicalmeteor:sinon
 promise
 velocity:meteor-stubs
+mrt:toastjs
+dapearce:material-icons

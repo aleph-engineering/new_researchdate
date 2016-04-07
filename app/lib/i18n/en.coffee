@@ -11,12 +11,17 @@ i18n.map 'en', loading:
 
 # FEATURES TEMPLATES
 i18n.map 'en', verification:
+    title: 'Verification'
   original_file: 'Original file'
   tsr_file: 'Tsr File'
-  placeholder: 'Drop your file'
   btn_verify: 'Verify'
+    messages:
+        info: 'Verification Successful'
+        error: 'Verification Failed'
+
 
 i18n.map 'en', timestamp:
+    title: 'Timestamp'
     file: 'File'
     placeholder: 'Choose the file you want to timestamp'
     hash: 'SHA256 Hash'

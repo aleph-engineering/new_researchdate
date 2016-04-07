@@ -1,9 +1,10 @@
 template(name='Timestamp')
-    fieldset(data-role='controlgroup')
+    div(class='timestamp')
+        h4 {{i18n 'timestamp.title'}}
         div(class='timestamp row')
             div(class='file-field input-field')
-                div(class='btn')
-                    span {{i18n 'timestamp.file'}}
+                div(class='btn' class='light-blue lighten-1')
+                    i(class="mdi-content-add")
                     input(type='file' name='artifact' id='generate-input')
                 div(class='file-path-wrapper')
                     input(class='file-path validate' type='text' placeholder="{{i18n 'timestamp.placeholder' }}")
@@ -13,4 +14,4 @@ template(name='Timestamp')
                         label(for='hash' class='active') {{i18n 'timestamp.hash'}}
                         input(type='text' id='hash' name='hash' value='#{artifactHash}' readonly)
                 div(class='row')
-                    button(type='submit' class='btn waves-effect waves-light' name='timestamp') {{i18n 'timestamp.timestamp_btn'}}
+                    button(type='submit' class='btn waves-effect waves-light' name='timestamp' class='light-blue lighten-1') {{i18n 'timestamp.timestamp_btn'}}

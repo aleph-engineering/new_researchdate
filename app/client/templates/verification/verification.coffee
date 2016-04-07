@@ -17,10 +17,15 @@ Template.Verification.events {
                     reader.onload = (evt) ->
                         if evt.target.error == null
                             responseBuffer = new Buffer evt.target.result
-                            verifier.verifyTimestamp(result, responseBuffer)
-
+                            verify = verifier.verifyTimestamp(result, responseBuffer)
+                            if verify is true
+                                Toast.info(i18n('verification.messages.info'), '', {width: 800})
+                            else
+                                Toast.error(i18n('verification.messages.error'), '', {width: 800})
                     reader.readAsArrayBuffer file
 }
+
+digestTsr = (result, callback)->
 
 
 Template.Verification.helpers {}
