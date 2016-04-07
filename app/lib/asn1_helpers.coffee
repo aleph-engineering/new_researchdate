@@ -22,16 +22,16 @@ tsReponse = require './asn1/timestamp_response'
     return response
 
 @getHashFromResponse = (response) ->
-    return fillHashBufferAndConvert response if responseAndResponseStatus response
-    null
+    hash = null
+    if responseAndResponseStatus response
+        hash = fillHashBufferAndConvert response
+    return hash
 
 responseStatusIsGranted = (response) ->
-    return response.status.status is 'granted'
-    false
+    response.status.status is 'granted'
 
 responseStatusIsGrantedWithMods = (response) ->
-    return response.status.status is 'grantedWithMods'
-    false
+    response.status.status is 'grantedWithMods'
 
 fillHashBufferAndConvert = (response) ->
     timeStampTokenContent = response.timeStampToken.content
@@ -41,5 +41,4 @@ fillHashBufferAndConvert = (response) ->
 
 responseAndResponseStatus = (response) ->
     responseStatus = (responseStatusIsGranted response || responseStatusIsGrantedWithMods response)
-    return response && responseStatus
-    false
+    response && responseStatus
