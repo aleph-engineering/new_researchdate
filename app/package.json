@@ -19,6 +19,8 @@
   "dependencies": {
     "asn1.js": "^4.5.2",
     "buffer": "^4.5.1",
+    "crypto-browserify": "^3.11.0",
+    "jsrsasign": "^5.0.7",
     "meteor-node-stubs": "^0.2.1",
     "sha.js": "^2.4.5",
     "vm-browserify": "0.0.4"

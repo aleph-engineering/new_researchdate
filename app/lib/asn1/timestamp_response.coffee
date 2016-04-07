@@ -38,14 +38,20 @@ SignedData = asn.define 'SignedData', () ->
     @seq().obj(
         @key('version').use(CMSVersion),
         @key('digestAlgorithms').setof(rfc5280.AlgorithmIdentifier),
-        @key('encapContentInfo').seq().obj(
-            @key('eContentType').objid(),
-            @key('eContent').optional().explicit(0).octstr().contains(TSTInfo)
-        ),
+        @key('encapContentInfo').use(EncapsulatedContentInfo),
         @key('certificates').optional().implicit(0).setof(CertificateChoices),
         @key('crls').optional().implicit(1).setof(RevocationInfoChoice),
         @key('signerInfos').setof(SignerInfo)
     )
+
+EncapsulatedContentInfo = asn.define 'EncapsulatedContentInfo', () ->
+    @seq().obj(
+        @key('eContentType').objid(),
+        @key('eContent').use(EncapsulatedContent)
+    )
+
+EncapsulatedContent = asn.define 'EncapsulatedContent', () ->
+    @optional().explicit(0).octstr().contains(TSTInfo)
 
 TSTInfo = asn.define 'TSTInfo', () ->
     @seq().obj(
@@ -116,4 +122,8 @@ CMSVersion = asn.define 'CMSVersion', () ->
     })
 
 
-exports.TimestampResponse = TimestampResponse
+timestampResponse = exports
+
+timestampResponse.TimestampResponse = TimestampResponse
+timestampResponse.EncapsulatedContentInfo = EncapsulatedContentInfo
+timestampResponse.EncapsulatedContent = EncapsulatedContent
