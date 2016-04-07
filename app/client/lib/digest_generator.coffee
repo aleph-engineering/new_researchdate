@@ -1,8 +1,8 @@
 STREAMING_CHUNK_SIZE = 1024 * 1024 #1 Mb
-createHash = require 'sha.js'
 
 
-@generateDigest = (file, callback) ->
+generateDigest = (file, callback) ->
+    createHash = require 'sha.js'
     sha256 = createHash 'sha256'
     parseFile file,
         binary: true,
@@ -18,3 +18,4 @@ createHash = require 'sha.js'
                 callback null, digest
 
 
+exports.generateDigest = generateDigest

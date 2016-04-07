@@ -1,7 +1,9 @@
+asn1_helpers = require '../lib/asn1_helpers'
+
 Meteor.methods
 
     'server/timestamp': (hash) ->
-        tsqBuffer = generateTimestampRequest hash
+        tsqBuffer = asn1_helpers.generateTimestampRequest hash
 
         @unblock()
 

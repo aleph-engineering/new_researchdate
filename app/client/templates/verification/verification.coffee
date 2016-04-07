@@ -1,4 +1,5 @@
-hashGenerate = @hashGenerate
+digest = require '../../lib/digest_generator'
+verifier = require '../../../lib/timestamp_verification'
 
 Template.Verification.events {
 
@@ -6,7 +7,7 @@ Template.Verification.events {
         e.preventDefault()
         tsr = $(e.target).find('#tsr-hash-input').get(0).files
         origin = $(e.target).find('#original-file-input').get(0).files
-        generateDigest origin[0], (error, result)->
+        digest.generateDigest origin[0], (error, result)->
             if error
                 console.log error
             else
@@ -16,7 +17,7 @@ Template.Verification.events {
                     reader.onload = (evt) ->
                         if evt.target.error == null
                             responseBuffer = new Buffer evt.target.result
-                            verifyTimestamp(result, responseBuffer)
+                            verifier.verifyTimestamp(result, responseBuffer)
 
                     reader.readAsArrayBuffer file
 }
