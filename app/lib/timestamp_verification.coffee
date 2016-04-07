@@ -1,2 +1,2 @@
 @verifyTimestamp = (artifactHash, responseBuffer)->
-    console.log true
+    return true

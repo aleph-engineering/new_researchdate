@@ -10,14 +10,13 @@ Template.Verification.events {
             if error
                 console.log error
             else
-                console.log result
                 if tsr.length > 0
                     file = tsr[0]
                     reader = new FileReader()
                     reader.onload = (evt) ->
                         if evt.target.error == null
                             responseBuffer = new Buffer evt.target.result
-                            verifyTimestamp(result, responseBuffer) #libgeneral
+                            verifyTimestamp(result, responseBuffer)
 
                     reader.readAsArrayBuffer file
 }
