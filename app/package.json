@@ -19,8 +19,8 @@
   "dependencies": {
     "asn1.js": "^4.5.2",
     "browser": "^0.2.6",
+    "browserify-sign": "^4.0.0",
     "buffer": "^4.5.1",
-    "crypto-browserify": "^3.11.0",
     "growl": "^1.9.2",
     "jade": "^1.11.0",
     "jsrsasign": "^5.0.7",

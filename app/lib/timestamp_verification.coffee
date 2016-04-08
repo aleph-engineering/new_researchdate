@@ -1,10 +1,10 @@
 asn1_helpers = require './asn1_helpers'
 tsr_helpers = require './tsr_helpers'
-crypto = require 'crypto'
+crypto = require 'browserify-sign'
 
 
 verifyTimestamp = (artifactHash, responseBuffer)->
-    asn1_helpers.parseTimestampResponse responseBuffer
+    response = asn1_helpers.parseTimestampResponse responseBuffer
 
     #   First we compare the artifact hash and the hash contained in the response
     tsrHash = response.getHashHex()
