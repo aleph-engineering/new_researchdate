@@ -12,9 +12,9 @@ i18n.map 'en', loading:
 # FEATURES TEMPLATES
 i18n.map 'en', verification:
     title: 'Verification'
-  original_file: 'Original file'
-  tsr_file: 'Tsr File'
-  btn_verify: 'Verify'
+    original_file: 'Original file'
+    tsr_file: 'Tsr File'
+    btn_verify: 'Verify'
     messages:
         info: 'Verification Successful'
         error: 'Verification Failed'
