@@ -23,7 +23,7 @@ Meteor.methods
 
             date = new Date()
             # TODO:(Helen Garcia Glez) Replace server when selection TSA implemented.
-            Timestamps.insert creationDate: date, hash: hash, server: 'https://freetsa.org/'
+            Timestamps.insert hash: hash, creationDate: date, server: 'https://freetsa.org/'
 
             return response.body
         catch e

@@ -25,8 +25,6 @@ Template.Verification.events {
                     reader.readAsArrayBuffer file
 }
 
-digestTsr = (result, callback)->
-
 
 Template.Verification.helpers {}
 
