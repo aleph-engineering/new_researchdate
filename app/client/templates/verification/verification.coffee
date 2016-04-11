@@ -11,19 +11,22 @@ Template.Verification.events {
             if error
                 console.log error
             else
-                if tsr.length > 0
-                    file = tsr[0]
-                    reader = new FileReader()
-                    reader.onload = (evt) ->
-                        if evt.target.error == null
-                            responseBuffer = new Buffer evt.target.result
-                            verify = verifier.verifyTimestamp(result, responseBuffer)
-                            if verify is true
-                                Toast.info(i18n('verification.messages.info'), '', {width: 800})
-                            else
-                                Toast.error(i18n('verification.messages.error'), '', {width: 800})
-                    reader.readAsArrayBuffer file
+                prueba(result, tsr)
 }
+
+prueba = (result, tsr)->
+    if tsr.length > 0
+        file = tsr[0]
+        reader = new FileReader()
+        reader.onload = (evt) ->
+            if evt.target.error == null
+                responseBuffer = new Buffer evt.target.result
+                verify = verifier.verifyTimestamp(result, responseBuffer)
+                if verify is true
+                    Toast.info(i18n('verification.messages.info'), '', {width: 800})
+                else
+                    Toast.error(i18n('verification.messages.error'), '', {width: 800})
+        reader.readAsArrayBuffer file
 
 
 Template.Verification.helpers {}
