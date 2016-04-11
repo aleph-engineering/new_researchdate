@@ -11,7 +11,7 @@ Feature: Timestamp an artifact
   Scenario: Generate timestamp an artifact
     And I provide a digital artifact
     When I submit the form
-    Then the site returns to me a timestamp
+    Then the site returns to me a zip file containing the timestamp
     And returns the encrypted hash
 
   Scenario: Generate timestamp with empty form

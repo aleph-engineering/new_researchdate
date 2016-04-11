@@ -9,6 +9,9 @@ module.exports = ->
         timestampFileExtension = require('../../../app/lib/system_parameters').TIMESTAMP_FILE_EXTENSION
         file.slice(file.length - 4) is timestampFileExtension
 
+    isZipExtension = (file) ->
+        file.slice(file.length - 4) is '.zip'
+
     clickTimestampButton = ->
         browser.waitForExist '#artifact-form', 3000
         browser.submitForm '#artifact-form'
@@ -21,11 +24,11 @@ module.exports = ->
     @When /^I submit the form$/, ->
         do clickTimestampButton
 
-    @Then /^the site returns to me a timestamp$/, ->
+    @Then /^the site returns to me a zip file containing the timestamp$/, ->
         files = fs.readdirSync @downloadsFolder
 
         # Assert that there is .tsr file in the Downloads folder
-        expect(_.any(files, isTimestampExtension)).toBeTruthy()
+        expect(_.any(files, isZipExtension)).toBeTruthy()
 
     @Then /^returns the encrypted hash$/, ->
         hashValue = browser.getValue '#hash'

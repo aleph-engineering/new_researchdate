@@ -1,54 +1,40 @@
 digest = require '../../lib/digest_generator'
-verifier = require '../../../lib/timestamp_verification'
-validator = require '../../lib/validator'
+#verifier = require '../../../lib/timestamp_verification'
 
 Template.Verification.events {
 
     'submit #verify-form': (e) ->
         e.preventDefault()
-        hashZone = $('#tsr-hash')
-        originalArtefactZone = $('#original-file')
-        tsr = hashZone.get(0).dropzone.getAcceptedFiles()
-        origin = originalArtefactZone.get(0).dropzone.getAcceptedFiles()
-
-        if validator.validArgsForVerification(tsr, origin)
-            digest.generateDigest origin[0], (error, result)->
-                if error
-                    console.log error
-                else
-                    verification(result, tsr)
-        else
-            hashZone.addClass('error') if !validator.fileExist(tsr)
-            originalArtefactZone.addClass('error') if !validator.fileExist(origin)
-
+        tsr = $(e.target).find('#tsr-hash-input').get(0).files
+        origin = $(e.target).find('#original-file-input').get(0).files
+        digest.generateDigest origin[0], (error, result)->
+            if error
+                console.log error
+            else
+                verification(result, tsr)
 }
 
 verification = (result, tsr)->
-    file = tsr[0]
-    reader = new FileReader()
-    reader.onload = (evt) ->
-        if evt.target.error == null
-            responseBuffer = new Buffer evt.target.result
-            verify = verifier.verifyTimestamp(result, responseBuffer)
-            if verify is true
-                Toast.info(i18n('verification.messages.info'), '', {width: 800})
-            else
-                Toast.error(i18n('verification.messages.error'), '', {width: 800})
-    reader.readAsArrayBuffer file
+    if tsr.length > 0
+        file = tsr[0]
+        reader = new FileReader()
+        reader.onload = (evt) ->
+            if evt.target.error == null
+                responseBuffer = new Buffer evt.target.result
+                verify = verifier.verifyTimestamp(result, responseBuffer)
+                if verify is true
+                    Toast.info(i18n('verification.messages.info'), '', {width: 800})
+                else
+                    Toast.error(i18n('verification.messages.error'), '', {width: 800})
+        reader.readAsArrayBuffer file
 
 
-Template.Verification.helpers {
-
-}
+Template.Verification.helpers {}
 
 # Verification: Lifecycle Hooks
 Template.Verification.onCreated ->
 
 Template.Verification.onRendered ->
-    Dropzone.forElement('#tsr-hash').on 'addedfile', (file)->
-        $('#tsr-hash').removeClass('error')
-    Dropzone.forElement('#original-file').on 'addedfile', (file)->
-        $('#original-file').removeClass('error')
 Template.Verification.onDestroyed ->
 
 

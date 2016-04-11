@@ -1,17 +1,41 @@
+JSZip = require 'jszip'
+FileSaver = require 'browser-filesaver'
+FileReaderStream = require 'filereader-stream'
+
 digest = require '../../lib/digest_generator'
 validator = require '../../lib/validator'
 
+
 Session.setDefault 'artifactHash', 'NONE'
+zip = null
 
 
 Template.Timestamp.events {
     'submit #artifact-form': (e) ->
         e.preventDefault()
-        val = $('#hash').val()
-        e.target.submit() if !validator.validArgsForTimestamp(val)
-        $('#original-artifact').addClass('error') if validator.validArgsForTimestamp(val)
-}
 
+        form = e.target
+        hash = $(form).find('input[name="hash"]').val()
+        if validator.validArgsForTimestamp(hash)
+            isBusy.set true
+
+            Meteor.call 'server/timestamp', hash, (error, result) ->
+                if not error
+                    resultArr = []
+                    $.each result, (name, value) ->
+                        resultArr[name] = value
+
+                    zip.file "response.tsr", resultArr
+                    zip.generateAsync({type: "blob"})
+                    .then (blob) ->
+                        isBusy.set false
+                        FileSaver.saveAs blob, "test.zip"
+                    , (err) ->
+                        console.log err
+        else
+            $('#original-artifact').addClass('error')
+
+}
 
 Template.Timestamp.helpers {
     artifactHash: ->
@@ -23,10 +47,14 @@ Template.Timestamp.onCreated ->
 
 Template.Timestamp.onRendered ->
     Dropzone.forElement('#original-artifact').on 'addedfile', (file)->
-        $('#original-artifact').removeClass('error')
         Session.set 'artifactHash', ''
         if file?
             isBusy.set true
+
+            fileStream = FileReaderStream file
+            zip = new JSZip()
+            zip.file file.name, fileStream
+
             digest.generateDigest file, (error, result) ->
                 if error
 #                    TODO (Marian Morgalo): Show a message to the user if an error occurs
