@@ -42,7 +42,7 @@ HomeController = @HomeController = RouteController.extend(
 #  action: 'myActionFunction'
 
     action: ->
-        @render()
+        do @render
 
     onAfterAction: ->
 

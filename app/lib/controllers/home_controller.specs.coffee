@@ -12,9 +12,11 @@ describe 'HomeController', ->
         @homeController = new HomeController()
         @contextMock =
             next: ->
+            render: ->
 
-        @checkHomeControllerMethodCallsNextMethod = (method) ->
-            nextMethod = sinon.spy @contextMock, 'next'
+        @checkHomeControllerMethodCallsNextMethod = (method, methodToSpy) ->
+            methodToSpy ?= 'next'
+            nextMethod = sinon.spy @contextMock, methodToSpy
             method.apply @contextMock
             assert nextMethod.calledOnce
 
@@ -36,3 +38,9 @@ describe 'HomeController', ->
 
         it 'onRerun calls next function in request handling pipeline', ->
             @checkHomeControllerMethodCallsNextMethod @homeController.onRerun
+
+        it 'onBeforeAction calls next function in request handling pipeline', ->
+            @checkHomeControllerMethodCallsNextMethod @homeController.onBeforeAction
+
+        it 'action calls next function in request handling pipeline', ->
+            @checkHomeControllerMethodCallsNextMethod @homeController.action, 'render'
