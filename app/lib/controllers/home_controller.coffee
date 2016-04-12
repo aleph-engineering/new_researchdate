@@ -1,8 +1,11 @@
-HomeController = @HomeController = RouteController.extend(
+class HomeController extends RouteController
 # A place to put your subscriptions
 # this.subscribe('items');
 # # add the subscription to the waitlist
 # this.subscribe('item', this.params._id).wait();
+
+    constructor: ->
+        super
 
     subscriptions: ->
 
@@ -42,12 +45,11 @@ HomeController = @HomeController = RouteController.extend(
 #  action: 'myActionFunction'
 
     action: ->
-        @render()
+        do @render
 
     onAfterAction: ->
 
     onStop: ->
-)
 
 
-exports.HomeController = HomeController
+exports.HomeController = @HomeController = HomeController
