@@ -1,8 +1,6 @@
 module.exports = ->
     'use strict'
 
-    cellsSelector = 'table#timestamp-list tbody tr td'
-
 
     @Given /^I timestamp the artifacts:$/, (scenario) ->
         browser.waitForExist 'input[type="file"]', 3000
@@ -21,21 +19,22 @@ module.exports = ->
 
 
     @Then /^I should see until "(\d+)" timestamp records in the recent timestamps list$/, (count) ->
-        browser.getText cellsSelector, (_, elements) ->
-# Assert that there are actually listed timestamps
+        browser.getText 'table#timestamp-list tbody tr td', (_, elements) ->
             expect(elements).not.toBe undefined, 'Expected timestamp records in the timestamp lists.'
-            expect(elements.length / 2).toBeLessThan parseInt count + 1
+            expect(elements.length).not.toBe 0, 'Expected timestamp records in the timestamp lists.'
+            expect(elements.length / 3).toBeLessThan parseInt count + 1
 
-            hashes = (x for i, x of elements when i % 2 isnt 1)
-            dates = (x for i, x of elements when i % 2 is 1)
+            cursor = 0
+            httpRegex = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/
 
-            # Assert that all the hashes of the timestamps follow the expected regular expression
-            for hash in hashes
-                expect(hash).toMatch /^[a-f0-9]{1,128}$/
-
-            # Assert that all the dates are correct as well
-            for date in dates
-                expect(Date.parse(date).toString()).not.toBe 'NaN'
+            for element in elements
+                if cursor is 0
+                    expect(element).toMatch /^[a-f0-9]{1,128}$/
+                else if cursor is 1
+                    expect(Date.parse(element).toString()).not.toBe('NaN')
+                else
+                    expect(element).toMatch(httpRegex) if cursor is 2
+                cursor = if cursor is 2 then 0 else cursor + 1
 
 
     @Then /^The recent timestamps list is as expected: it shows the last "(\d+)" timestamps ordered in descendant order by creation date$/, (timestampCount) ->

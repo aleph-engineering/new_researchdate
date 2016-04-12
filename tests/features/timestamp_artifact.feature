@@ -1,4 +1,3 @@
-@dev
 Feature: Timestamp an artifact
 
   As a visitor to the site,

@@ -1,4 +1,4 @@
-@HomeController = RouteController.extend(
+HomeController = @HomeController = RouteController.extend(
 # A place to put your subscriptions
 # this.subscribe('items');
 # # add the subscription to the waitlist
@@ -25,11 +25,13 @@
 # You can provide any of the hook options
 
     onRun: ->
-        @next()
+        do @next
+
     onRerun: ->
-        @next()
+        do @next
+
     onBeforeAction: ->
-        @next()
+        do @next
 
 # The same thing as providing a function as the second parameter. You can
 # also provide a string action name here which will be looked up on a Controller
@@ -41,6 +43,11 @@
 
     action: ->
         @render()
+
     onAfterAction: ->
+
     onStop: ->
 )
+
+
+exports.HomeController = HomeController
