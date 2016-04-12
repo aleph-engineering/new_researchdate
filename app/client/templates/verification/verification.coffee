@@ -1,5 +1,5 @@
 digest = require '../../lib/digest_generator'
-verifier = require '../../../lib/timestamp_verification'
+#verifier = require '../../../lib/timestamp_verification'
 
 Template.Verification.events {
 
@@ -37,7 +37,6 @@ Template.Verification.helpers {
 Template.Verification.onCreated ->
 
 Template.Verification.onRendered ->
-
 Template.Verification.onDestroyed ->
 
 
