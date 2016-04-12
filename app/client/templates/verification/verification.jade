@@ -1,18 +1,41 @@
 template(name='Verification')
-    div(class='verification')
-        h4 {{i18n 'verification.title'}}
-        form(id='verify-form' method='post' class='col s12')
-            div(class='file-field input-field')
-                div(class='btn' class='light-blue lighten-1')
-                    i(class="mdi-content-add")
-                    input(type='file' name='tsr' id='tsr-hash-input' required)
-                div(class='file-path-wrapper')
-                    input(class='file-path validate' type='text' placeholder="{{i18n 'verification.tsr_file'}}")
-            div(class='file-field input-field')
-                div(class='btn' class='light-blue lighten-1')
-                    i(class="mdi-content-add")
-                    input(type='file' name='original' id='original-file-input' required)
-                div(class='file-path-wrapper')
-                    input(class='file-path validate' type='text' placeholder="{{i18n 'verification.original_file'}}")
-            div(class='row')
-                button(type='submit' class='btn waves-effect waves-light light-blue lighten-1' id='verify') {{i18n 'verification.btn_verify'}}
+    form(action="/file-upload" class="dropzone card-panel" id="my-awesome-dropzone")
+        i(class="mdi-content-add")
+        input(type="file" name="file")
+    //h4 {{i18n 'verification.title'}}
+    //form(id='verify-form' method='post' class='col s12')
+    //    div(class="container")
+    //        div(class="card-panel waves-effect waves-block waves-green pt0 hovicon" id="zdrop")
+    //            Drop files here or browse files to upload
+    //
+    //    div(class="collection" id="previews")
+    //        div(class="collection-item clearhack valign-wrapper item-template" id="zdrop-template")
+    //            div(class="left pv zdrop-info" data-dz-thumbnail)
+    //                div
+    //                    span(data-dz-name)
+    //                        span(data-dz-size)
+    //                div(class="progress")
+    //                    div(class="determinate" style="width:0" data-dz-uploadprogress)
+    //            div(class="secondary-content actions")
+    //                a(href="#!" class="btn waves-effect waves-light start")
+    //                    upload
+    //                a(href="#!" data-dz-remove class="btn ph red white-text waves-effect waves-light")
+    //                    i(class="mdi-content-clear")
+
+
+            //h4 {{i18n 'verification.title'}}
+            //form(id='verify-form' method='post' class='col s12')
+            //    div(class='file-field input-field')
+            //        div(class='btn' class='light-blue lighten-1')
+            //            i(class="mdi-content-add")
+            //            input(type='file' name='tsr' id='tsr-hash-input' required)
+            //        div(class='file-path-wrapper')
+            //            input(class='file-path validate' type='text' placeholder="{{i18n 'verification.tsr_file'}}")
+            //    div(class='file-field input-field')
+            //        div(class='btn' class='light-blue lighten-1')
+            //            i(class="mdi-content-add")
+            //            input(type='file' class="dropify" name='original' id='original-file-input' required)
+            //        div(class='file-path-wrapper')
+            //            input(class='file-path validate' type='text' placeholder="{{i18n 'verification.original_file'}}")
+            //    div(class='row')
+            //        button(type='submit' class='btn waves-effect waves-light light-blue lighten-1' id='verify') {{i18n 'verification.btn_verify'}}

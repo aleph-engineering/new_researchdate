@@ -7,7 +7,6 @@ describe 'Queries object', ->
     it 'should be defined', ->
         expect(queries).to.not.be.undefined
 
-
     describe 'getLatestTimestamps', ->
         it 'should be defined', ->
             expect(queries.getLatestTimestamps).to.not.undefined

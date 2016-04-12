@@ -1,5 +1,5 @@
 digest = require '../../lib/digest_generator'
-verifier = require '../../../lib/timestamp_verification'
+#verifier = require '../../../lib/timestamp_verification'
 
 Template.Verification.events {
 
@@ -11,10 +11,10 @@ Template.Verification.events {
             if error
                 console.log error
             else
-                prueba(result, tsr)
+                verification(result, tsr)
 }
 
-prueba = (result, tsr)->
+verification = (result, tsr)->
     if tsr.length > 0
         file = tsr[0]
         reader = new FileReader()
@@ -35,7 +35,6 @@ Template.Verification.helpers {}
 Template.Verification.onCreated ->
 
 Template.Verification.onRendered ->
-
 Template.Verification.onDestroyed ->
 
 
