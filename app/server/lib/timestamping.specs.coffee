@@ -28,3 +28,27 @@ describe 'Timestamping Module', ->
 
             expect(result).to.have.property 'encoding'
             expect(result.encoding).to.be.null
+
+
+    describe '_saveTimestampRecord', ->
+        beforeEach ->
+            @_saveTimestampRecord = timestamping._saveTimestampRecord
+
+        it 'is defined', ->
+            expect(@_saveTimestampRecord).to.not.be.undefined
+
+        it 'inserts a new Timestamp record with correct information', ->
+            hash = "a4f56c8bba9" # arrange
+            date = new Date().getTime();
+            clock = sinon.useFakeTimers date
+            insertMethod = sinon.spy Timestamps, 'insert'
+
+            # act
+            @_saveTimestampRecord hash
+
+            # assert
+            assert insertMethod.calledOnce
+            assert insertMethod.calledWith hash: hash, creationDate: new Date(date), server: 'https://freetsa.org/'
+
+            do insertMethod.restore
+            do clock.restore
