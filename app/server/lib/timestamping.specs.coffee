@@ -52,3 +52,27 @@ describe 'Timestamping Module', ->
 
             do insertMethod.restore
             do clock.restore
+
+    describe '_makeTimestampRequest', ->
+        beforeEach ->
+            @_makeTimestampRequest = timestamping._makeTimestampRequest
+
+        it 'is defined', ->
+            expect(@_makeTimestampRequest).to.not.be.undefined
+
+        it 'performs the tsr request to specified URL and using the given options and returns response', ->
+            tsrUrl = "https://www.tsr-url.com" # arrange
+            tsrRequestOptions = {}
+            expectedPostSyncResult = "postSync response"
+            postSyncMethod = sinon.stub request, 'postSync'
+            postSyncMethod.onCall(0).returns expectedPostSyncResult
+
+            # act
+            result = @_makeTimestampRequest [tsrUrl, tsrRequestOptions]
+
+            # assert
+            assert postSyncMethod.calledOnce
+            assert postSyncMethod.calledWith [tsrUrl, tsrRequestOptions]
+            expect(result).to.equal expectedPostSyncResult
+
+            do postSyncMethod.restore
