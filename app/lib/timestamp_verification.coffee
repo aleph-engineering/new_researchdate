@@ -1,6 +1,6 @@
 asn1_helpers = require './asn1_helpers'
 tsr_helpers = require './tsr_helpers'
-crypto = require 'browserify-sign'
+crypto = require 'crypto'
 
 
 verifyTimestamp = (artifactHash, responseBuffer)->
