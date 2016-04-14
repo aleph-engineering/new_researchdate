@@ -12,8 +12,8 @@ i18n.map 'en', loading:
 # FEATURES TEMPLATES
 i18n.map 'en', verification:
     title: 'Verification'
-    original_file: 'Original file'
-    tsr_file: 'Tsr File'
+    original_file: 'Drop or pick the Original file'
+    tsr_file: 'Drop or pick the Tsr file'
     btn_verify: 'Verify'
     messages:
         info: 'Verification Successful'
