@@ -53,6 +53,7 @@ describe 'Timestamping Module', ->
             do insertMethod.restore
             do clock.restore
 
+
     describe '_makeTimestampRequest', ->
         beforeEach ->
             @_makeTimestampRequest = timestamping._makeTimestampRequest
@@ -76,3 +77,23 @@ describe 'Timestamping Module', ->
             expect(result).to.equal expectedPostSyncResult
 
             do postSyncMethod.restore
+
+
+    describe '_generateTimestampRequest', ->
+        beforeEach ->
+            @_generateTimestampRequest = timestamping._generateTimestampRequest
+
+        it 'is defined', ->
+            expect(@_generateTimestampRequest).to.not.be.undefined
+
+        it 'calls the proper timestamp request generation method', ->
+            asn1_helpers = require '../../lib/asn1_helpers'
+            generateTimestampRequestMethod = sinon.stub asn1_helpers, 'generateTimestampRequest'
+
+            hash = "e897ab9cb"
+            @_generateTimestampRequest hash
+
+            assert generateTimestampRequestMethod.calledOnce
+            assert generateTimestampRequestMethod.calledWith hash
+
+            do generateTimestampRequestMethod.restore
