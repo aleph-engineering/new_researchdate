@@ -5,13 +5,14 @@ Template.Verification.events {
 
     'submit #verify-form': (e) ->
         e.preventDefault()
-        tsr = $(e.target).find('#tsr-hash-input').get(0).files
-        origin = $(e.target).find('#original-file-input').get(0).files
-        digest.generateDigest origin[0], (error, result)->
-            if error
-                console.log error
-            else
-                verification(result, tsr)
+        tsr = $(e.target).find('#tsr-hash-input')[0]
+        console.log tsr
+#        origin = $(e.target).find('#original-file-input').get(0).files
+#        digest.generateDigest origin[0], (error, result)->
+#            if error
+#                console.log error
+#            else
+#                verification(result, tsr)
 }
 
 verification = (result, tsr)->
@@ -29,12 +30,15 @@ verification = (result, tsr)->
         reader.readAsArrayBuffer file
 
 
-Template.Verification.helpers {}
+Template.Verification.helpers {
+
+}
 
 # Verification: Lifecycle Hooks
 Template.Verification.onCreated ->
 
 Template.Verification.onRendered ->
+
 Template.Verification.onDestroyed ->
 
 
