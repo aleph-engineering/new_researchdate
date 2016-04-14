@@ -19,12 +19,7 @@ generateTimestampRequest = (hash) ->
     }, 'der')
     return output
 
-parseTimestampResponse = (responseBuffer) ->
-    response = tsResponse.TimestampResponse.decode responseBuffer, 'der'
-    return new tsr_helpers.TSRWrapper response
-
 
 asn1_helpers = exports
 
 asn1_helpers.generateTimestampRequest = generateTimestampRequest
-asn1_helpers.parseTimestampResponse = parseTimestampResponse
