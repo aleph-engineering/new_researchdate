@@ -1,18 +1,17 @@
 digest = require '../../lib/digest_generator'
-#verifier = require '../../../lib/timestamp_verification'
+verifier = require '../../../lib/timestamp_verification'
 
 Template.Verification.events {
 
     'submit #verify-form': (e) ->
         e.preventDefault()
-        tsr = $(e.target).find('#tsr-hash-input')[0]
-        console.log tsr
-#        origin = $(e.target).find('#original-file-input').get(0).files
-#        digest.generateDigest origin[0], (error, result)->
-#            if error
-#                console.log error
-#            else
-#                verification(result, tsr)
+        tsr = $('#tsr-hash').get(0).dropzone.getAcceptedFiles()
+        origin = $('#original-file').get(0).dropzone.getAcceptedFiles()
+        digest.generateDigest origin[0], (error, result)->
+            if error
+                console.log error
+            else
+                verification(result, tsr)
 }
 
 verification = (result, tsr)->

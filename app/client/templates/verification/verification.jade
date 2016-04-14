@@ -2,22 +2,7 @@ template(name='Verification')
     div(class="col s12 m6")
         h4 {{i18n 'verification.title'}}
         form(id='verify-form' method='post' class='col s12')
-            +dropzone url='/' class='dropzone' id='tsr-hash' dictDefaultMessage='Drop or pick the Tsr file'
-            +dropzone url='/' class='dropzone' id='original-file' dictDefaultMessage='Drop or pick the Original file'
+            +dropzone class='dropzone' id='tsr-hash' dictDefaultMessage='Drop or pick the Tsr file'
+            +dropzone class='dropzone' id='original-file' dictDefaultMessage='Drop or pick the Original file'
             div(class='row')
-                button(type='submit' class='btn waves-effect waves-light light-blue lighten-1 margin' id='verify') {{i18n 'verification.btn_verify'}}
-
-
-
-            //    div(class='file-field input-field')
-            //        div(class='btn' class='light-blue lighten-1')
-            //            i(class="mdi-content-add")
-            //            input(type='file' name='tsr' id='tsr-hash-input' required)
-            //        div(class='file-path-wrapper')
-            //            input(class='file-path validate' type='text' placeholder="{{i18n 'verification.tsr_file'}}")
-            //    div(class='file-field input-field')
-            //        div(class='btn' class='light-blue lighten-1')
-            //            i(class="mdi-content-add")
-            //            input(type='file' class="dropify" name='original' id='original-file-input' required)
-            //        div(class='file-path-wrapper')
-            //            input(class='file-path validate' type='text' placeholder="{{i18n 'verification.original_file'}}")
+                button(type='submit' class='btn waves-effect waves-light light-blue lighten-1 verification' id='verify') {{i18n 'verification.btn_verify'}}

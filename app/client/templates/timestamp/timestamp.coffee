@@ -31,5 +31,14 @@ Template.Timestamp.helpers {
 Template.Timestamp.onCreated ->
 
 Template.Timestamp.onRendered ->
+    $('#original-artifact').on 'success', ()->
+        console.log 'aaa'
+
+#    Meteor.Dropzone.options.init = () ->
+#        r = Dropzone.getElement("#original-artifact").dropzone
+#        console.log r
+#        @on 'dragstart', (e)->
+#            console.log 'ok'
+
 
 Template.Timestamp.onDestroyed ->
