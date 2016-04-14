@@ -18,15 +18,8 @@
   "homepage": "https://github.com/aleph-engineering/new_researchdate#readme",
   "dependencies": {
     "asn1.js": "^4.5.2",
-    "browser": "^0.2.6",
-    "buffer": "^4.5.1",
-    "dropify": "^0.2.0",
-    "growl": "^1.9.2",
-    "jade": "^1.11.0",
-    "jsrsasign": "^5.0.7",
     "meteor-node-stubs": "^0.2.3",
-    "sha.js": "^2.4.5",
-    "vm-browserify": "0.0.4"
+    "sha.js": "^2.4.5"
   },
   "devDependencies": {
     "mocha": "^2.4.5",
