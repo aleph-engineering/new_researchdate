@@ -1,5 +1,5 @@
 tsr_helpers = require './tsr_helpers'
-crypto = require 'crypto'
+rsaSign = require('jsrsasign');
 
 
 verifyTimestamp = (artifactHash, responseBuffer)->
@@ -14,9 +14,10 @@ verifyTimestamp = (artifactHash, responseBuffer)->
     signature = responseWrapper.getSignature()
     publicKey = responseWrapper.getPublicKey()
 
-    verify = crypto.createVerify 'RSA-SHA1'
-    verify.update signedContentBuffer
-    return verify.verify publicKey, signature
+    sig = new rsaSign.Signature({"alg": "SHA1withRSA"});
+    sig.init publicKey
+    sig.updateHex signedContentBuffer.toString('hex')
+    return sig.verify signature.toString('hex')
 
 
 exports.verifyTimestamp = verifyTimestamp
