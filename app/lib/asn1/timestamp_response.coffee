@@ -5,33 +5,45 @@ common = require './common'
 
 TimestampResponse = asn.define 'TimestampResponse', () ->
     @seq().obj(
-        @key('status').seq().obj(
-            @key('status').int({
-                0: 'granted',
-                1: 'grantedWithMods',
-                2: 'rejection',
-                3: 'waiting',
-                4: 'revocationWarning',
-                5: 'revocationNotification'
-            }),
-            @key('statusString').optional().seq().obj(
-                @key('text').optional().utf8str()
-            ),
-            @key('failInfo').optional().bitstr({
-                '0': 'badAlg',
-                '2': 'badRequest',
-                '5': 'badDataFormat',
-                '14': 'timeNotAvailable',
-                '15': 'unacceptedPolicy',
-                '16': 'unacceptedExtension',
-                '17': 'addInfoNotAvailable',
-                '25': 'systemFailure'
-            }),
-        ),
+        @key('status').use(PKIStatusInfo)
         @key('timeStampToken').optional().seq().obj(
             @key('contentType').objid(common.PKCS7_CONTENT_TYPES),
             @key('content').optional().explicit(0).use(SignedData)
         )
+    )
+
+TimestampResponseTST = asn.define 'TimestampResponse', () ->
+    @seq().obj(
+        @key('status').use(PKIStatusInfo)
+        @key('timeStampToken').optional().seq().obj(
+            @key('contentType').objid(common.PKCS7_CONTENT_TYPES),
+            @key('content').optional().explicit(0).use(SignedDataTST)
+        )
+    )
+
+PKIStatusInfo = asn.define 'PKIStatusInfo', () ->
+    @seq().obj(
+        @key('status').int({
+            0: 'granted',
+            1: 'grantedWithMods',
+            2: 'rejection',
+            3: 'waiting',
+            4: 'revocationWarning',
+            5: 'revocationNotification'
+        }),
+        @key('statusString').optional().seq().obj(
+            @key('text').optional().utf8str()
+        ),
+        @key('failInfo').optional().bitstr({
+            '0': 'badAlg',
+            '2': 'badRequest',
+            '5': 'badDataFormat',
+            '14': 'timeNotAvailable',
+            '15': 'unacceptedPolicy',
+            '16': 'unacceptedExtension',
+            '17': 'addInfoNotAvailable',
+            '25': 'systemFailure'
+        }),
     )
 
 SignedData = asn.define 'SignedData', () ->
@@ -44,13 +56,32 @@ SignedData = asn.define 'SignedData', () ->
         @key('signerInfos').setof(SignerInfo)
     )
 
+SignedDataTST = asn.define 'SignedData', () ->
+    @seq().obj(
+        @key('version').use(CMSVersion),
+        @key('digestAlgorithms').setof(rfc5280.AlgorithmIdentifier),
+        @key('encapContentInfo').use(EncapsulatedContentInfoTST),
+        @key('certificates').optional().implicit(0).setof(CertificateChoices),
+        @key('crls').optional().implicit(1).setof(RevocationInfoChoice),
+        @key('signerInfos').setof(SignerInfo)
+    )
+
 EncapsulatedContentInfo = asn.define 'EncapsulatedContentInfo', () ->
     @seq().obj(
         @key('eContentType').objid(),
         @key('eContent').use(EncapsulatedContent)
     )
 
+EncapsulatedContentInfoTST = asn.define 'EncapsulatedContentInfoTST', () ->
+    @seq().obj(
+        @key('eContentType').objid(),
+        @key('eContent').use(EncapsulatedContentTST)
+    )
+
 EncapsulatedContent = asn.define 'EncapsulatedContent', () ->
+    @optional().explicit(0).octstr()
+
+EncapsulatedContentTST = asn.define 'EncapsulatedContentTST', () ->
     @optional().explicit(0).octstr().contains(TSTInfo)
 
 TSTInfo = asn.define 'TSTInfo', () ->
@@ -121,9 +152,14 @@ CMSVersion = asn.define 'CMSVersion', () ->
         5: 'v5'
     })
 
+SignedAttributes = asn.define 'SignedAttributes', () ->
+    @setof(common.Attribute)
+
 
 timestampResponse = exports
 
 timestampResponse.TimestampResponse = TimestampResponse
+timestampResponse.TimestampResponseTST = TimestampResponseTST
 timestampResponse.EncapsulatedContentInfo = EncapsulatedContentInfo
 timestampResponse.EncapsulatedContent = EncapsulatedContent
+timestampResponse.SignedAttributes = SignedAttributes

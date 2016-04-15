@@ -1,24 +1,22 @@
-asn1_helpers = require './asn1_helpers'
 tsr_helpers = require './tsr_helpers'
-crypto = require 'browserify-sign'
+crypto = require 'crypto'
 
 
 verifyTimestamp = (artifactHash, responseBuffer)->
-    response = asn1_helpers.parseTimestampResponse responseBuffer
+    responseWrapper = new tsr_helpers.TSRWrapper responseBuffer
 
     #   First we compare the artifact hash and the hash contained in the response
-    tsrHash = response.getHashHex()
+    tsrHash = responseWrapper.getHashHex()
     return false unless artifactHash == tsrHash
 
-    #   Then we verify that the response's content was signed with the certificates also present in it
-    signedContentBuffer = response.getSignedContent()
-    certsInfo = response.getCertificatesDetails()
-    for cert in certsInfo
-        verify = crypto.createVerify 'RSA-SHA512'
-        verify.update signedContentBuffer
-        return false unless verify.verify cert.publicKey, cert.signature
+    #   Then we verify that the response's content was signed with the certificate also present in it
+    signedContentBuffer = responseWrapper.getSignedContent()
+    signature = responseWrapper.getSignature()
+    publicKey = responseWrapper.getPublicKey()
 
-    true
+    verify = crypto.createVerify 'RSA-SHA1'
+    verify.update signedContentBuffer
+    return verify.verify publicKey, signature
 
 
 exports.verifyTimestamp = verifyTimestamp

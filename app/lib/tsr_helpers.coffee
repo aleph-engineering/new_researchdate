@@ -3,55 +3,90 @@ tsResponse = require './asn1/timestamp_response'
 
 
 class TSRWrapper
-    constructor: (@response) ->
+    constructor: (responseBuffer) ->
+        @response = tsResponse.TimestampResponseTST.decode responseBuffer, 'der'
+        if _responseAndResponseStatus @response
+            responseWithoutTST = tsResponse.TimestampResponse.decode responseBuffer, 'der'
+            @encapsulatedContent = _getEncapsulatedContent responseWithoutTST
 
 #   PUBLIC METHODS
     getHashHex: () ->
-        @_assertResponseStatus()
-        content = @_getEncapsulatedContent()
+        content = _getEncapsulatedContent @response
         hashBuffer = new Buffer content.messageImprint.hashedMessage
         return hashBuffer.toString 'hex'
 
-    getCertificatesDetails: () ->
-        @_assertResponseStatus()
-        certArray = []
-        timestampToken = @_getTimestampToken()
-        respCerts = timestampToken.certificates
-        for cert in respCerts
-            signatureBuffer = new Buffer cert.value.signature.data
+    getSignature: () ->
+        signerInfo = _getSignerInfo @response
+        signerInfo.signature
+
+    getPublicKey: () ->
+        pem = null
+        signerDetails = _getSignerIssuerAndSerialNumber @response
+        cert = _getIssuerCertificate _getTimestampToken(@response).certificates, signerDetails.issuer, signerDetails.serialNumber
+        if cert
             publicKeyInfo = cert.value.tbsCertificate.subjectPublicKeyInfo
-            publicKeyPEM = rfc5280.SubjectPublicKeyInfo.encode publicKeyInfo, 'pem', label: 'PUBLIC KEY'
-            certArray.push
-                signature: signatureBuffer,
-                publicKey: publicKeyPEM
-        return certArray
+            pem = rfc5280.SubjectPublicKeyInfo.encode publicKeyInfo, 'pem', label: 'PUBLIC KEY'
+        return pem
 
     getSignedContent: () ->
-        @_assertResponseStatus()
-        responseContent = @_getEncapsulatedContent()
-        signedContentObj = tsResponse.EncapsulatedContent.encode responseContent, 'der'
-        signedContent = new Buffer signedContentObj
-        return signedContent
+        signedContent = null
+        if not _responseHasSignedAttrs @response
+            signedContent = @encapsulatedContent
+        else
+            signerInfo = _getSignerInfo @response
+            signedContent = tsResponse.SignedAttributes.encode signerInfo.signedAttrs, 'der'
 
-#   PRIVATE METHODS
-    _assertResponseStatus: () ->
-        throw 'Does not contain a timestamp' if not @_responseAndResponseStatus
 
-    _responseAndResponseStatus: () ->
-        responseStatus = (_responseStatusIsGranted() || _responseStatusIsGrantedWithMods())
-        @response && responseStatus
+    #   PRIVATE METHODS
+    _assertResponseStatus = (response) ->
+        throw 'Does not contain a timestamp' if not _responseAndResponseStatus(response)
 
-    _responseStatusIsGranted: () ->
-        @response.status.status is 'granted'
+    #   There must be ONE AND ONLY ONE SignerInfo in the response, otherwise is not valid according to the standard
+    _assertSignerInfo = (response) ->
+        token = _getTimestampToken response
+        throw 'Does not contain a valid Signer Info' if not token.signerInfos.length == 1
 
-    _responseStatusIsGrantedWithMods: () ->
-        @response.status.status is 'grantedWithMods'
+    _responseAndResponseStatus = (response) ->
+        responseStatus = (_responseStatusIsGranted(response) || _responseStatusIsGrantedWithMods(response))
+        response && responseStatus
 
-    _getTimestampToken: () ->
-        @response.timeStampToken.content
+    _responseStatusIsGranted = (response) ->
+        response.status.status is 'granted'
 
-    _getEncapsulatedContent: () ->
-        @_getTimestampToken().encapContentInfo.eContent
+    _responseStatusIsGrantedWithMods = (response) ->
+        response.status.status is 'grantedWithMods'
+
+    _getTimestampToken = (response) ->
+        _assertResponseStatus response
+        response.timeStampToken.content
+
+    _getSignerInfo = (response) ->
+        _assertSignerInfo response
+        token = _getTimestampToken response
+        token.signerInfos[0]
+
+    _getSignerIssuerAndSerialNumber = (response) ->
+        signerInfo = _getSignerInfo response
+        {
+        issuer: signerInfo.sid.value.issuer,
+        serialNumber: signerInfo.sid.value.serialNumber
+        }
+
+    _getEncapsulatedContent = (response) ->
+        _getTimestampToken(response).encapContentInfo.eContent
+
+    _responseHasSignedAttrs = (response) ->
+        signerInfo = _getSignerInfo response
+        signerInfo.signedAttrs && signerInfo.signedAttrs.length > 0
+
+    _getIssuerCertificate = (certificates, issuer, serialNumber) ->
+        result = null
+        for cert in certificates
+            tbs = cert.value.tbsCertificate
+            if _.isEqual(issuer, tbs.issuer) && _.isEqual(serialNumber, tbs.serialNumber)
+                result = cert
+                break
+        return result
 
 
 tsr = exports

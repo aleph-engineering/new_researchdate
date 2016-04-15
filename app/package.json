@@ -19,7 +19,6 @@
   "dependencies": {
     "asn1.js": "^4.5.2",
     "browser": "^0.2.6",
-    "browserify-sign": "^4.0.0",
     "buffer": "^4.5.1",
     "dropify": "^0.2.0",
     "growl": "^1.9.2",
@@ -30,9 +29,7 @@
     "vm-browserify": "0.0.4"
   },
   "devDependencies": {
-    "coffeescript": "^1.0.15",
     "mocha": "^2.4.5",
-    "rewire": "^2.5.1",
     "sinon": "^1.17.3"
   }
 }
