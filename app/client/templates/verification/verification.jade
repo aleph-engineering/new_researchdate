@@ -2,7 +2,7 @@ template(name='Verification')
     div(class="col s12 m6")
         h4 {{i18n 'verification.title'}}
         form(id='verify-form' method='post' class='col s12')
-            +dropzone class='dropzone' id='tsr-hash' dictDefaultMessage='Drop or pick the Tsr file'
-            +dropzone class='dropzone' id='original-file' dictDefaultMessage='Drop or pick the Original file'
+            +dropzone class='dropzone' id='tsr-hash' name='tsr' dictDefaultMessage='Drop or pick the Tsr file'
+            +dropzone class='dropzone' id='original-file' name='original' dictDefaultMessage='Drop or pick the Original file'
             div(class='row')
                 button(type='submit' class='btn waves-effect waves-light light-blue lighten-1 verification' id='verify') {{i18n 'verification.btn_verify'}}
