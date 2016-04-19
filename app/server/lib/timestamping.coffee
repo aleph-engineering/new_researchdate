@@ -62,3 +62,4 @@ class TimestampGenerator
 
 
 exports.TimestampGenerator = TimestampGenerator
+exports.getTimestampGenerator = -> new TimestampGenerator()

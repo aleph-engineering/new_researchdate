@@ -1,4 +1,3 @@
-rewire = require 'rewire'
 timestamping = require './timestamping'
 
 
@@ -179,3 +178,12 @@ describe 'Timestamping Module', ->
                 do genTimestampRequestMethod.restore
                 do buildTimestampRequestOptionsMethod.restore
                 do makeTimestampRequest.restore
+
+
+    describe 'getTimestampGenerator method', ->
+        it 'is defined', ->
+            expect(timestamping.getTimestampGenerator).to.not.be.undefined
+
+        it 'returns new instance of timestamping.TimestampGenerator class', ->
+            timestampGenerator = timestamping.getTimestampGenerator()
+            expect(timestampGenerator).to.be.an.instanceof timestamping.TimestampGenerator
