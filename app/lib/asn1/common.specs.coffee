@@ -32,7 +32,8 @@ describe 'Common module', ->
     it 'is defined', ->
         expect(common).to.not.be.undefined
 
-    describe 'MessageImprint', ->
+
+    describe 'MessageImprint ASN Model', ->
         before ->
             @MessageImprint = common.MessageImprint
 
@@ -58,3 +59,8 @@ describe 'Common module', ->
             expect(@keyFuncSpy.calledWith('hashedMessage')).to.be.true
             expect(@useFuncSpy.calledWith(rfc5280.AlgorithmIdentifier)).to.be.true
             expect(@octstrFuncSpy.calledOnce).to.be.true
+
+        it 'does not have any decoders', ->
+            console.log @MessageImprint
+            expect(@MessageImprint.decoders).to.be.an 'object'
+            expect(@MessageImprint.decoders).to.empty
