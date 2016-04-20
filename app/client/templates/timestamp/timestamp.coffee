@@ -1,4 +1,5 @@
 digest = require '../../lib/digest_generator'
+validator = require '../../lib/validator'
 
 Session.setDefault 'artifactHash', 'NONE'
 
@@ -7,11 +8,10 @@ Template.Timestamp.events {
     'submit #artifact-form': (e) ->
         e.preventDefault()
         val = $('#hash').val()
-        if val is 'NONE'
-            $('#original-artifact').addClass('error')
-        else
-            e.target.submit()
+        e.target.submit() if !validator.validArgsForTimestamp(val)
+        $('#original-artifact').addClass('error') if validator.validArgsForTimestamp(val)
 }
+
 
 Template.Timestamp.helpers {
     artifactHash: ->

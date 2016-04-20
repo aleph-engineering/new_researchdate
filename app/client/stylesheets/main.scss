@@ -4,6 +4,14 @@
 .main {
 }
 
+.dropzone {
+  border: 2px dashed #bbb;
+  width: 30em;
+  margin-top: 12px;
+  background-color: yellow;
+}
+
 .error {
   border: 2px dashed #F34141;
+  color: #cc0000;
 }
