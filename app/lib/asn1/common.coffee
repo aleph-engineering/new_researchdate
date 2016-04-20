@@ -29,5 +29,6 @@ PKCS7_CONTENT_TYPES = {
 common = exports
 
 common.MessageImprint = MessageImprint
+common.Any = Any
 common.Attribute = Attribute
 common.PKCS7_CONTENT_TYPES = PKCS7_CONTENT_TYPES
