@@ -1,4 +1,1 @@
-@Timestamps = TimestampsCollection = new Mongo.Collection 'timestamps'
-
-
-exports.Timestamps = TimestampsCollection
+exports.Timestamps = @Timestamps = new Mongo.Collection 'timestamps'
