@@ -53,19 +53,23 @@ describe 'Common module', ->
 
     describe 'ASN Models', ->
         describe 'MessageImprint', ->
-            before ->
+            beforeEach ->
                 @MessageImprint = common.MessageImprint
+
 
             it 'is defined', ->
                 expect(@MessageImprint).to.not.be.undefined
+
 
             it 'contains "name" property with correct value', ->
                 expect(@MessageImprint).to.have.property 'name'
                 expect(@MessageImprint.name).to.equal 'MessageImprint'
 
+
             it 'contains "body" property with provided callback', ->
                 expect(@MessageImprint).to.have.property 'body'
                 expect(@MessageImprint.body).to.be.a 'Function'
+
 
             it '"body" callback does the right model configuration', ->
                 expectedMessageImPrintBodyResult = do Math.random
@@ -116,27 +120,39 @@ describe 'Common module', ->
             before ->
                 @Any = common.Any
 
+
             it 'is defined', ->
                 expect(@Any).to.not.be.undefined
+
 
             it 'contains "name" property with correct value', ->
                 expect(@Any).to.have.property 'name'
                 expect(@Any.name).to.equal 'Any'
 
+
             it 'contains "body" property with provided callback', ->
                 expect(@Any).to.have.property 'body'
                 expect(@Any.body).to.be.a 'Function'
 
-            it '"body" callback does the right model configuration', ->
-                callback = @Any.body
-                callback.call @fakeContext
 
-                expect(@anyFuncSpy.calledOnce).to.be.true
+            it '"body" callback does the right model configuration', ->
+                expectedAnyBodyFnResult = do Math.random
+                fakeContext = sinon.stub
+                    any: ->
+                fakeContext.any.returns expectedAnyBodyFnResult
+
+                callback = @Any.body
+                result = callback.call fakeContext
+
+                expect(fakeContext.any.calledOnce).to.be.true
+                expect(result).to.be.equal expectedAnyBodyFnResult
+
 
             it 'does not have any decoders', ->
                 expect(@Any).to.have.property 'decoders'
                 expect(@Any.decoders).to.be.an 'object'
                 expect(@Any.decoders).to.empty
+
 
             it 'does not have any encoders', ->
                 expect(@Any).to.have.property 'decoders'
