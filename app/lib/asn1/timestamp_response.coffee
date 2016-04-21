@@ -5,10 +5,10 @@ common = require './common'
 
 TimestampResponse = asn.define 'TimestampResponse', () ->
     @seq().obj(
-        @key('status').use(PKIStatusInfo)
+        @key('status').use PKIStatusInfo
         @key('timeStampToken').optional().seq().obj(
-            @key('contentType').objid(common.PKCS7_CONTENT_TYPES)
-            @key('content').optional().explicit(0).use(SignedData)
+            @key('contentType').objid common.PKCS7_CONTENT_TYPES
+            @key('content').optional().explicit(0).use SignedData
         )
     )
 
@@ -173,6 +173,7 @@ SignedAttributes = asn.define 'SignedAttributes', () ->
 timestampResponse = exports
 
 timestampResponse.SignedData = SignedData
+timestampResponse.SignedDataTST = SignedDataTST
 timestampResponse.PKIStatusInfo = PKIStatusInfo
 timestampResponse.TimestampResponse = TimestampResponse
 timestampResponse.TimestampResponseTST = TimestampResponseTST
