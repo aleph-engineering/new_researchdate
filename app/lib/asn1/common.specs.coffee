@@ -164,33 +164,53 @@ describe 'Common module', ->
             beforeEach ->
                 @Attribute = common.Attribute
 
+
             it 'is defined', ->
                 expect(@Attribute).to.not.be.undefined
+
 
             it 'contains "name" property with correct value', ->
                 expect(@Attribute).to.have.property 'name'
                 expect(@Attribute.name).to.equal 'Attribute'
 
+
             it 'contains "body" property with provided callback', ->
                 expect(@Attribute).to.have.property 'body'
                 expect(@Attribute.body).to.be.a 'Function'
 
-            it '"body" callback does the right model configuration', ->
-                callback = @Attribute.body
-                callback.call @fakeContext
 
-                expect(@seqFuncSpy.calledOnce).to.be.true
-                expect(@objFuncSpy.calledOnce).to.be.true
-                expect(@keyFuncSpy.calledTwice).to.be.true
-                expect(@keyFuncSpy.calledWith('attrType')).to.be.true
-                expect(@keyFuncSpy.calledWith('attrValues')).to.be.true
-                expect(@objidFuncSpy.calledOnce).to.be.true
-                expect(@seqofFuncSpy.calledWith(common.Any)).to.be.true
+            it '"body" callback does the right model configuration', ->
+                expectedAttributeBodyFnResult = do Math.random
+                expectedObjidFnResult = do Math.random
+                expectedSetofFnResult = do Math.random
+                # Same as before, initialing the expected result for the asn special methods: objid and setof
+
+                objFunc = sinon.stub obj: ->
+                objFunc.obj.returns expectedAttributeBodyFnResult
+                setofStub = sinon.stub setof: ->
+                setofStub.setof.withArgs(common.Any).returns expectedSetofFnResult
+
+                fakeContext = sinon.stub
+                    seq: ->
+                    key: ->
+                fakeContext.seq.returns objFunc
+                fakeContext.key.withArgs('attrType').returns objid: -> expectedObjidFnResult
+                fakeContext.key.withArgs('attrValues').returns setofStub
+
+                callback = @Attribute.body
+                result = callback.call fakeContext
+
+                expect(fakeContext.seq.calledOnce).to.be.true
+                expect(objFunc.obj.calledOnce).to.be.true
+                expect(objFunc.obj.calledWith expectedObjidFnResult, expectedSetofFnResult).to.be.true
+                expect(result).to.be.equal expectedAttributeBodyFnResult
+
 
             it 'does not have any decoders', ->
                 expect(@Attribute).to.have.property 'decoders'
                 expect(@Attribute.decoders).to.be.an 'object'
                 expect(@Attribute.decoders).to.empty
+
 
             it 'does not have any encoders', ->
                 expect(@Attribute).to.have.property 'encoders'
