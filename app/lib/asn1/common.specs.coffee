@@ -79,21 +79,17 @@ describe 'Common module', ->
                 # MessageImprint.body function's result
 
                 # Configuring the stubs that the MessageImprint.body function must interact with
-                apiStub = sinon.stub
-                    use: ->
-                    octstr: ->
-                apiStub.use.withArgs(rfc5280.AlgorithmIdentifier).returns expectUseFnResult
-                apiStub.octstr.returns expectOctstrFnResult
-
                 objFuncStub = sinon.stub obj: ->
                 objFuncStub.obj.returns expectedMessageImPrintBodyResult
+                useStub = sinon.stub use: ->
+                useStub.use.withArgs(rfc5280.AlgorithmIdentifier).returns expectUseFnResult
 
                 fakeContext = sinon.stub
                     seq: ->
                     key: ->
                 fakeContext.seq.returns objFuncStub
-                fakeContext.key.withArgs('hashAlgorithm').returns apiStub
-                fakeContext.key.withArgs('hashedMessage').returns apiStub
+                fakeContext.key.withArgs('hashAlgorithm').returns useStub
+                fakeContext.key.withArgs('hashedMessage').returns octstr: -> expectOctstrFnResult
 
                 callback = @MessageImprint.body
                 result = callback.call fakeContext
@@ -183,7 +179,8 @@ describe 'Common module', ->
                 expectedAttributeBodyFnResult = do Math.random
                 expectedObjidFnResult = do Math.random
                 expectedSetofFnResult = do Math.random
-                # Same as before, initialing the expected result for the asn special methods: objid and setof
+                # Same as before, initialing the expected result for the asn special methods: objid and setof and the
+                # Attribute.body function's result also
 
                 objFunc = sinon.stub obj: ->
                 objFunc.obj.returns expectedAttributeBodyFnResult
@@ -222,31 +219,39 @@ describe 'Common module', ->
         beforeEach ->
             @pkcs7 = common.PKCS7_CONTENT_TYPES
 
+
         it 'is defined', ->
             expect(@pkcs7).to.not.be.undefined
 
+
         it 'is be an object', ->
             expect(@pkcs7).to.be.an 'object'
+
 
         it 'should have a "data" value', ->
             expect(@pkcs7).to.have.property "1 2 840 113549 1 7 1"
             expect(@pkcs7["1 2 840 113549 1 7 1"]).to.equal 'data'
 
+
         it 'should have a "signedData" value', ->
             expect(@pkcs7).to.have.property "1 2 840 113549 1 7 2"
             expect(@pkcs7["1 2 840 113549 1 7 2"]).to.equal 'signedData'
+
 
         it 'should have a "envelopedData" value', ->
             expect(@pkcs7).to.have.property "1 2 840 113549 1 7 3"
             expect(@pkcs7["1 2 840 113549 1 7 3"]).to.equal 'envelopedData'
 
+
         it 'should have a "signedAndEnvelopedData" value', ->
             expect(@pkcs7).to.have.property "1 2 840 113549 1 7 4"
             expect(@pkcs7["1 2 840 113549 1 7 4"]).to.equal 'signedAndEnvelopedData'
 
+
         it 'should have a "digestData" value', ->
             expect(@pkcs7).to.have.property "1 2 840 113549 1 7 5"
             expect(@pkcs7["1 2 840 113549 1 7 5"]).to.equal 'digestData'
+
 
         it 'should have a "encryptedData" value', ->
             expect(@pkcs7).to.have.property "1 2 840 113549 1 7 6"
