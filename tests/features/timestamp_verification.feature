@@ -8,6 +8,7 @@ Feature: Timestamp verification
   Background:
     Given I am on the homepage
 
+  @dev
   Scenario: Successful verification
     Given I provide a encrypted hash "hash.tsr"
     And I provide the original artifact "TEST.txt"

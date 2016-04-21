@@ -11,13 +11,20 @@ module.exports = ->
 
 
     @Given /^I provide the digital artifact "([^"]*)"$/, (filename) ->
-        browser.waitForExist '#generate-input', 3000
-        @generalUpload('#generate-input', filename)
+#        browser.waitForExist '#original-artifact', 3000
+        browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
+        browser.execute((-> $('input[type="file"]').css('width', '300px')))
+        browser.execute((-> $('input[type="file"]').css('height', '100px')))
+        browser.pause 3000
+    #        @generalUpload('div#original-artifact input[type="file"]', filename)
+    #        browser.pause 3000
+    #        browser.setValue('#hash', '685c01d82443e1ca6283a29ac0b693fec50ecaf92ecb82e31b6b3817c52a85ca')
+    #        browser.click("#original-artifact").uploadFile('./tests/media/TEST.txt')
 
     @When /^I submit the form$/, ->
-        browser.waitForExist '#artifact-form', 3000
+#        browser.waitForExist '#artifact-form', 3000
         browser.submitForm '#artifact-form'
-        browser.pause 300
+    #        browser.pause 300
 
     @Then /^the site returns to me a timestamp$/, ->
         files = fs.readdirSync @downloadsFolder

@@ -8,7 +8,6 @@ Feature: Timestamp an artifact
   Background:
     Given I am on the homepage
 
-
   Scenario: Timestamp an artifact
     Given I provide the digital artifact "TEST.txt"
     When I submit the form
