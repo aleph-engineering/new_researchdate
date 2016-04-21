@@ -7,10 +7,11 @@ TimestampResponse = asn.define 'TimestampResponse', () ->
     @seq().obj(
         @key('status').use(PKIStatusInfo)
         @key('timeStampToken').optional().seq().obj(
-            @key('contentType').objid(common.PKCS7_CONTENT_TYPES),
+            @key('contentType').objid(common.PKCS7_CONTENT_TYPES)
             @key('content').optional().explicit(0).use(SignedData)
         )
     )
+
 
 TimestampResponseTST = asn.define 'TimestampResponse', () ->
     @seq().obj(
@@ -20,6 +21,7 @@ TimestampResponseTST = asn.define 'TimestampResponse', () ->
             @key('content').optional().explicit(0).use(SignedDataTST)
         )
     )
+
 
 PKIStatusInfo = asn.define 'PKIStatusInfo', () ->
     @seq().obj(
@@ -46,6 +48,7 @@ PKIStatusInfo = asn.define 'PKIStatusInfo', () ->
         }),
     )
 
+
 SignedData = asn.define 'SignedData', () ->
     @seq().obj(
         @key('version').use(CMSVersion),
@@ -55,6 +58,7 @@ SignedData = asn.define 'SignedData', () ->
         @key('crls').optional().implicit(1).setof(RevocationInfoChoice),
         @key('signerInfos').setof(SignerInfo)
     )
+
 
 SignedDataTST = asn.define 'SignedData', () ->
     @seq().obj(
@@ -66,11 +70,13 @@ SignedDataTST = asn.define 'SignedData', () ->
         @key('signerInfos').setof(SignerInfo)
     )
 
+
 EncapsulatedContentInfo = asn.define 'EncapsulatedContentInfo', () ->
     @seq().obj(
         @key('eContentType').objid(),
         @key('eContent').use(EncapsulatedContent)
     )
+
 
 EncapsulatedContentInfoTST = asn.define 'EncapsulatedContentInfoTST', () ->
     @seq().obj(
@@ -78,11 +84,14 @@ EncapsulatedContentInfoTST = asn.define 'EncapsulatedContentInfoTST', () ->
         @key('eContent').use(EncapsulatedContentTST)
     )
 
+
 EncapsulatedContent = asn.define 'EncapsulatedContent', () ->
     @optional().explicit(0).octstr()
 
+
 EncapsulatedContentTST = asn.define 'EncapsulatedContentTST', () ->
     @optional().explicit(0).octstr().contains(TSTInfo)
+
 
 TSTInfo = asn.define 'TSTInfo', () ->
     @seq().obj(
@@ -105,6 +114,7 @@ TSTInfo = asn.define 'TSTInfo', () ->
         @key('extensions').optional().implicit(1).seqof(rfc5280.Extension)
     )
 
+
 CertificateChoices = asn.define 'CertificateChoices', () ->
     @choice({
         certificate: @use(rfc5280.Certificate),
@@ -117,6 +127,7 @@ CertificateChoices = asn.define 'CertificateChoices', () ->
         ),
     })
 
+
 RevocationInfoChoice = asn.define 'RevocationInfoChoice', () ->
     @choice({
         crl: @use(rfc5280.CertificateList),
@@ -125,6 +136,7 @@ RevocationInfoChoice = asn.define 'RevocationInfoChoice', () ->
             @key('otherRevInfo').any()
         )
     })
+
 
 SignerInfo = asn.define 'SignerInfo', () ->
     @seq().obj(
@@ -142,6 +154,7 @@ SignerInfo = asn.define 'SignerInfo', () ->
         @key('unsignedAttrs').optional().implicit(1).setof(common.Attribute)
     )
 
+
 CMSVersion = asn.define 'CMSVersion', () ->
     @int({
         0: 'v0',
@@ -152,12 +165,15 @@ CMSVersion = asn.define 'CMSVersion', () ->
         5: 'v5'
     })
 
+
 SignedAttributes = asn.define 'SignedAttributes', () ->
     @setof(common.Attribute)
 
 
 timestampResponse = exports
 
+timestampResponse.SignedData = SignedData
+timestampResponse.PKIStatusInfo = PKIStatusInfo
 timestampResponse.TimestampResponse = TimestampResponse
 timestampResponse.TimestampResponseTST = TimestampResponseTST
 timestampResponse.EncapsulatedContentInfo = EncapsulatedContentInfo
