@@ -3,23 +3,31 @@ rfc5280 = require 'asn1.js/rfc/5280'
 common = require './common'
 
 
+class FakeContext
+    any: => @
+    def: => @
+    int: => @
+    key: => @
+    obj: => @
+    seq: => @
+    use: => @
+    bool: => @
+    objid: => @
+    seqof: => @
+    setof: => @
+    octstr: => @
+    implicit: => @
+    optional: => @
+
+
 describe 'Common module', ->
     beforeEach ->
         @asnDefine = sinon.stub asn, 'define'
 
-        class FakeContext
-            any: => @
-            seq: => @
-            obj: => @
-            key: => @
-            use: => @
-            objid: => @
-            setof: => @
-            octstr: => @
         @fakeContext = new FakeContext()
         @anyFuncSpy = sinon.spy @fakeContext, 'any'
         @seqFuncSpy = sinon.spy @fakeContext, 'seq'
-        @setofFuncSpy = sinon.spy @fakeContext, 'setof'
+        @seqofFuncSpy = sinon.spy @fakeContext, 'setof'
         @objFuncSpy = sinon.spy @fakeContext, 'obj'
         @objidFuncSpy = sinon.spy @fakeContext, 'objid'
         @keyFuncSpy = sinon.spy @fakeContext, 'key'
@@ -29,7 +37,7 @@ describe 'Common module', ->
     afterEach ->
         do @anyFuncSpy.restore
         do @seqFuncSpy.restore
-        do @setofFuncSpy.restore
+        do @seqofFuncSpy.restore
         do @objFuncSpy.restore
         do @objidFuncSpy.restore
         do @keyFuncSpy.restore
@@ -138,7 +146,7 @@ describe 'Common module', ->
                 expect(@keyFuncSpy.calledWith('attrType')).to.be.true
                 expect(@keyFuncSpy.calledWith('attrValues')).to.be.true
                 expect(@objidFuncSpy.calledOnce).to.be.true
-                expect(@setofFuncSpy.calledWith(common.Any)).to.be.true
+                expect(@seqofFuncSpy.calledWith(common.Any)).to.be.true
 
             it 'does not have any decoders', ->
                 expect(@Attribute).to.have.property 'decoders'
@@ -184,3 +192,6 @@ describe 'Common module', ->
         it 'should have a "encryptedData" value', ->
             expect(@pkcs7).to.have.property "1 2 840 113549 1 7 6"
             expect(@pkcs7["1 2 840 113549 1 7 6"]).to.equal 'encryptedData'
+
+
+exports.FakeContext = FakeContext
