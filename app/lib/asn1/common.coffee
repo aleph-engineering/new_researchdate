@@ -8,14 +8,17 @@ MessageImprint = asn.define 'MessageImprint', () ->
         @key('hashedMessage').octstr()
     )
 
+
 Any = asn.define 'Any', () ->
     @any()
+
 
 Attribute = asn.define 'Attribute', () ->
     @seq().obj(
         @key('attrType').objid(),
         @key('attrValues').setof(Any)
     )
+
 
 PKCS7_CONTENT_TYPES = {
     "1 2 840 113549 1 7 1": "data",
@@ -25,6 +28,7 @@ PKCS7_CONTENT_TYPES = {
     "1 2 840 113549 1 7 5": "digestData",
     "1 2 840 113549 1 7 6": "encryptedData",
 }
+
 
 common = exports
 
