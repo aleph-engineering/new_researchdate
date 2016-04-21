@@ -3,6 +3,7 @@ rfc5280 = require 'asn1.js/rfc/5280'
 common = require './common'
 
 
+# TODO: (@riel) Remove this when removed all dependencies to it
 class FakeContext
     any: => @
     def: => @
@@ -67,21 +68,43 @@ describe 'Common module', ->
                 expect(@MessageImprint.body).to.be.a 'Function'
 
             it '"body" callback does the right model configuration', ->
-                callback = @MessageImprint.body
-                callback.call @fakeContext
+                expectedMessageImPrintBodyResult = do Math.random
+                expectUseFnResult = do Math.random
+                expectOctstrFnResult = do Math.random
+                # Above were defined the expected results for the "use" and "octstr" methods, as well as the overall
+                # MessageImprint.body function's result
 
-                expect(@seqFuncSpy.calledOnce).to.be.true
-                expect(@objFuncSpy.calledOnce).to.be.true
-                expect(@keyFuncSpy.calledTwice).to.be.true
-                expect(@keyFuncSpy.calledWith('hashAlgorithm')).to.be.true
-                expect(@keyFuncSpy.calledWith('hashedMessage')).to.be.true
-                expect(@useFuncSpy.calledWith(rfc5280.AlgorithmIdentifier)).to.be.true
-                expect(@octstrFuncSpy.calledOnce).to.be.true
+                # Configuring the stubs that the MessageImprint.body function must interact with
+                apiStub = sinon.stub
+                    use: ->
+                    octstr: ->
+                apiStub.use.withArgs(rfc5280.AlgorithmIdentifier).returns expectUseFnResult
+                apiStub.octstr.returns expectOctstrFnResult
+
+                objFuncStub = sinon.stub obj: ->
+                objFuncStub.obj.returns expectedMessageImPrintBodyResult
+
+                fakeContext = sinon.stub
+                    seq: ->
+                    key: ->
+                fakeContext.seq.returns objFuncStub
+                fakeContext.key.withArgs('hashAlgorithm').returns apiStub
+                fakeContext.key.withArgs('hashedMessage').returns apiStub
+
+                callback = @MessageImprint.body
+                result = callback.call fakeContext
+
+                expect(result).to.be.equal expectedMessageImPrintBodyResult
+                expect(fakeContext.seq.calledOnce).to.be.true
+                expect(objFuncStub.obj.calledOnce).to.be.true
+                expect(objFuncStub.obj.firstCall.calledWith(expectUseFnResult, expectOctstrFnResult)).to.be.true
+
 
             it 'does not have any decoders', ->
                 expect(@MessageImprint).to.have.property 'decoders'
                 expect(@MessageImprint.decoders).to.be.an 'object'
                 expect(@MessageImprint.decoders).to.empty
+
 
             it 'does not have any encoders', ->
                 expect(@MessageImprint).to.have.property 'encoders'
