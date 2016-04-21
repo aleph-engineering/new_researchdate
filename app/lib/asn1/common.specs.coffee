@@ -149,3 +149,38 @@ describe 'Common module', ->
                 expect(@Attribute).to.have.property 'encoders'
                 expect(@Attribute.encoders).to.be.an 'object'
                 expect(@Attribute.encoders).to.empty
+
+
+    describe 'PKCS7_CONTENT_TYPES', ->
+        beforeEach ->
+            @pkcs7 = common.PKCS7_CONTENT_TYPES
+
+        it 'is defined', ->
+            expect(@pkcs7).to.not.be.undefined
+
+        it 'is be an object', ->
+            expect(@pkcs7).to.be.an 'object'
+
+        it 'should have a "data" value', ->
+            expect(@pkcs7).to.have.property "1 2 840 113549 1 7 1"
+            expect(@pkcs7["1 2 840 113549 1 7 1"]).to.equal 'data'
+
+        it 'should have a "signedData" value', ->
+            expect(@pkcs7).to.have.property "1 2 840 113549 1 7 2"
+            expect(@pkcs7["1 2 840 113549 1 7 2"]).to.equal 'signedData'
+
+        it 'should have a "envelopedData" value', ->
+            expect(@pkcs7).to.have.property "1 2 840 113549 1 7 3"
+            expect(@pkcs7["1 2 840 113549 1 7 3"]).to.equal 'envelopedData'
+
+        it 'should have a "signedAndEnvelopedData" value', ->
+            expect(@pkcs7).to.have.property "1 2 840 113549 1 7 4"
+            expect(@pkcs7["1 2 840 113549 1 7 4"]).to.equal 'signedAndEnvelopedData'
+
+        it 'should have a "digestData" value', ->
+            expect(@pkcs7).to.have.property "1 2 840 113549 1 7 5"
+            expect(@pkcs7["1 2 840 113549 1 7 5"]).to.equal 'digestData'
+
+        it 'should have a "encryptedData" value', ->
+            expect(@pkcs7).to.have.property "1 2 840 113549 1 7 6"
+            expect(@pkcs7["1 2 840 113549 1 7 6"]).to.equal 'encryptedData'
