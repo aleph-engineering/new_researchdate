@@ -1,6 +1,5 @@
 rfc5280 = require 'asn1.js/rfc/5280'
 timestampRequest = require './timestamp_request'
-commonSpecs = require './common.specs'
 common = require './common'
 
 
@@ -11,35 +10,7 @@ describe 'TimestampRequest module', ->
 
     describe 'TimestampRequest ASN Model', ->
         beforeEach ->
-            @fakeContext = new commonSpecs.FakeContext()
             @TimestampRequest = timestampRequest.TimestampRequest
-
-            @seqFuncSpy = sinon.spy @fakeContext, 'seq'
-            @objFuncSpy = sinon.spy @fakeContext, 'obj'
-            @keyFuncSpy = sinon.spy @fakeContext, 'key'
-
-            @intFuncSpy = sinon.spy @fakeContext, 'int'
-            @useFuncSpy = sinon.spy @fakeContext, 'use'
-            @optionalFuncSpy = sinon.spy @fakeContext, 'optional'
-            @objidFuncSpy = sinon.spy @fakeContext, 'objid'
-            @defFuncSpy = sinon.spy @fakeContext, 'def'
-            @boolFuncSpy = sinon.spy @fakeContext, 'bool'
-            @implicitFuncSpy = sinon.spy @fakeContext, 'implicit'
-            @seqofFuncSpy = sinon.spy @fakeContext, 'seqof'
-
-
-        afterEach ->
-            do @seqFuncSpy.restore
-            do @objFuncSpy.restore
-            do @keyFuncSpy.restore
-            do @intFuncSpy.restore
-            do @useFuncSpy.restore
-            do @optionalFuncSpy.restore
-            do @objidFuncSpy.restore
-            do @defFuncSpy.restore
-            do @boolFuncSpy.restore
-            do @implicitFuncSpy.restore
-            do @seqofFuncSpy.restore
 
 
         it 'is defined', ->
@@ -57,34 +28,59 @@ describe 'TimestampRequest module', ->
 
 
         it '"body" callback does the right model configuration', ->
+            expectedTimestampRequestBodyFnResult = do Math.random
+            expectedIntWithArgFnResult = do Math.random
+            expectedUseFnResult = do Math.random
+            expectedObjidFnResult = do Math.random
+            expectedIntWithoutArgFnResult = do Math.random
+            expectedBoolFnResult = do Math.random
+            expectedSeqofFnResult = do Math.random
             callback = @TimestampRequest.body
-            callback.call @fakeContext
 
-            expect(@seqFuncSpy.calledOnce).to.be.true
+            optionalStub =
+                optional: ->
+                    objid: -> expectedObjidFnResult
+                    int: -> expectedIntWithoutArgFnResult
+                    implicit: (arg) ->
+                        if arg is 0
+                            seqof: (arg0) ->
+                                expectedSeqofFnResult if arg0 is rfc5280.Extension
+            objStub = sinon.stub obj: ->
+            objStub.obj.withArgs(
+                expectedIntWithArgFnResult
+                expectedUseFnResult
+                expectedObjidFnResult
+                expectedIntWithoutArgFnResult
+                expectedBoolFnResult
+                expectedSeqofFnResult
+            ).returns expectedTimestampRequestBodyFnResult
+            intWithArgStub = sinon.stub int: ->
+            intWithArgStub.int.withArgs({1: 'v1'}).returns expectedIntWithArgFnResult
+            useStub = sinon.stub use: ->
+            useStub.use.withArgs(common.MessageImprint).returns expectedUseFnResult
 
-            expect(@objFuncSpy.calledOnce).to.be.true
+            fakeContext = sinon.stub
+                seq: ->
+                key: ->
+            fakeContext.seq.returns objStub
+            fakeContext.key.withArgs('version').returns intWithArgStub
+            fakeContext.key.withArgs('messageImprint').returns useStub
+            fakeContext.key.withArgs('reqPolicy').returns optionalStub
+            fakeContext.key.withArgs('nonce').returns optionalStub
+            fakeContext.key.withArgs('certReq').returns def: (arg) -> (bool: -> expectedBoolFnResult) unless arg
+            fakeContext.key.withArgs('extensions').returns optionalStub
 
-            expect(@keyFuncSpy.callCount).to.equal 6
-            expect(@keyFuncSpy.calledWith 'version').to.be.true
-            expect(@keyFuncSpy.calledWith 'messageImprint').to.be.true
-            expect(@keyFuncSpy.calledWith 'reqPolicy').to.be.true
-            expect(@keyFuncSpy.calledWith 'nonce').to.be.true
-            expect(@keyFuncSpy.calledWith 'certReq').to.be.true
-            expect(@keyFuncSpy.calledWith 'extensions').to.be.true
+            result = callback.call fakeContext
 
-            expect(@intFuncSpy.calledWith 1: 'v1').to.be.true
-            expect(@intFuncSpy.calledWith()).to.be.true
+            expect(objStub.obj.calledOnce).to.be.true
+            expect(fakeContext.key.calledWith 'version').to.be.true
+            expect(fakeContext.key.calledWith 'messageImprint').to.be.true
+            expect(fakeContext.key.calledWith 'reqPolicy').to.be.true
+            expect(fakeContext.key.calledWith 'nonce').to.be.true
+            expect(fakeContext.key.calledWith 'certReq').to.be.true
+            expect(fakeContext.key.calledWith 'extensions').to.be.true
 
-            expect(@useFuncSpy.calledWith common.MessageImprint).to.be.true
-            expect(@optionalFuncSpy.callCount).to.be.equal 3
-            expect(@optionalFuncSpy.firstCall.calledWith()).to.be.true
-            expect(@optionalFuncSpy.secondCall.calledWith()).to.be.true
-            expect(@optionalFuncSpy.thirdCall.calledWith()).to.be.true
-            expect(@objidFuncSpy.calledOnce).to.be.true
-            expect(@defFuncSpy.calledWith no).to.be.true
-            expect(@boolFuncSpy.calledWith()).to.be.true
-            expect(@implicitFuncSpy.calledWith 0).to.be.true
-            expect(@seqofFuncSpy.calledWith rfc5280.Extension).to.be.true
+            expect(result).to.be.equal expectedTimestampRequestBodyFnResult
 
 
         it 'does not have any decoders', ->

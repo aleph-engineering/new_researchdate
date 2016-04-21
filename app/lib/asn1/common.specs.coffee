@@ -3,50 +3,7 @@ rfc5280 = require 'asn1.js/rfc/5280'
 common = require './common'
 
 
-# TODO: (@riel) Remove this when removed all dependencies to it
-class FakeContext
-    any: => @
-    def: => @
-    int: => @
-    key: => @
-    obj: => @
-    seq: => @
-    use: => @
-    bool: => @
-    objid: => @
-    seqof: => @
-    setof: => @
-    octstr: => @
-    implicit: => @
-    optional: => @
-
-
 describe 'Common module', ->
-    beforeEach ->
-        @asnDefine = sinon.stub asn, 'define'
-
-        @fakeContext = new FakeContext()
-        @anyFuncSpy = sinon.spy @fakeContext, 'any'
-        @seqFuncSpy = sinon.spy @fakeContext, 'seq'
-        @seqofFuncSpy = sinon.spy @fakeContext, 'setof'
-        @objFuncSpy = sinon.spy @fakeContext, 'obj'
-        @objidFuncSpy = sinon.spy @fakeContext, 'objid'
-        @keyFuncSpy = sinon.spy @fakeContext, 'key'
-        @useFuncSpy = sinon.spy @fakeContext, 'use'
-        @octstrFuncSpy = sinon.spy @fakeContext, 'octstr'
-
-    afterEach ->
-        do @anyFuncSpy.restore
-        do @seqFuncSpy.restore
-        do @seqofFuncSpy.restore
-        do @objFuncSpy.restore
-        do @objidFuncSpy.restore
-        do @keyFuncSpy.restore
-        do @useFuncSpy.restore
-        do @octstrFuncSpy.restore
-        do @asnDefine.restore
-
-
     it 'is defined', ->
         expect(common).to.not.be.undefined
 
@@ -256,6 +213,3 @@ describe 'Common module', ->
         it 'should have a "encryptedData" value', ->
             expect(@pkcs7).to.have.property "1 2 840 113549 1 7 6"
             expect(@pkcs7["1 2 840 113549 1 7 6"]).to.equal 'encryptedData'
-
-
-exports.FakeContext = FakeContext
