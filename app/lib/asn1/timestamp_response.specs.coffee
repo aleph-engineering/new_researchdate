@@ -835,3 +835,65 @@ describe 'TimestampResponse module', ->
                 expect(@CertificateChoices).to.have.property 'encoders'
                 expect(@CertificateChoices.encoders).to.be.an 'object'
                 expect(@CertificateChoices.encoders).to.empty
+
+
+        describe 'RevocationInfoChoice', ->
+            beforeEach ->
+                @RevocationInfoChoice = timestampResponse.RevocationInfoChoice
+
+
+            it 'is defined', ->
+                expect(@RevocationInfoChoice).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@RevocationInfoChoice).to.have.property 'name'
+                expect(@RevocationInfoChoice.name).to.equal 'RevocationInfoChoice'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@RevocationInfoChoice).to.have.property 'body'
+                expect(@RevocationInfoChoice.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                expectedCrl = do Math.random
+                expectedImplicit = do Math.random
+                expectedObjid = do Math.random
+                expectedAny = do Math.random
+                bodyFn = @RevocationInfoChoice.body
+
+                objStub = sinon.stub obj: ->
+                objStub.obj.withArgs(expectedObjid, expectedAny).returns expectedImplicit
+
+                fakeContext = sinon.stub
+                    choice: ->
+                    use: ->
+                    implicit: ->
+                    key: ->
+                fakeContext.choice.withArgs(
+                    crl: expectedCrl
+                    other: expectedImplicit
+                ).returns expectedResult
+                fakeContext.use.withArgs(rfc5280.CertificateList).returns expectedCrl
+                fakeContext.implicit.withArgs(1).returns seq: -> objStub
+                fakeContext.key.withArgs('otherRevInfoFormat').returns objid: -> expectedObjid
+                fakeContext.key.withArgs('otherRevInfo').returns any: -> expectedAny
+
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.choice.calledOnce).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@RevocationInfoChoice).to.have.property 'decoders'
+                expect(@RevocationInfoChoice.decoders).to.be.an 'object'
+                expect(@RevocationInfoChoice.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@RevocationInfoChoice).to.have.property 'encoders'
+                expect(@RevocationInfoChoice.encoders).to.be.an 'object'
+                expect(@RevocationInfoChoice.encoders).to.empty

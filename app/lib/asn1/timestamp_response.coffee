@@ -123,13 +123,13 @@ CertificateChoices = asn.define 'CertificateChoices', () ->
 
 
 RevocationInfoChoice = asn.define 'RevocationInfoChoice', () ->
-    @choice({
-        crl: @use(rfc5280.CertificateList),
+    @choice(
+        crl: @use rfc5280.CertificateList
         other: @implicit(1).seq().obj(
             @key('otherRevInfoFormat').objid(),
             @key('otherRevInfo').any()
         )
-    })
+    )
 
 
 SignerInfo = asn.define 'SignerInfo', () ->
