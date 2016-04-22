@@ -2,6 +2,7 @@
 
 common = require './common'
 timestampResponse = require './timestamp_response'
+rfc5280 = require 'asn1.js/rfc/5280'
 
 
 describe 'TimestampResponse module', ->
@@ -32,7 +33,6 @@ describe 'TimestampResponse module', ->
             it '"body" callback does the right model configuration', ->
                 expectedTimestampResponseBodyFnResult = do Math.random
                 expectedUseFnResult = do Math.random
-                expectedOptionalFnResult = do Math.random
                 expectedArg0Value = do Math.random
                 expectedArg1Value = do Math.random
                 expectedOptionalSeqObjResult = do Math.random
@@ -51,7 +51,10 @@ describe 'TimestampResponse module', ->
                     obj: ->
                     objid: ->
                     optional: ->
-                objStub.obj.withArgs(expectedUseFnResult, expectedOptionalSeqObjResult).returns expectedTimestampResponseBodyFnResult
+                objStub.obj.withArgs(
+                    expectedUseFnResult,
+                    expectedOptionalSeqObjResult
+                ).returns expectedTimestampResponseBodyFnResult
                 objStub.objid.withArgs(common.PKCS7_CONTENT_TYPES).returns expectedArg0Value
                 objStub.optional.returns
                     explicit: (arg0) ->
@@ -73,6 +76,8 @@ describe 'TimestampResponse module', ->
                 result = bodyFn.call fakeContext
 
                 expect(fakeContext.seq.calledOnce).to.be.true
+                expect(objStub.obj.calledOnce).to.be.true
+                expect(objStub.obj.calledWith expectedUseFnResult, expectedOptionalSeqObjResult).to.be.true
                 expect(result).to.be.equal expectedTimestampResponseBodyFnResult
 
 
@@ -110,7 +115,6 @@ describe 'TimestampResponse module', ->
             it '"body" callback does the right model configuration', ->
                 expectedTimestampResponseBodyFnResult = do Math.random
                 expectedUseFnResult = do Math.random
-                expectedOptionalFnResult = do Math.random
                 expectedArg0Value = do Math.random
                 expectedArg1Value = do Math.random
                 expectedOptionalSeqObjResult = do Math.random
@@ -129,7 +133,10 @@ describe 'TimestampResponse module', ->
                     obj: ->
                     objid: ->
                     optional: ->
-                objStub.obj.withArgs(expectedUseFnResult, expectedOptionalSeqObjResult).returns expectedTimestampResponseBodyFnResult
+                objStub.obj.withArgs(
+                    expectedUseFnResult,
+                    expectedOptionalSeqObjResult
+                ).returns expectedTimestampResponseBodyFnResult
                 objStub.objid.withArgs(common.PKCS7_CONTENT_TYPES).returns expectedArg0Value
                 objStub.optional.returns
                     explicit: (arg0) ->
@@ -151,6 +158,8 @@ describe 'TimestampResponse module', ->
                 result = bodyFn.call fakeContext
 
                 expect(fakeContext.seq.calledOnce).to.be.true
+                expect(objStub.obj.calledOnce).to.be.true
+                expect(objStub.obj.calledWith expectedUseFnResult, expectedOptionalSeqObjResult).to.be.true
                 expect(result).to.be.equal expectedTimestampResponseBodyFnResult
 
 
@@ -205,7 +214,11 @@ describe 'TimestampResponse module', ->
                     expectedIntFnResult
 
                 objStub = sinon.stub obj: ->
-                objStub.obj.withArgs(expectedIntFnResult, expectedUtf8strResult, expectedBitstrFnResult).returns expectedResult
+                objStub.obj.withArgs(
+                    expectedIntFnResult,
+                    expectedUtf8strResult,
+                    expectedBitstrFnResult
+                ).returns expectedResult
                 objStub1 = sinon.stub obj: ->
                 expectedUtf8str = do Math.random
                 objStub1.obj.withArgs(expectedUtf8str).returns expectedUtf8strResult
@@ -233,7 +246,13 @@ describe 'TimestampResponse module', ->
 
                 result = bodyFn.call fakeContext
 
-                expect(fakeContext.seq.calledOnce).to.be.true
+                expect(objStub.obj.calledOnce).to.be.true
+                expect(objStub.obj.calledOnce).to.be.true
+                expect(objStub.obj.calledWith(
+                    expectedIntFnResult,
+                    expectedUtf8strResult,
+                    expectedBitstrFnResult
+                )).to.be.true
                 expect(result).to.be.equal expectedResult
 
 
@@ -247,3 +266,93 @@ describe 'TimestampResponse module', ->
                 expect(@PKIStatusInfo).to.have.property 'encoders'
                 expect(@PKIStatusInfo.encoders).to.be.an 'object'
                 expect(@PKIStatusInfo.encoders).to.empty
+
+
+        describe 'SignedData', ->
+            beforeEach ->
+                @SignedData = timestampResponse.SignedData
+
+
+            it 'is defined', ->
+                expect(@SignedData).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@SignedData).to.have.property 'name'
+                expect(@SignedData.name).to.equal 'SignedData'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@SignedData).to.have.property 'body'
+                expect(@SignedData.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                expectedUse0FnResult = do Math.random
+                expectedSetof0FnResult = do Math.random
+                expectedUse1FnResult = do Math.random
+                expectedSetof1FnResult = do Math.random
+                expectedSetof2FnResult = do Math.random
+                expectedSetof3FnResult = do Math.random
+                bodyFn = @SignedData.body
+
+                objStub = sinon.stub obj: ->
+                objStub.obj.withArgs(
+                    expectedUse0FnResult,
+                    expectedSetof0FnResult,
+                    expectedUse1FnResult,
+                    expectedSetof1FnResult,
+                    expectedSetof2FnResult,
+                    expectedSetof3FnResult
+                ).returns expectedResult
+
+                fakeContext = sinon.stub
+                    seq: ->
+                    key: ->
+                fakeContext.seq.returns objStub
+                fakeContext.key.withArgs('version').returns
+                    use: (arg) -> expectedUse0FnResult  if arg is timestampResponse.CMSVersion
+                fakeContext.key.withArgs('digestAlgorithms').returns
+                    setof: (arg) -> expectedSetof0FnResult if arg is rfc5280.AlgorithmIdentifier
+                fakeContext.key.withArgs('encapContentInfo').returns
+                    use: (arg) -> expectedUse1FnResult if arg is timestampResponse.EncapsulatedContentInfo
+                fakeContext.key.withArgs('certificates').returns
+                    optional: ->
+                        implicit: (arg) ->
+                            if arg is 0
+                                setof: (arg0) -> expectedSetof1FnResult if arg0 is timestampResponse.CertificateChoices
+                fakeContext.key.withArgs('crls').returns
+                    optional: ->
+                        implicit: (arg) ->
+                            if arg is 1
+                                setof: (arg0) ->
+                                    expectedSetof2FnResult if arg0 is timestampResponse.RevocationInfoChoice
+                fakeContext.key.withArgs('signerInfos').returns
+                    setof: (arg) -> expectedSetof3FnResult  if arg is timestampResponse.SignerInfo
+
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.seq.calledOnce).to.be.true
+                expect(objStub.obj.calledOnce).to.be.true
+                expect(objStub.obj.calledWith(
+                    expectedUse0FnResult,
+                    expectedSetof0FnResult,
+                    expectedUse1FnResult,
+                    expectedSetof1FnResult,
+                    expectedSetof2FnResult,
+                    expectedSetof3FnResult
+                )).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@SignedData).to.have.property 'decoders'
+                expect(@SignedData.decoders).to.be.an 'object'
+                expect(@SignedData.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@SignedData).to.have.property 'encoders'
+                expect(@SignedData.encoders).to.be.an 'object'
+                expect(@SignedData.encoders).to.empty

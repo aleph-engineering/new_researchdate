@@ -168,11 +168,15 @@ SignedAttributes = asn.define 'SignedAttributes', () ->
 
 timestampResponse = exports
 
+timestampResponse.CertificateChoices = CertificateChoices
+timestampResponse.CMSVersion = CMSVersion
+timestampResponse.EncapsulatedContent = EncapsulatedContent
+timestampResponse.EncapsulatedContentInfo = EncapsulatedContentInfo
+timestampResponse.PKIStatusInfo = PKIStatusInfo
+timestampResponse.RevocationInfoChoice = RevocationInfoChoice
 timestampResponse.SignedData = SignedData
 timestampResponse.SignedDataTST = SignedDataTST
-timestampResponse.PKIStatusInfo = PKIStatusInfo
+timestampResponse.SignerInfo = SignerInfo
+timestampResponse.SignedAttributes = SignedAttributes
 timestampResponse.TimestampResponse = TimestampResponse
 timestampResponse.TimestampResponseTST = TimestampResponseTST
-timestampResponse.EncapsulatedContentInfo = EncapsulatedContentInfo
-timestampResponse.EncapsulatedContent = EncapsulatedContent
-timestampResponse.SignedAttributes = SignedAttributes
