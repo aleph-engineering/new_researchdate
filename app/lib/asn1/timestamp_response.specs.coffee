@@ -690,8 +690,7 @@ describe 'TimestampResponse module', ->
                 expectedSeqofFnResult = do Math.random
                 bodyFn = @TSTInfo.body
 
-                objStub = sinon.stub
-                    obj: ->
+                objStub = sinon.stub obj: ->
                 objStub.obj.withArgs(
                     expectedIntFnResult
                     expectedObjidFnResult
@@ -765,3 +764,74 @@ describe 'TimestampResponse module', ->
                 expect(@TSTInfo).to.have.property 'encoders'
                 expect(@TSTInfo.encoders).to.be.an 'object'
                 expect(@TSTInfo.encoders).to.empty
+
+
+        describe 'CertificateChoices', ->
+            beforeEach ->
+                @CertificateChoices = timestampResponse.CertificateChoices
+
+
+            it 'is defined', ->
+                expect(@CertificateChoices).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@CertificateChoices).to.have.property 'name'
+                expect(@CertificateChoices.name).to.equal 'CertificateChoices'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@CertificateChoices).to.have.property 'body'
+                expect(@CertificateChoices.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                expectedCertificate = do Math.random
+                expectedImplicit = do Math.random
+                expectedImplicit1 = do Math.random
+                expectedImplicit2 = do Math.random
+                expectedOther = do Math.random
+                expectedOther1 = do Math.random
+                expectedOther2 = do Math.random
+                bodyFn = @CertificateChoices.body
+
+                objStub = sinon.stub obj: ->
+                objStub.obj.withArgs(expectedOther1, expectedOther2).returns expectedOther
+
+                fakeContext = sinon.stub
+                    key: ->
+                    use: ->
+                    choice: ->
+                    implicit: ->
+                fakeContext.choice.withArgs(
+                    certificate: expectedCertificate
+                    extendedCertificate: expectedImplicit
+                    v1AttrCert: expectedImplicit1
+                    v2AttrCert: expectedImplicit2
+                    other: expectedOther
+                ).returns expectedResult
+                fakeContext.use.withArgs(rfc5280.Certificate).returns expectedCertificate
+                fakeContext.implicit.withArgs(0).returns use: (arg) -> expectedImplicit if arg is rfc5280.Certificate
+                fakeContext.implicit.withArgs(1).returns use: (arg) -> expectedImplicit1 if arg is rfc5280.Certificate
+                fakeContext.implicit.withArgs(2).returns use: (arg) -> expectedImplicit2 if arg is rfc5280.Certificate
+                fakeContext.implicit.withArgs(3).returns seq: -> objStub
+                fakeContext.key.withArgs('otherCertFormat').returns objid: -> expectedOther1
+                fakeContext.key.withArgs('otherCert').returns any: -> expectedOther2
+
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.choice.calledOnce).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@CertificateChoices).to.have.property 'decoders'
+                expect(@CertificateChoices.decoders).to.be.an 'object'
+                expect(@CertificateChoices.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@CertificateChoices).to.have.property 'encoders'
+                expect(@CertificateChoices.encoders).to.be.an 'object'
+                expect(@CertificateChoices.encoders).to.empty

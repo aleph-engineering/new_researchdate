@@ -110,16 +110,16 @@ TSTInfo = asn.define 'TSTInfo', () ->
 
 
 CertificateChoices = asn.define 'CertificateChoices', () ->
-    @choice({
-        certificate: @use(rfc5280.Certificate),
-        extendedCertificate: @implicit(0).use(rfc5280.Certificate),
-        v1AttrCert: @implicit(1).use(rfc5280.Certificate),
-        v2AttrCert: @implicit(2).use(rfc5280.Certificate),
+    @choice(
+        certificate: @use rfc5280.Certificate
+        extendedCertificate: @implicit(0).use rfc5280.Certificate
+        v1AttrCert: @implicit(1).use rfc5280.Certificate
+        v2AttrCert: @implicit(2).use rfc5280.Certificate
         other: @implicit(3).seq().obj(
-            @key('otherCertFormat').objid(),
+            @key('otherCertFormat').objid()
             @key('otherCert').any()
-        ),
-    })
+        )
+    )
 
 
 RevocationInfoChoice = asn.define 'RevocationInfoChoice', () ->
