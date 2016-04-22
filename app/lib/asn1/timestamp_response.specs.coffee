@@ -164,3 +164,86 @@ describe 'TimestampResponse module', ->
                 expect(@TimestampResponseTST).to.have.property 'encoders'
                 expect(@TimestampResponseTST.encoders).to.be.an 'object'
                 expect(@TimestampResponseTST.encoders).to.empty
+
+
+        describe 'PKIStatusInfo', ->
+            beforeEach ->
+                @PKIStatusInfo = timestampResponse.PKIStatusInfo
+
+
+            it 'is defined', ->
+                expect(@PKIStatusInfo).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@PKIStatusInfo).to.have.property 'name'
+                expect(@PKIStatusInfo.name).to.equal 'PKIStatusInfo'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@PKIStatusInfo).to.have.property 'body'
+                expect(@PKIStatusInfo.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                expectedIntFnResult = do Math.random
+                expectedUtf8strResult = do Math.random
+                expectedBitstrFnResult = do Math.random
+                # Above are defined the result serving as contracts to determining whether the method under test
+                # executes correctly
+
+                bodyFn = @PKIStatusInfo.body
+                intStub = int: (arg0) ->
+                    expect(arg0).to.be.eql
+                        0: 'granted'
+                        1: 'grantedWithMods'
+                        2: 'rejection'
+                        3: 'waiting'
+                        4: 'revocationWarning'
+                        5: 'revocationNotification'
+                    expectedIntFnResult
+
+                objStub = sinon.stub obj: ->
+                objStub.obj.withArgs(expectedIntFnResult, expectedUtf8strResult, expectedBitstrFnResult).returns expectedResult
+                objStub1 = sinon.stub obj: ->
+                expectedUtf8str = do Math.random
+                objStub1.obj.withArgs(expectedUtf8str).returns expectedUtf8strResult
+
+                fakeContext = sinon.stub
+                    seq: ->
+                    key: ->
+                fakeContext.seq.returns objStub
+                fakeContext.key.withArgs('status').returns intStub
+                fakeContext.key.withArgs('statusString').returns optional: -> seq: -> objStub1
+                fakeContext.key.withArgs('text').returns optional: -> utf8str: -> expectedUtf8str
+                fakeContext.key.withArgs('failInfo').returns
+                    optional: ->
+                        bitstr: (arg0) ->
+                            expect(arg0).to.be.eql
+                                '0': 'badAlg',
+                                '2': 'badRequest',
+                                '5': 'badDataFormat',
+                                '14': 'timeNotAvailable',
+                                '15': 'unacceptedPolicy',
+                                '16': 'unacceptedExtension',
+                                '17': 'addInfoNotAvailable',
+                                '25': 'systemFailure'
+                            expectedBitstrFnResult
+
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.seq.calledOnce).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@PKIStatusInfo).to.have.property 'decoders'
+                expect(@PKIStatusInfo.decoders).to.be.an 'object'
+                expect(@PKIStatusInfo.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@PKIStatusInfo).to.have.property 'encoders'
+                expect(@PKIStatusInfo.encoders).to.be.an 'object'
+                expect(@PKIStatusInfo.encoders).to.empty

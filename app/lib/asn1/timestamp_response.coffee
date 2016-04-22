@@ -15,28 +15,25 @@ TimestampResponse = asn.define 'TimestampResponse', () ->
 
 TimestampResponseTST = asn.define 'TimestampResponse', () ->
     @seq().obj(
-        @key('status').use(PKIStatusInfo)
+        @key('status').use PKIStatusInfo
         @key('timeStampToken').optional().seq().obj(
-            @key('contentType').objid(common.PKCS7_CONTENT_TYPES),
-            @key('content').optional().explicit(0).use(SignedDataTST)
+            @key('contentType').objid common.PKCS7_CONTENT_TYPES
+            @key('content').optional().explicit(0).use SignedDataTST
         )
     )
 
 
 PKIStatusInfo = asn.define 'PKIStatusInfo', () ->
     @seq().obj(
-        @key('status').int({
+        @key('status').int
             0: 'granted',
             1: 'grantedWithMods',
             2: 'rejection',
             3: 'waiting',
             4: 'revocationWarning',
             5: 'revocationNotification'
-        }),
-        @key('statusString').optional().seq().obj(
-            @key('text').optional().utf8str()
-        ),
-        @key('failInfo').optional().bitstr({
+        @key('statusString').optional().seq().obj @key('text').optional().utf8str()
+        @key('failInfo').optional().bitstr
             '0': 'badAlg',
             '2': 'badRequest',
             '5': 'badDataFormat',
@@ -45,7 +42,6 @@ PKIStatusInfo = asn.define 'PKIStatusInfo', () ->
             '16': 'unacceptedExtension',
             '17': 'addInfoNotAvailable',
             '25': 'systemFailure'
-        }),
     )
 
 
