@@ -47,23 +47,23 @@ PKIStatusInfo = asn.define 'PKIStatusInfo', () ->
 
 SignedData = asn.define 'SignedData', () ->
     @seq().obj(
-        @key('version').use(CMSVersion),
-        @key('digestAlgorithms').setof(rfc5280.AlgorithmIdentifier),
-        @key('encapContentInfo').use(EncapsulatedContentInfo),
-        @key('certificates').optional().implicit(0).setof(CertificateChoices),
-        @key('crls').optional().implicit(1).setof(RevocationInfoChoice),
-        @key('signerInfos').setof(SignerInfo)
+        @key('version').use CMSVersion
+        @key('digestAlgorithms').setof rfc5280.AlgorithmIdentifier
+        @key('encapContentInfo').use EncapsulatedContentInfo
+        @key('certificates').optional().implicit(0).setof CertificateChoices
+        @key('crls').optional().implicit(1).setof RevocationInfoChoice
+        @key('signerInfos').setof SignerInfo
     )
 
 
 SignedDataTST = asn.define 'SignedData', () ->
     @seq().obj(
-        @key('version').use(CMSVersion),
-        @key('digestAlgorithms').setof(rfc5280.AlgorithmIdentifier),
-        @key('encapContentInfo').use(EncapsulatedContentInfoTST),
-        @key('certificates').optional().implicit(0).setof(CertificateChoices),
-        @key('crls').optional().implicit(1).setof(RevocationInfoChoice),
-        @key('signerInfos').setof(SignerInfo)
+        @key('version').use CMSVersion
+        @key('digestAlgorithms').setof rfc5280.AlgorithmIdentifier
+        @key('encapContentInfo').use EncapsulatedContentInfoTST
+        @key('certificates').optional().implicit(0).setof CertificateChoices
+        @key('crls').optional().implicit(1).setof RevocationInfoChoice
+        @key('signerInfos').setof SignerInfo
     )
 
 
@@ -172,6 +172,7 @@ timestampResponse.CertificateChoices = CertificateChoices
 timestampResponse.CMSVersion = CMSVersion
 timestampResponse.EncapsulatedContent = EncapsulatedContent
 timestampResponse.EncapsulatedContentInfo = EncapsulatedContentInfo
+timestampResponse.EncapsulatedContentInfoTST = EncapsulatedContentInfoTST
 timestampResponse.PKIStatusInfo = PKIStatusInfo
 timestampResponse.RevocationInfoChoice = RevocationInfoChoice
 timestampResponse.SignedData = SignedData
