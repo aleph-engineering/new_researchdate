@@ -654,3 +654,114 @@ describe 'TimestampResponse module', ->
                 expect(@EncapsulatedContentTST).to.have.property 'encoders'
                 expect(@EncapsulatedContentTST.encoders).to.be.an 'object'
                 expect(@EncapsulatedContentTST.encoders).to.empty
+
+
+        describe 'TSTInfo', ->
+            beforeEach ->
+                @TSTInfo = timestampResponse.TSTInfo
+
+
+            it 'is defined', ->
+                expect(@TSTInfo).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@TSTInfo).to.have.property 'name'
+                expect(@TSTInfo.name).to.equal 'TSTInfo'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@TSTInfo).to.have.property 'body'
+                expect(@TSTInfo.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                expectedIntFnResult = do Math.random
+                expectedObjidFnResult = do Math.random
+                expectedUseFnResult = do Math.random
+                expectedInt0FnResult = do Math.random
+                expectedGenTimeFnResult = do Math.random
+                expectedAccuracyFnResult = do Math.random
+                expectedBoolFnResult = do Math.random
+                expectedInt1FnResult = do Math.random
+                expectedInt2FnResult = do Math.random
+                expectedUse0FnResult = do Math.random
+                expectedSeqofFnResult = do Math.random
+                bodyFn = @TSTInfo.body
+
+                objStub = sinon.stub
+                    obj: ->
+                objStub.obj.withArgs(
+                    expectedIntFnResult
+                    expectedObjidFnResult
+                    expectedUseFnResult
+                    expectedInt0FnResult
+                    expectedGenTimeFnResult
+                    expectedAccuracyFnResult
+                    expectedBoolFnResult
+                    expectedInt2FnResult
+                    expectedUse0FnResult
+                    expectedSeqofFnResult
+                ).returns expectedResult
+
+                fakeContext = sinon.stub
+                    seq: ->
+                    key: ->
+                fakeContext.seq.returns objStub
+                fakeContext.key.withArgs('version').returns
+                    int: (arg) ->
+                        expect(arg).to.be.eql 1: 'v1'
+                        expectedIntFnResult
+                fakeContext.key.withArgs('policy').returns objid: -> expectedObjidFnResult
+                fakeContext.key.withArgs('messageImprint').returns
+                    use: (arg) -> expectedUseFnResult if arg is common.MessageImprint
+                fakeContext.key.withArgs('serialNumber').returns int: -> expectedInt0FnResult
+                fakeContext.key.withArgs('genTime').returns gentime: -> expectedGenTimeFnResult
+                fakeContext.key.withArgs('seconds').returns optional: -> int: -> expectedInt1FnResult
+                fakeContext.key.withArgs('accuracy').returns
+                    optional: -> seq: -> obj: (arg) -> expectedAccuracyFnResult if arg is expectedInt1FnResult
+                fakeContext.key.withArgs('ordering').returns def: (arg) -> (bool: -> expectedBoolFnResult) unless arg
+                fakeContext.key.withArgs('nonce').returns optional: -> int: -> expectedInt2FnResult
+                fakeContext.key.withArgs('tsa').returns
+                    optional: ->
+                        explicit: (arg) ->
+                            if arg is 0
+                                use: (arg0) ->
+                                    expectedUse0FnResult if arg0 is rfc5280.GeneralName
+                fakeContext.key.withArgs('extensions').returns
+                    optional: ->
+                        implicit: (arg) ->
+                            if arg is 1
+                                seqof: (arg0) ->
+                                    expectedSeqofFnResult if arg0 is rfc5280.Extension
+
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.seq.calledOnce).to.be.true
+                expect(objStub.obj.calledOnce).to.be.true
+                expect(objStub.obj.calledWith(
+                    expectedIntFnResult
+                    expectedObjidFnResult
+                    expectedUseFnResult
+                    expectedInt0FnResult
+                    expectedGenTimeFnResult
+                    expectedAccuracyFnResult
+                    expectedBoolFnResult
+                    expectedInt2FnResult
+                    expectedUse0FnResult
+                    expectedSeqofFnResult
+                )).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@TSTInfo).to.have.property 'decoders'
+                expect(@TSTInfo.decoders).to.be.an 'object'
+                expect(@TSTInfo.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@TSTInfo).to.have.property 'encoders'
+                expect(@TSTInfo.encoders).to.be.an 'object'
+                expect(@TSTInfo.encoders).to.empty

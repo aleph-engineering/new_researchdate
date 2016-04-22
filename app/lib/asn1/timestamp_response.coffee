@@ -91,23 +91,21 @@ EncapsulatedContentTST = asn.define 'EncapsulatedContentTST', () ->
 
 TSTInfo = asn.define 'TSTInfo', () ->
     @seq().obj(
-        @key('version').int({
-            1: 'v1'
-        }),
-        @key('policy').objid(),
-        @key('messageImprint').use(common.MessageImprint),
-        @key('serialNumber').int(),
-        @key('genTime').gentime(),
+        @key('version').int 1: 'v1'
+        @key('policy').objid()
+        @key('messageImprint').use common.MessageImprint
+        @key('serialNumber').int()
+        @key('genTime').gentime()
         @key('accuracy').optional().seq().obj(
-            @key('seconds').optional().int(),
+            @key('seconds').optional().int()
 #            Commented because the library doesn't support the length of this integers right now
 #            @key('millis').optional().explicit(0),
 #            @key('micros').optional().explicit(1)
-        ),
-        @key('ordering').def(false).bool(),
-        @key('nonce').optional().int(),
-        @key('tsa').optional().explicit(0).use(rfc5280.GeneralName),
-        @key('extensions').optional().implicit(1).seqof(rfc5280.Extension)
+        )
+        @key('ordering').def(false).bool()
+        @key('nonce').optional().int()
+        @key('tsa').optional().explicit(0).use rfc5280.GeneralName
+        @key('extensions').optional().implicit(1).seqof rfc5280.Extension
     )
 
 
