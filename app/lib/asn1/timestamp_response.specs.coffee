@@ -503,3 +503,60 @@ describe 'TimestampResponse module', ->
                 expect(@EncapsulatedContentInfo).to.have.property 'encoders'
                 expect(@EncapsulatedContentInfo.encoders).to.be.an 'object'
                 expect(@EncapsulatedContentInfo.encoders).to.empty
+
+
+        describe 'EncapsulatedContentInfoTST', ->
+            beforeEach ->
+                @EncapsulatedContentInfoTST = timestampResponse.EncapsulatedContentInfoTST
+
+
+            it 'is defined', ->
+                expect(@EncapsulatedContentInfoTST).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@EncapsulatedContentInfoTST).to.have.property 'name'
+                expect(@EncapsulatedContentInfoTST.name).to.equal 'EncapsulatedContentInfoTST'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@EncapsulatedContentInfoTST).to.have.property 'body'
+                expect(@EncapsulatedContentInfoTST.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                expectedObjidFnResult = do Math.random
+                expectedUseFnResult = do Math.random
+                bodyFn = @EncapsulatedContentInfoTST.body
+
+                objStub = sinon.stub
+                    obj: ->
+                objStub.obj.withArgs(expectedObjidFnResult, expectedUseFnResult).returns expectedResult
+
+                fakeContext = sinon.stub
+                    seq: ->
+                    key: ->
+                fakeContext.seq.returns objStub
+                fakeContext.key.withArgs('eContentType').returns objid: -> expectedObjidFnResult
+                fakeContext.key.withArgs('eContent').returns
+                    use: (arg) -> expectedUseFnResult if arg is timestampResponse.EncapsulatedContentTST
+
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.seq.calledOnce).to.be.true
+                expect(objStub.obj.calledOnce).to.be.true
+                expect(objStub.obj.calledWith expectedObjidFnResult, expectedUseFnResult).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@EncapsulatedContentInfoTST).to.have.property 'decoders'
+                expect(@EncapsulatedContentInfoTST.decoders).to.be.an 'object'
+                expect(@EncapsulatedContentInfoTST.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@EncapsulatedContentInfoTST).to.have.property 'encoders'
+                expect(@EncapsulatedContentInfoTST.encoders).to.be.an 'object'
+                expect(@EncapsulatedContentInfoTST.encoders).to.empty

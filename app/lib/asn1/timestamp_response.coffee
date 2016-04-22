@@ -76,8 +76,8 @@ EncapsulatedContentInfo = asn.define 'EncapsulatedContentInfo', () ->
 
 EncapsulatedContentInfoTST = asn.define 'EncapsulatedContentInfoTST', () ->
     @seq().obj(
-        @key('eContentType').objid(),
-        @key('eContent').use(EncapsulatedContentTST)
+        @key('eContentType').objid()
+        @key('eContent').use EncapsulatedContentTST
     )
 
 
@@ -171,6 +171,7 @@ timestampResponse = exports
 timestampResponse.CertificateChoices = CertificateChoices
 timestampResponse.CMSVersion = CMSVersion
 timestampResponse.EncapsulatedContent = EncapsulatedContent
+timestampResponse.EncapsulatedContentTST = EncapsulatedContentTST
 timestampResponse.EncapsulatedContentInfo = EncapsulatedContentInfo
 timestampResponse.EncapsulatedContentInfoTST = EncapsulatedContentInfoTST
 timestampResponse.PKIStatusInfo = PKIStatusInfo
