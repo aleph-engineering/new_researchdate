@@ -560,3 +560,97 @@ describe 'TimestampResponse module', ->
                 expect(@EncapsulatedContentInfoTST).to.have.property 'encoders'
                 expect(@EncapsulatedContentInfoTST.encoders).to.be.an 'object'
                 expect(@EncapsulatedContentInfoTST.encoders).to.empty
+
+
+        describe 'EncapsulatedContent', ->
+            beforeEach ->
+                @EncapsulatedContent = timestampResponse.EncapsulatedContent
+
+
+            it 'is defined', ->
+                expect(@EncapsulatedContent).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@EncapsulatedContent).to.have.property 'name'
+                expect(@EncapsulatedContent.name).to.equal 'EncapsulatedContent'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@EncapsulatedContent).to.have.property 'body'
+                expect(@EncapsulatedContent.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                bodyFn = @EncapsulatedContent.body
+
+                fakeContext = sinon.stub
+                    optional: ->
+                fakeContext.optional.returns explicit: (arg) -> (octstr: -> expectedResult) if arg is 0
+
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.optional.calledOnce).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@EncapsulatedContent).to.have.property 'decoders'
+                expect(@EncapsulatedContent.decoders).to.be.an 'object'
+                expect(@EncapsulatedContent.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@EncapsulatedContent).to.have.property 'encoders'
+                expect(@EncapsulatedContent.encoders).to.be.an 'object'
+                expect(@EncapsulatedContent.encoders).to.empty
+
+
+        describe 'EncapsulatedContentTST', ->
+            beforeEach ->
+                @EncapsulatedContentTST = timestampResponse.EncapsulatedContentTST
+
+
+            it 'is defined', ->
+                expect(@EncapsulatedContentTST).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@EncapsulatedContentTST).to.have.property 'name'
+                expect(@EncapsulatedContentTST.name).to.equal 'EncapsulatedContentTST'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@EncapsulatedContentTST).to.have.property 'body'
+                expect(@EncapsulatedContentTST.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                bodyFn = @EncapsulatedContentTST.body
+
+                fakeContext = sinon.stub
+                    optional: ->
+                fakeContext.optional.returns explicit: (arg) ->
+                    if arg is 0
+                        octstr: ->
+                            contains: (arg0) ->
+                                expectedResult if arg0 is timestampResponse.TSTInfo
+
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.optional.calledOnce).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@EncapsulatedContentTST).to.have.property 'decoders'
+                expect(@EncapsulatedContentTST.decoders).to.be.an 'object'
+                expect(@EncapsulatedContentTST.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@EncapsulatedContentTST).to.have.property 'encoders'
+                expect(@EncapsulatedContentTST.encoders).to.be.an 'object'
+                expect(@EncapsulatedContentTST.encoders).to.empty

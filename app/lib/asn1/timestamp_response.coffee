@@ -182,3 +182,4 @@ timestampResponse.SignerInfo = SignerInfo
 timestampResponse.SignedAttributes = SignedAttributes
 timestampResponse.TimestampResponse = TimestampResponse
 timestampResponse.TimestampResponseTST = TimestampResponseTST
+timestampResponse.TSTInfo = TSTInfo
