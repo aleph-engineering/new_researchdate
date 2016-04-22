@@ -69,8 +69,8 @@ SignedDataTST = asn.define 'SignedData', () ->
 
 EncapsulatedContentInfo = asn.define 'EncapsulatedContentInfo', () ->
     @seq().obj(
-        @key('eContentType').objid(),
-        @key('eContent').use(EncapsulatedContent)
+        @key('eContentType').objid()
+        @key('eContent').use EncapsulatedContent
     )
 
 
