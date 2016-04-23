@@ -134,18 +134,17 @@ RevocationInfoChoice = asn.define 'RevocationInfoChoice', () ->
 
 SignerInfo = asn.define 'SignerInfo', () ->
     @seq().obj(
-        @key('version').use(CMSVersion),
-        @key('sid').choice({
+        @key('version').use CMSVersion
+        @key('sid').choice
             issuerAndSerialNumber: @seq().obj(
-                @key('issuer').use(rfc5280.Name),
-                @key('serialNumber').use(rfc5280.CertificateSerialNumber)
+                @key('issuer').use rfc5280.Name
+                @key('serialNumber').use rfc5280.CertificateSerialNumber
             )
-        }),
-        @key('digestAlgorithm').use(rfc5280.AlgorithmIdentifier),
-        @key('signedAttrs').optional().implicit(0).setof(common.Attribute),
-        @key('signatureAlgorithm').use(rfc5280.AlgorithmIdentifier),
-        @key('signature').octstr(),
-        @key('unsignedAttrs').optional().implicit(1).setof(common.Attribute)
+        @key('digestAlgorithm').use rfc5280.AlgorithmIdentifier
+        @key('signedAttrs').optional().implicit(0).setof common.Attribute
+        @key('signatureAlgorithm').use rfc5280.AlgorithmIdentifier
+        @key('signature').octstr()
+        @key('unsignedAttrs').optional().implicit(1).setof common.Attribute
     )
 
 

@@ -897,3 +897,107 @@ describe 'TimestampResponse module', ->
                 expect(@RevocationInfoChoice).to.have.property 'encoders'
                 expect(@RevocationInfoChoice.encoders).to.be.an 'object'
                 expect(@RevocationInfoChoice.encoders).to.empty
+
+
+        describe 'SignerInfo', ->
+            beforeEach ->
+                @SignerInfo = timestampResponse.SignerInfo
+
+
+            it 'is defined', ->
+                expect(@SignerInfo).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@SignerInfo).to.have.property 'name'
+                expect(@SignerInfo.name).to.equal 'SignerInfo'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@SignerInfo).to.have.property 'body'
+                expect(@SignerInfo.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                expectedVersion = do Math.random
+                expectedSidResult = do Math.random
+                expectedIssueObj = do Math.random
+                expectedIssuer = do Math.random
+                expectedSerialNumber = do Math.random
+                expectedDigestAlgorithm = do Math.random
+                expectedSignedAttrs = do Math.random
+                expectedSignatureAlgorithm = do Math.random
+                expectedSignature = do Math.random
+                expectedUnsignedAttrs = do Math.random
+
+                bodyFn = @SignerInfo.body
+
+                objStub = sinon.stub obj: ->
+                objStub.obj.withArgs(
+                    expectedVersion
+                    expectedSidResult
+                    expectedDigestAlgorithm
+                    expectedSignedAttrs
+                    expectedSignatureAlgorithm
+                    expectedSignature
+                    expectedUnsignedAttrs
+                ).returns expectedResult
+                objStub.obj.withArgs(expectedIssuer, expectedSerialNumber).returns expectedIssueObj
+
+                fakeContext = sinon.stub
+                    seq: ->
+                    key: ->
+                fakeContext.seq.returns objStub
+                fakeContext.key.withArgs('version').returns
+                    use: (arg) -> expectedVersion if arg is timestampResponse.CMSVersion
+                fakeContext.key.withArgs('sid').returns
+                    choice: (arg) ->
+                        expect(arg).to.be.eql issuerAndSerialNumber: expectedIssueObj
+                        expectedSidResult
+                fakeContext.key.withArgs('issuer').returns use: (arg) -> expectedIssuer if arg is rfc5280.Name
+                fakeContext.key.withArgs('serialNumber').returns
+                    use: (arg) -> expectedSerialNumber if arg is rfc5280.CertificateSerialNumber
+                fakeContext.key.withArgs('digestAlgorithm').returns
+                    use: (arg) -> expectedDigestAlgorithm if arg is rfc5280.AlgorithmIdentifier
+                fakeContext.key.withArgs('signedAttrs').returns
+                    optional: ->
+                        implicit: (arg) ->
+                            if arg is 0
+                                setof: (arg0) ->
+                                    expectedSignedAttrs if arg0 is common.Attribute
+                fakeContext.key.withArgs('signatureAlgorithm').returns
+                    use: (arg) -> expectedSignatureAlgorithm if arg is rfc5280.AlgorithmIdentifier
+                fakeContext.key.withArgs('signature').returns octstr: -> expectedSignature
+                fakeContext.key.withArgs('unsignedAttrs').returns
+                    optional: ->
+                        implicit: (arg) ->
+                            if arg is 1
+                                setof: (arg0) -> expectedUnsignedAttrs if arg0 is common.Attribute
+
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.seq.calledTwice).to.be.true
+                expect(objStub.obj.calledTwice).to.be.true
+                expect(objStub.obj.calledWith(
+                    expectedVersion
+                    expectedSidResult
+                    expectedDigestAlgorithm
+                    expectedSignedAttrs
+                    expectedSignatureAlgorithm
+                    expectedSignature
+                    expectedUnsignedAttrs
+                )).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@SignerInfo).to.have.property 'decoders'
+                expect(@SignerInfo.decoders).to.be.an 'object'
+                expect(@SignerInfo.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@SignerInfo).to.have.property 'encoders'
+                expect(@SignerInfo.encoders).to.be.an 'object'
+                expect(@SignerInfo.encoders).to.empty
