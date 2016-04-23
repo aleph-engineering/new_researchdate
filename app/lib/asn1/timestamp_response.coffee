@@ -149,14 +149,7 @@ SignerInfo = asn.define 'SignerInfo', () ->
 
 
 CMSVersion = asn.define 'CMSVersion', () ->
-    @int({
-        0: 'v0',
-        1: 'v1',
-        2: 'v2',
-        3: 'v3',
-        4: 'v4',
-        5: 'v5'
-    })
+    @int 0: 'v0', 1: 'v1', 2: 'v2', 3: 'v3', 4: 'v4', 5: 'v5'
 
 
 SignedAttributes = asn.define 'SignedAttributes', () ->

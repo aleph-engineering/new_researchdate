@@ -1001,3 +1001,46 @@ describe 'TimestampResponse module', ->
                 expect(@SignerInfo).to.have.property 'encoders'
                 expect(@SignerInfo.encoders).to.be.an 'object'
                 expect(@SignerInfo.encoders).to.empty
+
+
+        describe 'CMSVersion', ->
+            beforeEach ->
+                @CMSVersion = timestampResponse.CMSVersion
+
+
+            it 'is defined', ->
+                expect(@CMSVersion).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@CMSVersion).to.have.property 'name'
+                expect(@CMSVersion.name).to.equal 'CMSVersion'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@CMSVersion).to.have.property 'body'
+                expect(@CMSVersion.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                bodyFn = @CMSVersion.body
+
+                fakeContext = sinon.stub int: ->
+                fakeContext.int.withArgs(0: 'v0', 1: 'v1', 2: 'v2', 3: 'v3', 4: 'v4', 5: 'v5').returns expectedResult
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.int.calledOnce).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@CMSVersion).to.have.property 'decoders'
+                expect(@CMSVersion.decoders).to.be.an 'object'
+                expect(@CMSVersion.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@CMSVersion).to.have.property 'encoders'
+                expect(@CMSVersion.encoders).to.be.an 'object'
+                expect(@CMSVersion.encoders).to.empty
