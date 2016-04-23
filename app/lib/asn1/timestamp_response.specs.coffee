@@ -1044,3 +1044,47 @@ describe 'TimestampResponse module', ->
                 expect(@CMSVersion).to.have.property 'encoders'
                 expect(@CMSVersion.encoders).to.be.an 'object'
                 expect(@CMSVersion.encoders).to.empty
+
+
+        describe 'SignedAttributes', ->
+            beforeEach ->
+                @SignedAttributes = timestampResponse.SignedAttributes
+
+
+            it 'is defined', ->
+                expect(@SignedAttributes).to.not.undefined
+
+
+            it 'contains "name" property with correct value', ->
+                expect(@SignedAttributes).to.have.property 'name'
+                expect(@SignedAttributes.name).to.equal 'SignedAttributes'
+
+
+            it 'contains "body" property with provided callback', ->
+                expect(@SignedAttributes).to.have.property 'body'
+                expect(@SignedAttributes.body).to.be.a 'Function'
+
+
+            it '"body" callback does the right model configuration', ->
+                expectedResult = do Math.random
+                bodyFn = @SignedAttributes.body
+
+                fakeContext = sinon.stub setof: ->
+                fakeContext.setof.withArgs(common.Attribute).returns expectedResult
+                result = bodyFn.call fakeContext
+
+                expect(fakeContext.setof.calledOnce).to.be.true
+                expect(fakeContext.setof.calledWith common.Attribute).to.be.true
+                expect(result).to.be.equal expectedResult
+
+
+            it 'does not have any decoders', ->
+                expect(@SignedAttributes).to.have.property 'decoders'
+                expect(@SignedAttributes.decoders).to.be.an 'object'
+                expect(@SignedAttributes.decoders).to.empty
+
+
+            it 'does not have any encoders', ->
+                expect(@SignedAttributes).to.have.property 'encoders'
+                expect(@SignedAttributes.encoders).to.be.an 'object'
+                expect(@SignedAttributes.encoders).to.empty

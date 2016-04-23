@@ -153,7 +153,7 @@ CMSVersion = asn.define 'CMSVersion', () ->
 
 
 SignedAttributes = asn.define 'SignedAttributes', () ->
-    @setof(common.Attribute)
+    @setof common.Attribute
 
 
 timestampResponse = exports
