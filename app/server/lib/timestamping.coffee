@@ -14,6 +14,7 @@ class TimestampGenerator
         body: tsqBuffer
         encoding: null
 
+
     _saveTimestampRecord: (hash) =>
         ### Saves information about the given timestamp in the Database.
 
@@ -22,6 +23,7 @@ class TimestampGenerator
         date = new Date()
         # TODO:(Helen Garcia Glez) Replace server when selection TSA implemented.
         Timestamps.insert hash: hash, creationDate: date, server: 'https://freetsa.org/'
+
 
     _makeTimestampRequest: (tsaUrl, requestOptions) =>
         ### Makes the timestamp request, given the TSA url and request options.
@@ -34,12 +36,14 @@ class TimestampGenerator
         else # Perform the request to the TSA using the built options
             return request.postSync tsaUrl, requestOptions
 
+
     _generateTimestampRequest: (hash) =>
         ### Generates the timestamp request for the given hash.
 
             @param hash: The hash to prepare a timestamp request for.
         ###
         asn1_helpers.generateTimestampRequest hash
+
 
     timestamp: (hash) =>
         ### Generates the timestamp for the given hash.
@@ -53,10 +57,12 @@ class TimestampGenerator
         try
             response = @_makeTimestampRequest @_freeTSA, requestOptions
             @_saveTimestampRecord hash
+            console.log response.body
             response.body
         catch e
             console.log e
             throw e
+
 
     _freeTSA: 'https://freetsa.org/tsr'
 
