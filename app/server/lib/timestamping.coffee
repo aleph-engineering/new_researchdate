@@ -57,7 +57,6 @@ class TimestampGenerator
         try
             response = @_makeTimestampRequest @_freeTSA, requestOptions
             @_saveTimestampRecord hash
-            console.log response.body
             response.body
         catch e
             console.log e

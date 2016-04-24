@@ -1,4 +1,8 @@
-TimestampController = RouteController.extend
+class TimestampController extends RouteController
+
+    constructor: ->
+        super
+
 
 # A place to put your subscriptions
 # this.subscribe('items');
@@ -19,17 +23,16 @@ TimestampController = RouteController.extend
 # example, the "dataNotFound" plugin calls this function to see if it
 # returns a null value, and if so, renders the not found template.
 # return Posts.findOne({_id: this.params._id});
-
     data: ->
 
 
 # You can provide any of the hook options
     onRun: ->
-        @next()
+        do @next
 
 
     onRerun: ->
-        @next()
+        do @next
 
 
     onBeforeAction: ->
@@ -46,7 +49,7 @@ TimestampController = RouteController.extend
 
         Meteor.call 'server/timestamp', hash, (error, result) ->
             if error
-                console.log "Occured an error in the process!! Details below:"
+                console.log "Occurred an error in the process!! Details below:"
                 console.log error
             else
                 arr = Object.keys(result).map (key) -> result[key]
@@ -60,7 +63,7 @@ TimestampController = RouteController.extend
                 resp.writeHead 200, headers
 
                 # Serve the file to the client
-                return resp.end resultBuffer
+                resp.end resultBuffer
 
 
     onAfterAction: ->
