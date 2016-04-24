@@ -1,5 +1,3 @@
-# FIXME: (@ariel) This is an ugly test implementation, can't think at this time in a better way of doing it
-
 common = require './common'
 timestampResponse = require './timestamp_response'
 rfc5280 = require 'asn1.js/rfc/5280'

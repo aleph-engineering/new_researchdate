@@ -1,6 +1,3 @@
-# FIXME: (@ariel) This is an ugly test implementation, can't think at this time in a better way of doing it
-
-
 rfc5280 = require 'asn1.js/rfc/5280'
 timestampRequest = require './timestamp_request'
 common = require './common'
