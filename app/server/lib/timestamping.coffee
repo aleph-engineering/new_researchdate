@@ -42,7 +42,8 @@ class TimestampGenerator
 
             @param hash: The hash to prepare a timestamp request for.
         ###
-        asn1_helpers.generateTimestampRequest hash
+        timestampRequestGenerator = asn1_helpers.getTimestampRequestGenerator hash
+        do timestampRequestGenerator.generate
 
 
     timestamp: (hash) =>

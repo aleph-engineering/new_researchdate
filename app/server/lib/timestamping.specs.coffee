@@ -11,15 +11,19 @@ describe 'Timestamping Module', ->
             @timestampGenerator = new timestamping.TimestampGenerator()
             @timestampInsertMethod = sinon.stub Timestamps, 'insert'
 
+
         afterEach ->
             do @timestampInsertMethod.restore
+
 
         it 'is defined', ->
             expect(timestamping.TimestampGenerator).to.not.be.undefined
 
+
         describe '_buildTimestampRequestOptions Method', ->
             it 'is defined', ->
                 expect(@timestampGenerator._buildTimestampRequestOptions).to.not.be.undefined
+
 
             it 'returns object with expected properties', ->
                 tsrResponse = {}
@@ -37,9 +41,11 @@ describe 'Timestamping Module', ->
                 expect(result).to.have.property 'encoding'
                 expect(result.encoding).to.be.null
 
+
         describe '_saveTimestampRecord', ->
             it 'is defined', ->
                 expect(@timestampGenerator._saveTimestampRecord).to.not.be.undefined
+
 
             it 'inserts a new Timestamp record with correct information', ->
                 hash = "a4f56c8bba9" # arrange
@@ -56,9 +62,11 @@ describe 'Timestamping Module', ->
 
                 do clock.restore
 
+
         describe '_makeTimestampRequest', ->
             it 'is defined', ->
                 expect(@timestampGenerator._makeTimestampRequest).to.not.be.undefined
+
 
             it 'performs the tsr request to specified URL and using the given options and returns response', ->
                 tsrUrl = "https://www.tsr-url.com" # arrange
@@ -77,21 +85,39 @@ describe 'Timestamping Module', ->
 
                 do postSyncMethod.restore
 
+
         describe '_generateTimestampRequest', ->
             it 'is defined', ->
                 expect(@timestampGenerator._generateTimestampRequest).to.not.be.undefined
 
+
             it 'calls the proper timestamp request generation method', ->
-                asn1_helpers = require '../../lib/asn1_helpers'
-                generateTimestampRequestMethod = sinon.stub asn1_helpers, 'generateTimestampRequest'
-
                 hash = "e897ab9cb"
-                @timestampGenerator._generateTimestampRequest hash
+                expectedRequest = do Math.random
+                timestampRequestGeneratorStub = sinon.stub generate: ->
+                timestampRequestGeneratorStub.generate.returns expectedRequest
+                asn1_helpers = require '../../lib/asn1_helpers'
+                getTimestampRequestGenerator = sinon.stub asn1_helpers, 'getTimestampRequestGenerator'
+                getTimestampRequestGenerator.withArgs(hash).returns timestampRequestGeneratorStub
 
-                assert generateTimestampRequestMethod.calledOnce
-                assert generateTimestampRequestMethod.calledWith hash
+                actualRequest = @timestampGenerator._generateTimestampRequest hash
 
-                do generateTimestampRequestMethod.restore
+                assert(
+                    getTimestampRequestGenerator.calledOnce
+                    'getTimestampRequestGenerator method was not called'
+                )
+                assert(
+                    getTimestampRequestGenerator.calledWith(hash)
+                    'getTimestampRequestGenerator method was not called with correct arguments'
+                )
+                assert(
+                    timestampRequestGeneratorStub.generate.calledOnce
+                    'generate method of the TimestampRequestGenerator instance was not called'
+                )
+                expect(actualRequest).to.be.equal expectedRequest
+
+                do getTimestampRequestGenerator.restore
+
 
         describe 'timestamp', ->
             beforeEach ->
@@ -138,6 +164,7 @@ describe 'Timestamping Module', ->
                 do makeTimestampRequest.restore
                 do saveTimestampRecord.restore
 
+
             it 'throws exception error when it happens', ->
                 consoleLogMethod = sinon.stub console, 'log'
                 error = new Error '123'
@@ -157,6 +184,7 @@ describe 'Timestamping Module', ->
                 do genTimestampRequestMethod.restore
                 do buildTimestampRequestOptionsMethod.restore
                 do makeTimestampRequest.restore
+
 
             it 'logs exception error to console when it happens', ->
                 consoleLogMethod = sinon.stub console, 'log'
@@ -184,6 +212,7 @@ describe 'Timestamping Module', ->
     describe 'getTimestampGenerator method', ->
         it 'is defined', ->
             expect(timestamping.getTimestampGenerator).to.not.be.undefined
+
 
         it 'returns new instance of timestamping.TimestampGenerator class', ->
             timestampGenerator = timestamping.getTimestampGenerator()
