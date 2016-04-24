@@ -26,23 +26,7 @@ class TimestampRequestGenerator
         , 'der')
 
 
-# TODO: (@riel) Remove this method and use the one from the class above
-generateTimestampRequest = (hash) ->
-    hashBuffer = new Buffer hash, 'hex'
-    output = tsRequest.TimestampRequest.encode({
-        version: 1,
-        messageImprint: {
-            hashAlgorithm: {
-                algorithm: hashes.HASHES.sha256.oid.split('.')
-            },
-            hashedMessage: hashBuffer
-        },
-        certReq: true
-    }, 'der')
-    return output
-
-
 asn1_helpers = exports
 
-asn1_helpers.generateTimestampRequest = generateTimestampRequest
 asn1_helpers.TimestampRequestGenerator = TimestampRequestGenerator
+asn1_helpers.getTimestampRequestGenerator = (hash) -> new TimestampRequestGenerator hash

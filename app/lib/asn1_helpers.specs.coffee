@@ -10,7 +10,9 @@ describe 'Asn1Helpers Module', ->
 
     describe 'TimestampRequestGenerator class', ->
         beforeEach ->
-            @hash = (Math.random() * 10000).toString().split('.')[0]
+            number1 = (Math.random() * 10).toString().split('.')[0]
+            number2 = (Math.random() * 10).toString().split('.')[0]
+            @hash = number1 + number2
             @TimestampRequestGenerator = asn1_helpers.TimestampRequestGenerator
             @encode = sinon.stub timestampRequest.TimestampRequest, 'encode'
             @timestampRequestGenerator = new @TimestampRequestGenerator @hash
@@ -58,3 +60,21 @@ describe 'Asn1Helpers Module', ->
 
                 expect(actualOutput).to.be.equal expectedOutput
                 do genBufferFromHash.restore
+
+
+    describe 'getTimestampRequestGenerator method', ->
+        beforeEach ->
+            @getTimestampRequestGenerator = asn1_helpers.getTimestampRequestGenerator
+
+
+        it 'is defined', ->
+            expect(@getTimestampRequestGenerator).not.to.be.undefined
+
+
+        it 'returns an instance of TimestampRequestGenerator class', ->
+            hash = '12'
+
+            tsg = @getTimestampRequestGenerator hash
+
+            expect(tsg).to.be.instanceOf asn1_helpers.TimestampRequestGenerator
+            expect(tsg.hash).to.be.equal hash
