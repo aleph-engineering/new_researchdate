@@ -92,3 +92,4 @@ class TSRWrapper
 tsr = exports
 
 tsr.TSRWrapper = TSRWrapper
+tsr.getTSRWrapper = (responseBuffer) -> new TSRWrapper responseBuffer
