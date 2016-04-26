@@ -34,7 +34,7 @@ describe 'TimestampVerification module', ->
                 expect(new @TimestampVerifier('a', 'b').verify).not.to.be.undefined
 
 
-            it 'artifact\'s hash and tsa\'s response hash do not match, returns false', ->
+            it 'artifact\'s hash and TSA\'s response hash do not match, returns false', ->
                 artifactHash = '1234'
                 tsrHash = '4321'
                 tsaResponseBuffer = 'buffer'
