@@ -4,8 +4,10 @@ tsResponse = require './asn1/timestamp_response'
 
 class TSRWrapper
     constructor: (responseBuffer) ->
+        unless responseBuffer
+            throw new TypeError 'responseBuffer was not provided, please provide one'
         @response = tsResponse.TimestampResponseTST.decode responseBuffer, 'der'
-        if _responseAndResponseStatus @response
+        if _hasResponseAndResponseHasStatus @response
             responseWithoutTST = tsResponse.TimestampResponse.decode responseBuffer, 'der'
             @encapsulatedContent = _getEncapsulatedContent responseWithoutTST
 
@@ -39,16 +41,16 @@ class TSRWrapper
 
     #   PRIVATE METHODS
     _assertResponseStatus = (response) ->
-        throw 'Does not contain a timestamp' if not _responseAndResponseStatus(response)
+        throw 'Does not contain a timestamp' if not _hasResponseAndResponseHasStatus response
 
     #   There must be ONE AND ONLY ONE SignerInfo in the response, otherwise is not valid according to the standard
     _assertSignerInfo = (response) ->
         token = _getTimestampToken response
         throw 'Does not contain a valid Signer Info' if not token.signerInfos.length == 1
 
-    _responseAndResponseStatus = (response) ->
+    _hasResponseAndResponseHasStatus = (response) ->
         responseStatus = (_responseStatusIsGranted(response) || _responseStatusIsGrantedWithMods(response))
-        response && responseStatus
+        response and responseStatus
 
     _responseStatusIsGranted = (response) ->
         response.status.status is 'granted'
