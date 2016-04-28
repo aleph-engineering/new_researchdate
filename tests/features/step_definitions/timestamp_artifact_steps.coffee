@@ -6,7 +6,7 @@ module.exports = ->
 
 
     isTimestampExtension = (file) ->
-        timestampFileExtension = require('../../../app/lib/system_parameters').TIMESTAMP_FILE_EXTENSION
+        timestampFileExtension = require('../../../app/server/lib/system_parameters').TIMESTAMP_FILE_EXTENSION
         file.slice(file.length - 4) is timestampFileExtension
 
     isZipExtension = (file) ->
