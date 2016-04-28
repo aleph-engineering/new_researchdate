@@ -2,16 +2,20 @@ module.exports = ->
     'use strict'
 
 
-    @Given /^I timestamp the artifacts:$/, (scenario) ->
-        browser.waitForExist 'input[type="file"]', 3000
+    @And /^I timestamp the artifacts:$/, (scenario) ->
+#        browser.waitForExist 'input[id="artifact"]', 3000
 
         # Make the timestamp request to each of the digital artifacts
         for data in scenario.rows()
             digital_artifact = data[0]
 
             # Upload the digital artifact
-            browser.waitForExist '#generate-input', 3000
-            @generalUpload '#generate-input', digital_artifact
+            browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
+            browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
+            #            browser.execute((-> $('input[type="file"]')[1].setAttribute('id', 'tsr')))
+            browser.execute((-> $('input[type="file"]')[2].setAttribute('id', 'original')))
+            browser.waitForExist 'input[id="artifact"]', 3000
+            @generalUpload 'input[id="artifact"]', digital_artifact
 
             # Submit the form to timestamp
             browser.waitForExist '#artifact-form', 3000

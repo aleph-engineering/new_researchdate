@@ -8,8 +8,14 @@ Feature: Timestamp an artifact
   Background:
     Given I am on the homepage
 
-  Scenario: Timestamp an artifact
-    Given I provide the digital artifact "TEST.txt"
+  Scenario: Generate timestamp an artifact
+    And I provide a digital artifact
     When I submit the form
     Then the site returns to me a timestamp
     And returns the encrypted hash
+
+
+  Scenario: Error generating timestamp for an artifact
+    When I submit the form
+#    Then the site return error
+#    And no returns the encrypted hash

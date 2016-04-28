@@ -10,8 +10,8 @@ Feature: Timestamp verification
 
   @dev
   Scenario: Successful verification
-    Given I provide a encrypted hash "hash.tsr"
-    And I provide the original artifact "TEST.txt"
+    And I provide a encrypted hash
+    And I provide the original artifact
     When I submit the verify form
     Then I can see a message saying that the verification was successful
 

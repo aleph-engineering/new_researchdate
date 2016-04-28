@@ -9,8 +9,7 @@ Feature: Display most recent timestamps
         Given I am on the homepage
 
     Scenario: Timestamped artifact generates items in the most recent timestamps
-        Given I timestamp the artifacts:
-            | artifact  |
+        And I timestamp the artifacts:
             | TEST1.txt |
             | TEST1.txt |
             | TEST2.txt |

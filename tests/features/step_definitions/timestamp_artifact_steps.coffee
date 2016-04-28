@@ -10,21 +10,23 @@ module.exports = ->
         file.slice(file.length - 4) is timestampFileExtension
 
 
-    @Given /^I provide the digital artifact "([^"]*)"$/, (filename) ->
+    @And /^I provide a digital artifact$/, ->
 #        browser.waitForExist '#original-artifact', 3000
+#        browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
+#        browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
+#        browser.pause 3000
+#        browser.chooseFile ('input[id="artifact"]'), './tests/media/TEST.txt'
         browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
-        browser.execute((-> $('input[type="file"]').css('width', '300px')))
-        browser.execute((-> $('input[type="file"]').css('height', '100px')))
+        browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
+        #        browser.execute((-> $('input[type="file"]')[1].setAttribute('id', 'tsr')))
+        #        browser.execute((-> $('input[type="file"]')[2].setAttribute('id', 'original')))
         browser.pause 3000
-    #        @generalUpload('div#original-artifact input[type="file"]', filename)
-    #        browser.pause 3000
-    #        browser.setValue('#hash', '685c01d82443e1ca6283a29ac0b693fec50ecaf92ecb82e31b6b3817c52a85ca')
-    #        browser.click("#original-artifact").uploadFile('./tests/media/TEST.txt')
+        browser.chooseFile 'input[id="artifact"]', './tests/media/TEST.txt'
+        browser.pause 3000
 
     @When /^I submit the form$/, ->
-#        browser.waitForExist '#artifact-form', 3000
+        browser.waitForExist '#artifact-form', 3000
         browser.submitForm '#artifact-form'
-    #        browser.pause 300
 
     @Then /^the site returns to me a timestamp$/, ->
         files = fs.readdirSync @downloadsFolder
@@ -37,3 +39,5 @@ module.exports = ->
 
         # Assert that there is currently a hash in the page, as result of the timestamping process
         expect(hashValue).toMatch /^[a-f0-9]{64}$/
+
+    @Then /^the site return error$/, ->
