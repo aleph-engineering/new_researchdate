@@ -14,7 +14,7 @@ describe 'TimestampVerification module', ->
 
 
         it 'is defined', ->
-            expect(@TimestampVerifier).not.to.be.true
+            expect(@TimestampVerifier).not.to.be.undefined
 
 
         describe '_getSignature', ->
