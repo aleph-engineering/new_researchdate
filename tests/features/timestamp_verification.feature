@@ -8,15 +8,19 @@ Feature: Timestamp verification
   Background:
     Given I am on the homepage
 
-  @dev
   Scenario: Successful verification
-    And I provide a encrypted hash
-    And I provide the original artifact
+    And I provide a valid tsr file
+    And I provide the original file
     When I submit the verify form
     Then I can see a message saying that the verification was successful
 
-
   Scenario: Unsuccessful verification
-    Given I provide an "invalid input"
-    When I click the "Verify" button
-    Then a message pops up saying that the verification was unsuccessfu
+    And I provide a invalid tsr file
+    And I provide the original file
+    When I submit the verify form
+    Then I can see a message saying that the verification was unsuccessfu
+
+  Scenario: Verification with empty form
+    When I submit the verify empty form
+    Then I can see the require areas focused
+    And no returns the encrypted hash

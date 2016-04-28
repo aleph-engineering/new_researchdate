@@ -14,8 +14,7 @@ Feature: Timestamp an artifact
     Then the site returns to me a timestamp
     And returns the encrypted hash
 
-
-  Scenario: Error generating timestamp for an artifact
-    When I submit the form
-#    Then the site return error
-#    And no returns the encrypted hash
+  Scenario: Generate timestamp with empty form
+    When I submit the timestamp empty form
+    Then I can see the require areas focused
+    And no returns the encrypted hash

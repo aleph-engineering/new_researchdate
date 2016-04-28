@@ -3,23 +3,24 @@ module.exports = ->
 
 
     @And /^I timestamp the artifacts:$/, (scenario) ->
-#        browser.waitForExist 'input[id="artifact"]', 3000
+#        browser.waitForExist 'input[type="file"]', 3000
+        browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
+        browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
 
         # Make the timestamp request to each of the digital artifacts
         for data in scenario.rows()
             digital_artifact = data[0]
+            console.log digital_artifact
 
             # Upload the digital artifact
-            browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
-            browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
-            #            browser.execute((-> $('input[type="file"]')[1].setAttribute('id', 'tsr')))
-            browser.execute((-> $('input[type="file"]')[2].setAttribute('id', 'original')))
-            browser.waitForExist 'input[id="artifact"]', 3000
-            @generalUpload 'input[id="artifact"]', digital_artifact
+            browser.chooseFile 'input[id="artifact"]', './tests/media/'.concat digital_artifact
+            browser.pause 300
+            #            @generalUpload '#generate-input', digital_artifact
 
             # Submit the form to timestamp
-            browser.waitForExist '#artifact-form', 3000
+            #            browser.waitForExist '#artifact-form', 3000
             browser.submitForm '#artifact-form'
+            browser.pause 300
 
 
     @Then /^I should see until "(\d+)" timestamp records in the recent timestamps list$/, (count) ->

@@ -8,6 +8,7 @@ module.exports = ->
     @Before ->
         @generalUpload = (id, filename) =>
             browser.chooseFile id, filename
+        #            browser.chooseFile id, './tests/media/'.concat filename
 
         do clearServer
 
