@@ -2,25 +2,34 @@ module.exports = ->
     'use strict'
 
 
-    @And /^I timestamp the artifacts:$/, (scenario) ->
-#        browser.waitForExist 'input[type="file"]', 3000
-        browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
-        browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
+    #    @And /^I timestamp the artifacts:$/, (scenario) ->
+    ##        browser.waitForExist 'input[type="file"]', 3000
+    #        browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
+    #        browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
+    #
+    #        # Make the timestamp request to each of the digital artifacts
+    #        for data in scenario.rows()
+    #            digital_artifact = data[0]
+    #            console.log digital_artifact
+    #
+    #            # Upload the digital artifact
+    #            browser.chooseFile 'input[id="artifact"]', './tests/media/'.concat digital_artifact
+    #            browser.pause 300
+    #            #            @generalUpload '#generate-input', digital_artifact
+    #
+    #            # Submit the form to timestamp
+    #            #            browser.waitForExist '#artifact-form', 3000
+    #            browser.submitForm '#artifact-form'
+    #            browser.pause 300
 
-        # Make the timestamp request to each of the digital artifacts
-        for data in scenario.rows()
-            digital_artifact = data[0]
-            console.log digital_artifact
-
-            # Upload the digital artifact
-            browser.chooseFile 'input[id="artifact"]', './tests/media/'.concat digital_artifact
-            browser.pause 300
-            #            @generalUpload '#generate-input', digital_artifact
-
-            # Submit the form to timestamp
-            #            browser.waitForExist '#artifact-form', 3000
-            browser.submitForm '#artifact-form'
-            browser.pause 300
+    @And /^I timestamp the "([^"]*)"$/, (digital_artifact) ->
+        console.log digital_artifact
+    #        browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
+    #        browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
+    #        browser.chooseFile 'input[id="artifact"]', './tests/media/'.concat digital_artifact
+    #        browser.pause 300
+    #        browser.submitForm '#artifact-form'
+    #        browser.pause 300
 
 
     @Then /^I should see until "(\d+)" timestamp records in the recent timestamps list$/, (count) ->

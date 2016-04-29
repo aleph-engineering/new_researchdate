@@ -8,14 +8,18 @@ Feature: Display most recent timestamps
     Background:
         Given I am on the homepage
 
+    @dev
     Scenario: Timestamped artifact generates items in the most recent timestamps
-#        And I timestamp the artifacts:
-#            | artifact  |
-#            | TEST1.txt |
-#            | TEST1.txt |
-#            | TEST2.txt |
-#            | TEST1.txt |
-#            | TEST2.txt |
-#            | TEST.txt  |
+        And I timestamp the <artifacts>
 #        Then I should see until "4" timestamp records in the recent timestamps list
 #        And The recent timestamps list is as expected: it shows the last "4" timestamps ordered in descendant order by creation date
+
+#    Examples:
+#        | artifacts  |
+#        | TEST1.txt |
+#        | TEST1.txt |
+#        | TEST2.txt |
+#        | TEST1.txt |
+#        | TEST2.txt |
+#        | TEST.txt  |
+
