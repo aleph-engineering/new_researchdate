@@ -5,21 +5,9 @@ Feature: Display most recent timestamps
 
     NOTE: That the list in the below steps will be referred as: recent timestamps list
 
-    Background:
-        Given I am on the homepage
-
     @dev
     Scenario: Timestamped artifact generates items in the most recent timestamps
-        And I timestamp the <artifacts>
-#        Then I should see until "4" timestamp records in the recent timestamps list
-#        And The recent timestamps list is as expected: it shows the last "4" timestamps ordered in descendant order by creation date
-
-#    Examples:
-#        | artifacts  |
-#        | TEST1.txt |
-#        | TEST1.txt |
-#        | TEST2.txt |
-#        | TEST1.txt |
-#        | TEST2.txt |
-#        | TEST.txt  |
-
+        Given exist some timestamps generated
+        When I am on the homepage
+        Then I can see 4 timestamps in the timestamps list
+        And they are ordered in descendant by date
