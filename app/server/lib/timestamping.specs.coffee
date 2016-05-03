@@ -1,4 +1,3 @@
-rewire = require 'rewire'
 timestamping = require './timestamping'
 
 

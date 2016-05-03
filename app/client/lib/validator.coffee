@@ -1,5 +1,5 @@
 validArgsForTimestamp = (file)->
-    file is not 'NONE'
+    file != 'NONE'
 
 validArgsForVerification = (tsr, original)->
     tsr.length > 0 && original.length > 0

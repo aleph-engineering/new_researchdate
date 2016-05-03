@@ -1,4 +1,4 @@
-SystemParameters = require 'lib/system_parameters'
+SystemParameters = require './lib/system_parameters'
 
 
 makePublications = ->

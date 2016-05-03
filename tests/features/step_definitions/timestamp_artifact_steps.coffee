@@ -31,6 +31,7 @@ module.exports = ->
         expect(_.any(files, isZipExtension)).toBeTruthy()
 
     @Then /^returns the encrypted hash$/, ->
+        browser.waitForExist '#hash', 5000
         hashValue = browser.getValue '#hash'
 
         # Assert that there is currently a hash in the page, as result of the timestamping process
@@ -40,9 +41,10 @@ module.exports = ->
         do clickTimestampButton
 
     @When /^I can see the require areas focused$/, ->
-        browser.waitForExist '.dropzone.dz-clickable.error', 3000
+        browser.waitForExist '.dropzone.dz-clickable.error', 5000
 
     @Then /^no returns the encrypted hash$/, ->
+        browser.waitForExist '#hash', 5000
         hashValue = browser.getValue '#hash'
 
         # Assert that there is not a hash in the page
