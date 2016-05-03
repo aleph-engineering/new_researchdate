@@ -1,8 +1,8 @@
-validArgsForTimestamp = (file)->
-    file != 'NONE'
+validArgsForTimestamp = (file) ->
+    file is 'NONE'
 
-validArgsForVerification = (tsr, original)->
-    tsr.length > 0 && original.length > 0
+validArgsForVerification = (tsr, original) ->
+    tsr.length > 0 and original.length > 0
 
 fileExist = (file) ->
     file.length > 0
