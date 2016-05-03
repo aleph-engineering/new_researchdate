@@ -2,8 +2,8 @@ module.exports = ->
     'use strict'
 
     @Given /^exist some timestamps generated$/, ->
-        server.execute((count) ->
-            Timestamps.insert(hash: '67yut456ytgfg', creationDate: '5/1/2016', server: 'https://freetsa.org/'))
+        server.execute(() ->
+            Timestamps.insert({hash: '67yut456ytgfg', creationDate: '5/1/2016', server: 'https://freetsa.org/'}))
         server.execute((count) ->
             Timestamps.insert(hash: '67yut45uioo6ytgfg', creationDate: '6/1/2016', server: 'https://freetsa.org/'))
         server.execute((count) ->
@@ -15,9 +15,17 @@ module.exports = ->
         server.execute((count) ->
             Timestamps.insert(hash: '67yut456ythrrgfg', creationDate: '10/1/2016', server: 'https://freetsa.org/'))
 
+    @Given /^not exist timestamps generated$/, ->
+        server.execute(() ->
+            Timestamps.remove({}))
+
     @Then /^I can see 4 timestamps in the timestamps list$/, ->
         timestamps = browser.getText 'table#timestamp-list tbody tr td.hash-cell'
         expect(timestamps.length).toBe 4
+
+    @Then /^I can see there is not timestamps in the timestamps list$/, ->
+        cantTr = browser.execute((-> $('#timestamp-list tbody tr')))
+        expect(cantTr.value.length).toBe 0
 
     @Then /^they are ordered in descendant by date$/, ->
 

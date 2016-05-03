@@ -5,9 +5,13 @@ Feature: Display most recent timestamps
 
     NOTE: That the list in the below steps will be referred as: recent timestamps list
 
-    @dev
     Scenario: Timestamped artifact generates items in the most recent timestamps
         Given exist some timestamps generated
         When I am on the homepage
         Then I can see 4 timestamps in the timestamps list
         And they are ordered in descendant by date
+
+    Scenario: There is not timestamps in the most recent timestamps list
+        Given not exist timestamps generated
+        When I am on the homepage
+        Then I can see there is not timestamps in the timestamps list
