@@ -45,10 +45,13 @@ Template.Verification.helpers {
 Template.Verification.onCreated ->
 
 Template.Verification.onRendered ->
-    Dropzone.forElement('#tsr-hash').on 'addedfile', (file)->
+    dropzoneForTsr = Dropzone.forElement('#tsr-hash')
+    dropzoneForTsr.options.acceptedFiles = '.tsr'
+    dropzoneForTsr.on 'addedfile', (file)->
         $('#tsr-hash').removeClass('error')
     Dropzone.forElement('#original-file').on 'addedfile', (file)->
         $('#original-file').removeClass('error')
+
 Template.Verification.onDestroyed ->
 
 
