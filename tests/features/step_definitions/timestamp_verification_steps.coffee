@@ -34,5 +34,6 @@ module.exports = ->
 
     addIdToInput = ->
         browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
+        browser.pause 3000
         browser.execute((-> $('input[type="file"]')[1].setAttribute('id', 'tsr')))
         browser.execute((-> $('input[type="file"]')[2].setAttribute('id', 'original')))

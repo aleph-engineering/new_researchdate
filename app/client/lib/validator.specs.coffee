@@ -17,12 +17,12 @@ describe 'Validator module', ->
             valid = validator.validArgsForTimestamp null
             expect(valid).to.be.false
 
-        it "returns false if given other value than: 'NONE'", ->
-            valid = validator.validArgsForTimestamp 'A'
+        it "returns false if given value: 'NONE'", ->
+            valid = validator.validArgsForTimestamp 'NONE'
             expect(valid).to.be.false
 
-        it "returns true if given value: 'NONE'", ->
-            valid = validator.validArgsForTimestamp 'NONE'
+        it "returns true if given other value than: 'NONE'", ->
+            valid = validator.validArgsForTimestamp 'other'
             expect(valid).to.be.true
 
 

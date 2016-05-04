@@ -18,6 +18,7 @@ module.exports = ->
 
     @And /^I provide a digital artifact$/, ->
         browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
+        browser.pause 3000
         browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
         browser.chooseFile 'input[id="artifact"]', './tests/media/TEST.txt'
 
@@ -31,7 +32,7 @@ module.exports = ->
         expect(_.any(files, isZipExtension)).toBeTruthy()
 
     @Then /^returns the encrypted hash$/, ->
-        browser.waitForExist '#hash', 5000
+        browser.waitForExist '#hash', 10000
         hashValue = browser.getValue '#hash'
 
         # Assert that there is currently a hash in the page, as result of the timestamping process
