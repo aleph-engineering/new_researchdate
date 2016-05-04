@@ -18,7 +18,7 @@ module.exports = ->
 
     @And /^I provide a digital artifact$/, ->
         browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
-        browser.pause 3000
+        browser.waitForExist 'input[type="file"]', 3000
         browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
         browser.chooseFile 'input[id="artifact"]', './tests/media/TEST.txt'
 

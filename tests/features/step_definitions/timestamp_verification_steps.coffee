@@ -7,7 +7,7 @@ module.exports = ->
 
 
     @And /^I provide the original file$/, ->
-        browser.pause 3000
+        browser.waitForExist 'input[id="original"]', 3000
         browser.chooseFile 'input[id="original"]', './tests/media/TEST.txt'
 
     @When /^I submit the verify form$/, ->
@@ -34,6 +34,6 @@ module.exports = ->
 
     addIdToInput = ->
         browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
-        browser.pause 3000
+        browser.waitForExist 'input[type="file"]', 3000
         browser.execute((-> $('input[type="file"]')[1].setAttribute('id', 'tsr')))
         browser.execute((-> $('input[type="file"]')[2].setAttribute('id', 'original')))

@@ -8,7 +8,6 @@ module.exports = ->
     @Before ->
         @generalUpload = (id, filename) =>
             browser.chooseFile id, filename
-        #            browser.chooseFile id, './tests/media/'.concat filename
 
         do clearServer
 
@@ -18,6 +17,8 @@ module.exports = ->
 
 
     @After ->
+        do clearServer
+
         ### This will be executed each time the e2e tests are executed ###
         fs = require 'fs'
 

@@ -6,8 +6,9 @@ Feature: Display most recent timestamps
     NOTE: That the list in the below steps will be referred as: recent timestamps list
 
     Scenario: Timestamped artifact generates items in the most recent timestamps
-        Given exist some timestamps generated
+        Given exists some timestamps generated
         When I am on the homepage
+        And I wait 2 seconds
         Then I can see 4 timestamps in the timestamps list
         And they are ordered in descendant by date
 
