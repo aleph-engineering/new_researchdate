@@ -7,4 +7,4 @@
 # export MONGO_URL="mongodb://localhost:27017/myapp-development"
 # export ROOT_URL="http://localhost:3000"
 
-export MOCK_TIMESTAMPING=1
+#export MOCK_TIMESTAMPING=1
