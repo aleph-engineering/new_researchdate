@@ -48,7 +48,7 @@ Template.Timestamp.onCreated ->
 Template.Timestamp.onRendered ->
     Dropzone.forElement('#original-artifact').on 'addedfile', (file)->
         Session.set 'artifactHash', ''
-        if file?
+        if validator.fileIsValid(file)
             isBusy.set true
 
             fileStream = FileReaderStream file

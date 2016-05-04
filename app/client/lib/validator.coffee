@@ -1,5 +1,5 @@
 validArgsForTimestamp = (file)->
-    file? and file isnt 'NONE'
+    file? && file isnt 'NONE'
 
 validArgsForVerification = (tsr, original)->
     tsr?.length > 0 and original?.length > 0
@@ -7,6 +7,10 @@ validArgsForVerification = (tsr, original)->
 fileExist = (file) ->
     file?.length > 0
 
+fileIsValid = (file) ->
+    file?.size <= 266454270
+
 exports.validArgsForTimestamp = validArgsForTimestamp
 exports.validArgsForVerification = validArgsForVerification
 exports.fileExist = fileExist
+exports.fileIsValid = fileIsValid

@@ -66,3 +66,15 @@ describe 'Validator module', ->
         it 'returns true, if given a not empty file', ->
             result = validator.fileExist length: 10
             expect(result).to.be.true
+
+    describe 'fileIsValid method', ->
+        it 'is defined', ->
+            expect(validator.fileIsValid).not.to.be.undefined
+
+        it 'returns true, if file.size <= 266454270', ->
+            result = validator.fileIsValid size: 266454270
+            expect(result).to.be.true
+
+        it 'returns false, if file.size >= 266454270', ->
+            result = validator.fileIsValid size: 266454272
+            expect(result).to.be.false
