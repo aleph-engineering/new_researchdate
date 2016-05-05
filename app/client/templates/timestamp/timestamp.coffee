@@ -7,6 +7,7 @@ validator = require '../../lib/validator'
 
 
 Session.setDefault 'artifactHash', 'NONE'
+Session.setDefault 'artifactFilename', ''
 zip = null
 
 
@@ -25,13 +26,17 @@ Template.Timestamp.events {
                     $.each result, (name, value) ->
                         resultArr[isBusy.set truename] = value
 
-                    zip.file "response.tsr", resultArr
+                    zip.file "timestamp.tsr", resultArr
                     zip.generateAsync({
                         type: "blob",
-                        streamFiles: true
+                        streamFiles: true,
+                        comment: i18n 'timestamp.tsr_comment'
                     }).then (blob) ->
                         isBusy.set false
-                        FileSaver.saveAs blob, "test.zip"
+                        artifactName = Session.get 'artifactFilename'
+                        zipName = artifactName.substr(0, artifactName.lastIndexOf('.')) or artifactName
+                        zipName += ' - Timestamped by ResearchDate.zip'
+                        FileSaver.saveAs blob, zipName
                     , (err) ->
                         console.log err
                 else
@@ -53,6 +58,7 @@ Template.Timestamp.onCreated ->
 Template.Timestamp.onRendered ->
     Dropzone.forElement('#original-artifact').on 'addedfile', (file)->
         Session.set 'artifactHash', ''
+        Session.set 'artifactFilename', ''
         if validator.fileIsValid(file)
             isBusy.set true
 
@@ -66,6 +72,7 @@ Template.Timestamp.onRendered ->
                     console.log error
                 else
                     Session.set 'artifactHash', result
+                    Session.set 'artifactFilename', file.name
                     isBusy.set false
         else
             Session.set 'artifactHash', 'NONE'

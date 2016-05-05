@@ -26,6 +26,7 @@ i18n.map 'en', timestamp:
     placeholder: 'Choose the file you want to timestamp'
     hash: 'SHA256 Hash'
     timestamp_btn: 'Timestamp'
+    tsr_comment: "This zip is used to verify the timestamp of your original file. It's very important that you don't lose this! (ResearchDate.net)"
 
 i18n.map 'en', timestampList:
     hash_result: 'Hash Result'
