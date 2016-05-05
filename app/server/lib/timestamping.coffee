@@ -24,7 +24,6 @@ class TimestampGenerator
         # TODO:(Helen Garcia Glez) Replace server when selection TSA implemented.
         Timestamps.insert hash: hash, creationDate: date, server: 'https://freetsa.org/'
 
-
     _makeTimestampRequest: (tsaUrl, requestOptions) =>
         ### Makes the timestamp request, given the TSA url and request options.
 

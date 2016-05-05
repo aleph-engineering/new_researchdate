@@ -17,13 +17,13 @@ Template.Timestamp.events {
         form = e.target
         hash = $(form).find('input[name="hash"]').val()
         if validator.validArgsForTimestamp(hash)
-            isBusy.set true
+
 
             Meteor.call 'server/timestamp', hash, (error, result) ->
                 if not error
                     resultArr = []
                     $.each result, (name, value) ->
-                        resultArr[name] = value
+                        resultArr[isBusy.set truename] = value
 
                     zip.file "response.tsr", resultArr
                     zip.generateAsync({type: "blob"})
@@ -32,6 +32,9 @@ Template.Timestamp.events {
                         FileSaver.saveAs blob, "test.zip"
                     , (err) ->
                         console.log err
+                else
+                    isBusy.set false
+                    Toast.error(error.message, '', {width: 800})
         else
             $('#original-artifact').addClass('error')
 
