@@ -26,8 +26,10 @@ Template.Timestamp.events {
                         resultArr[isBusy.set truename] = value
 
                     zip.file "response.tsr", resultArr
-                    zip.generateAsync({type: "blob"})
-                    .then (blob) ->
+                    zip.generateAsync({
+                        type: "blob",
+                        streamFiles: true
+                    }).then (blob) ->
                         isBusy.set false
                         FileSaver.saveAs blob, "test.zip"
                     , (err) ->
