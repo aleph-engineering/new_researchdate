@@ -39,3 +39,5 @@ velocity:meteor-stubs
 mrt:toastjs
 dapearce:material-icons
 dbarrett:dropzonejs
+aldeed:simple-schema
+aldeed:collection2
