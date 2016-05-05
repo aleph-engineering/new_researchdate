@@ -1,21 +1,19 @@
-STREAMING_CHUNK_SIZE = 1024 * 1024 #1 Mb
+createHash = require 'sha.js'
 
 
-generateDigest = (file, callback) ->
-    createHash = require 'sha.js'
+generateDigestWithStream = (stream, callback) ->
     sha256 = createHash 'sha256'
-    parseFile file,
-        binary: true,
-        chunk_size: STREAMING_CHUNK_SIZE,
-        chunk_read_callback: (chunk) ->
-            chunkBuffer = new Buffer chunk
-            sha256.update chunkBuffer
-        error_callback: (error) ->
-            callback(error, null) if callback?
-        success: ->
-            if callback?
-                digest = sha256.digest 'hex'
-                callback null, digest
+
+    stream.on 'data', (chunk) ->
+        sha256.update chunk
+
+    stream.on 'end', () ->
+        if callback?
+            digest = sha256.digest 'hex'
+            callback null, digest
+
+    stream.on 'error', (error) ->
+        callback(error, null) if callback?
 
 
-exports.generateDigest = generateDigest
+exports.generateDigestWithStream = generateDigestWithStream

@@ -62,11 +62,12 @@ Template.Timestamp.onRendered ->
         if validator.fileIsValid(file)
             isBusy.set true
 
-            fileStream = FileReaderStream file
+            zipStream = FileReaderStream file
+            digestStream = FileReaderStream file
             zip = new JSZip()
-            zip.file file.name, fileStream
+            zip.file file.name, zipStream
 
-            digest.generateDigest file, (error, result) ->
+            digest.generateDigestWithStream digestStream, (error, result) ->
                 if error
 #                    TODO (Marian Morgalo): Show a message to the user if an error occurs
                     console.log error
