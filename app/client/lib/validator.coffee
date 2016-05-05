@@ -1,8 +1,8 @@
 validArgsForTimestamp = (file)->
     file? && file isnt 'NONE'
 
-validArgsForVerification = (tsr, original)->
-    tsr?.length > 0 and original?.length > 0
+validArgsForVerification = (zip)->
+    true
 
 fileExist = (file) ->
     file?.length > 0
