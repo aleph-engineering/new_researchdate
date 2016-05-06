@@ -19,7 +19,6 @@ Template.Timestamp.events {
         hash = $(form).find('input[name="hash"]').val()
         if validator.validArgsForTimestamp(hash)
 
-
             Meteor.call 'server/timestamp', hash, (error, result) ->
                 if not error
                     resultArr = []

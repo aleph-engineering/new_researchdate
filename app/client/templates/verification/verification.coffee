@@ -30,8 +30,8 @@ Template.Verification.events {
                             else
                                 originalZippedFile = file
 
-                        throw 'The zip does not contain a timestamp archive' unless tsrZippedFile?
-                        throw 'The zip does not contain a timestamped artifact' unless originalZippedFile?
+                        Toast.error(i18n('verification.messages.not_tsr'), '', {width: 800}) unless tsrZippedFile?
+                        Toast.error(i18n('verification.messages.not_artifact'), '', {width: 800}) unless originalZippedFile?
 
                         tsrPromise = tsrZippedFile.async('nodebuffer')
                         artifactPromise = originalZippedFile.nodeStream()
@@ -44,8 +44,7 @@ Template.Verification.events {
                                 verification(result, values[0])
                     )
         else
-            zipZone.addClass('error') if !validator.fileExist(zip)
-
+            zipZone.addClass('error')
 }
 
 verification = (result, tsr)->
@@ -66,7 +65,7 @@ Template.Verification.onCreated ->
 Template.Verification.onRendered ->
     dropzoneForZip = Dropzone.forElement('#zipInput')
     dropzoneForZip.options.acceptedFiles = '.zip'
-    dropzoneForZip.on 'addedfile', (file)->
+    dropzoneForZip.on 'addedfile', ->
         $('#zipInput').removeClass('error')
 
 Template.Verification.onDestroyed ->

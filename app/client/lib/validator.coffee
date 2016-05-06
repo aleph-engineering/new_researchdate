@@ -2,7 +2,7 @@ validArgsForTimestamp = (file)->
     file? && file isnt 'NONE'
 
 validArgsForVerification = (zip)->
-    true
+    zip?
 
 fileExist = (file) ->
     file?.length > 0
