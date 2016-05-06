@@ -18,12 +18,13 @@ Template.Timestamp.events {
         form = e.target
         hash = $(form).find('input[name="hash"]').val()
         if validator.validArgsForTimestamp(hash)
+            isBusy.set true
 
             Meteor.call 'server/timestamp', hash, (error, result) ->
                 if not error
                     resultArr = []
                     $.each result, (name, value) ->
-                        resultArr[isBusy.set truename] = value
+                        resultArr[name] = value
 
                     zip.file "timestamp.tsr", resultArr
                     zip.generateAsync({
