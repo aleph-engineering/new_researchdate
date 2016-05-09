@@ -23,6 +23,7 @@ i18n.map 'en', verification:
 
 
 i18n.map 'en', timestamp:
+    tsa_servers_title: 'Select the TSA servers'
     title: 'Timestamp'
     file: 'File'
     placeholder: 'Choose the file you want to timestamp'

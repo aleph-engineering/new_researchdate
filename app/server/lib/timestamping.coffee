@@ -15,14 +15,14 @@ class TimestampGenerator
         encoding: null
 
 
-    _saveTimestampRecord: (hash) =>
+    _saveTimestampRecord: (hash, tsaUrl) =>
         ### Saves information about the given timestamp in the Database.
 
             @param hash: The hash to extract the information to save from.
         ###
         date = new Date()
         # TODO:(Helen Garcia Glez) Replace server when selection TSA implemented.
-        Timestamps.insert hash: hash, creationDate: date, server: 'https://freetsa.org/'
+        Timestamps.insert hash: hash, creationDate: date, server: tsaUrl
 
     _makeTimestampRequest: (tsaUrl, requestOptions) =>
         ### Makes the timestamp request, given the TSA url and request options.
@@ -45,7 +45,7 @@ class TimestampGenerator
         do timestampRequestGenerator.generate
 
 
-    timestamp: (hash) =>
+    timestamp: (hash, tsaUrl) =>
         ### Generates the timestamp for the given hash.
 
             @param hash: The hash to generate the timestamp for.
@@ -55,8 +55,8 @@ class TimestampGenerator
 
         # Build the options for the request to make
         try
-            response = @_makeTimestampRequest @_freeTSA, requestOptions
-            @_saveTimestampRecord hash
+            response = @_makeTimestampRequest tsaUrl, requestOptions
+            @_saveTimestampRecord hash, tsaUrl
             response.body
         catch e
             console.log e

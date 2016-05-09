@@ -14,12 +14,13 @@ Template.Timestamp.events {
 
         form = e.target
         hash = $(form).find('input[name="hash"]').val()
+        tsaUrl = $(form).find('input[name="tsa_server"]:checked').val()
         artifactFilename = Session.get 'artifactFilename'
 
         isBusy.set true
 
         stamper = reactiveStamper.get()
-        stamper.timestamp(hash, artifactFilename).then((result)->
+        stamper.timestamp(hash, artifactFilename, tsaUrl).then((result)->
             isBusy.set false
             FileSaver.saveAs result.data, result.zipName
         ).catch((error) ->

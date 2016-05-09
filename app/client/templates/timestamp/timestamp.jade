@@ -8,5 +8,22 @@ template(name='Timestamp')
                     div(class='input-field')
                         label(for='hash' class='active') {{i18n 'timestamp.hash'}}
                         input(type='text' id='hash' name='hash' value='#{artifactHash}' readonly)
+                div(id='servers-container' class='row')
+                    h6 {{i18n 'timestamp.tsa_servers_title'}}
+                    p
+                        input(type='checkbox' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr')
+                        label(for='free_tsa') https://www.freetsa.org/index_en.php
+                    p
+                        input(type='checkbox' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')
+                        label(for='tsa_startssl') http://tsa.startssl.com/rfc3161
+                    p
+                        input(type='checkbox' id='time_certum' name='tsa_server' value='http://time.certum.pl/')
+                        label(for='time_certum') http://time.certum.pl/
+                    p
+                        input(type='checkbox' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
+                        label(for='zeitstempel') http://zeitstempel.dfn.de/
+                    p
+                        input(type='checkbox' id='dse200_ncipher' name='tsa_server' value='http://dse200.ncipher.com/TSS/HttpTspServer')
+                        label(for='dse200_ncipher') http://dse200.ncipher.com/TSS/HttpTspServer
                 div(class='row')
                     button(type='submit' class='btn waves-effect waves-light light-blue lighten-1' name='timestamp') {{i18n 'timestamp.timestamp_btn'}}
