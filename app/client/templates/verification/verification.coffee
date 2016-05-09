@@ -26,11 +26,8 @@ Template.Verification.events {
                             filename = file.name
                             fileExt = filename.substr(filename.lastIndexOf('.'), filename.length)
                             if fileExt is '.tsr'
-                                console.log 'tsr'
                                 tsrZippedFile = file
-                                console.log tsrZippedFile
                             else
-                                console.log 'no tsr'
                                 originalZippedFile = file
                                 console.log originalZippedFile
 
