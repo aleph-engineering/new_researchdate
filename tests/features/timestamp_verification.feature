@@ -9,16 +9,16 @@ Feature: Timestamp verification
         Given I am on the homepage
 
     Scenario: Successful verification
-        And I provide a valid tsr file
-        And I provide the original file
+        And I provide a valid zip file
+#        And I provide the original file
         When I submit the verify form
         Then I can see a message saying that the verification was successful
 
     Scenario: Unsuccessful verification
-        And I provide a invalid tsr file
-        And I provide the original file
+        And I provide a invalid zip file
+#        And I provide the original file
         When I submit the verify form
-        Then I can see a message saying that the verification was unsuccessfu
+        Then I can see a message saying that the verification was unsuccessful
 
     Scenario: Verification with empty form
         When I submit the verify empty form
