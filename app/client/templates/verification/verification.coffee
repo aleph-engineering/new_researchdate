@@ -26,9 +26,13 @@ Template.Verification.events {
                             filename = file.name
                             fileExt = filename.substr(filename.lastIndexOf('.'), filename.length)
                             if fileExt is '.tsr'
+                                console.log 'tsr'
                                 tsrZippedFile = file
+                                console.log tsrZippedFile
                             else
+                                console.log 'no tsr'
                                 originalZippedFile = file
+                                console.log originalZippedFile
 
                         Toast.error(i18n('verification.messages.not_tsr'), '', {width: 800}) unless tsrZippedFile?
                         Toast.error(i18n('verification.messages.not_artifact'), '', {width: 800}) unless originalZippedFile?

@@ -31,3 +31,19 @@ module.exports = ->
         browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
         browser.waitForExist 'input[type="file"]', 3000
         browser.execute((-> $('input[type="file"]')[1].setAttribute('id', 'zipVerification')))
+
+    @And /^I provide a zip file that does not contain .tsr file$/, ->
+        do addIdToInput
+        browser.chooseFile('input[id="zipVerification"]', './tests/media/not_tsr.zip')
+
+    @Then /^I can see a message saying that zip does not contain a timestamp archive$/, ->
+        browser.waitForExist '.toast-error', 3000
+        expect(browser.getText('.toast-error')).toBe 'The zip does not contain a timestamp archive'
+
+    @And /^I provide a zip file that does not contain a timestamped artifact$/, ->
+        do addIdToInput
+        browser.chooseFile('input[id="zipVerification"]', './tests/media/only_tsr.zip')
+
+    @Then /^I can see a message saying that does not contain a timestamped artifact$/, ->
+        browser.waitForExist '.toast-error', 3000
+        expect(browser.getText('.toast-error')).toBe 'The zip does not contain a timestamped artifact'

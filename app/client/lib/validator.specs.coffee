@@ -30,24 +30,12 @@ describe 'Validator module', ->
         it 'is defined', ->
             expect(validator.validArgsForVerification).not.to.be.undefined
 
-        it 'returns false, if not given a TSR file', ->
-            result = validator.validArgsForVerification null, {length: 10}
+        it 'returns false, if not given a zip file', ->
+            result = validator.validArgsForVerification null
             expect(result).to.be.false
 
-        it 'returns false, if given an empty TSR file', ->
-            result = validator.validArgsForVerification {length: 0}, {length: 10}
-            expect(result).to.be.false
-
-        it 'returns false, if not given the original file', ->
-            result = validator.validArgsForVerification {length: 10}, null
-            expect(result).to.be.false
-
-        it 'returns false, if given an empty original file', ->
-            result = validator.validArgsForVerification {length: 10}, {length: 0}
-            expect(result).to.be.false
-
-        it 'returns true, if given two not empty files', ->
-            result = validator.validArgsForVerification {length: 10}, {length: 10}
+        it 'returns true, if given not empty file', ->
+            result = validator.validArgsForVerification {length: 10}
             expect(result).to.be.true
 
 
