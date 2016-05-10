@@ -36,14 +36,14 @@ module.exports = ->
         do addIdToInput
         browser.chooseFile('input[id="zipVerification"]', './tests/media/not_tsr.zip')
 
-    @Then /^I can see a message saying that zip does not contain a timestamp archive$/, ->
+    @Then /^I can see a message saying that zip does not contain a timestamp file/, ->
         browser.waitForExist '.toast-error', 3000
-        expect(browser.getText('.toast-error')).toBe 'The zip does not contain a timestamp archive'
+        expect(browser.getText('.toast-error')).toBe 'The zip does not contain a timestamp file (.tsr)'
 
-    @And /^I provide a zip file that does not contain a timestamped artifact$/, ->
+    @And /^I provide a zip file that does not contain a timestamped file/, ->
         do addIdToInput
         browser.chooseFile('input[id="zipVerification"]', './tests/media/only_tsr.zip')
 
-    @Then /^I can see a message saying that does not contain a timestamped artifact$/, ->
+    @Then /^I can see a message saying that does not contain a timestamped file/, ->
         browser.waitForExist '.toast-error', 3000
-        expect(browser.getText('.toast-error')).toBe 'The zip does not contain a timestamped artifact'
+        expect(browser.getText('.toast-error')).toBe 'The zip does not contain a timestamped file'

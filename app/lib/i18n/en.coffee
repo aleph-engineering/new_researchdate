@@ -18,8 +18,8 @@ i18n.map 'en', verification:
     messages:
         info: 'Verification Successful'
         error: 'Verification Failed'
-        not_artifact: 'The zip does not contain a timestamped artifact'
-        not_tsr: 'The zip does not contain a timestamp archive'
+        not_artifact: 'The zip does not contain a timestamped file'
+        not_tsr: 'The zip does not contain a timestamp file (.tsr)'
 
 
 i18n.map 'en', timestamp:

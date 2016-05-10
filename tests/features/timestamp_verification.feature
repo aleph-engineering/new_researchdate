@@ -26,9 +26,9 @@ Feature: Timestamp verification
     Scenario: Error in verification when .zip file not contain .tsr file
         And I provide a zip file that does not contain .tsr file
         When I submit the verify form
-        Then I can see a message saying that zip does not contain a timestamp archive
+        Then I can see a message saying that zip does not contain a timestamp file
 
-#    Scenario: Error in verification when .zip file only contain a .tsr file
-#        And I provide a zip file that does not contain a timestamped artifact
-#        When I submit the verify form
-#        Then I can see a message saying that does not contain a timestamped artifact
+    Scenario: Error in verification when .zip file only contain a .tsr file
+        And I provide a zip file that does not contain a timestamped file
+        When I submit the verify form
+        Then I can see a message saying that does not contain a timestamped file
