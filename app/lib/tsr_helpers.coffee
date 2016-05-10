@@ -1,5 +1,6 @@
 rfc5280 = require 'asn1.js/rfc/5280'
 tsResponse = require './asn1/timestamp_response'
+hashHelpers = require './asn1/hash_helpers'
 
 
 class TSRWrapper
@@ -37,6 +38,16 @@ class TSRWrapper
         else
             signerInfo = _getSignerInfo @response
             signedContent = tsResponse.SignedAttributes.encode signerInfo.signedAttrs, 'der'
+
+    getHashAlgorithmForVerification: () ->
+        signerInfo = _getSignerInfo @response
+        algorithmOID = signerInfo.digestAlgorithm.algorithm.join '.'
+        HASHES = hashHelpers.HASHES
+        switch algorithmOID
+            when HASHES.sha1.oid then 'SHA1withRSA'
+            when HASHES.sha256.oid then 'SHA256withRSA'
+            when HASHES.sha384.oid then 'SHA384withRSA'
+            when HASHES.sha512.oid then 'SHA512withRSA'
 
 
     #   PRIVATE METHODS

@@ -7,8 +7,8 @@ class TimestampVerifier
     constructor: (@artifactHash, @responseBuffer) ->
 
 
-    _getSignature: =>
-        new rsaSign.Signature "alg": "SHA1withRSA"
+    _getSignature: (responseWrapper) =>
+        new rsaSign.Signature "alg": responseWrapper.getHashAlgorithmForVerification()
 
 
     verify: =>
@@ -23,7 +23,7 @@ class TimestampVerifier
         signature = responseWrapper.getSignature()
         publicKey = responseWrapper.getPublicKey()
 
-        sig = @_getSignature()
+        sig = @_getSignature responseWrapper
         sig.init publicKey
         sig.updateHex signedContentBuffer.toString 'hex'
         sig.verify signature.toString 'hex'
