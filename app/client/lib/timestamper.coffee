@@ -28,13 +28,13 @@ class Timestamper
                     reject 'Hash could not be generated. Check that the input file is correct.'
         )
 
-    timestamp: (hash, filename) ->
+    timestamp: (hash, filename, tsaUrl) ->
 #        Returns a promise
         zipGen = @zipHandler
         return new Promise(
             (resolve, reject) ->
                 if validator.validArgsForTimestamp(hash)
-                    Meteor.call 'server/timestamp', hash, (error, result) ->
+                    Meteor.call 'server/timestamp', hash, tsaUrl, (error, result) ->
                         if not error
                             resultArr = []
                             $.each result, (name, value) ->
