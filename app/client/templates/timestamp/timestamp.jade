@@ -11,7 +11,7 @@ template(name='Timestamp')
                 div(id='servers-container' class='row')
                     h6 {{i18n 'timestamp.tsa_servers_title'}}
                     p
-                        input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr')
+                        input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked)
                         label(for='free_tsa') https://www.freetsa.org/index_en.php
                     p
                         input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')

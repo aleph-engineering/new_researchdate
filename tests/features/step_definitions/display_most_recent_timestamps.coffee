@@ -15,9 +15,9 @@ module.exports = ->
     @Given /^not exist timestamps generated$/, ->
         server.execute(() -> Timestamps.remove({}))
 
-    @Then /^I can see 4 timestamps in the timestamps list$/, ->
+    @Then /^I can see 10 timestamps in the timestamps list$/, ->
         timestamps = browser.getText 'table#timestamp-list tbody tr td.hash-cell'
-        expect(timestamps.length).toBe 4
+        expect(timestamps.length).toBe 410
 
     @Then /^I can see there is not timestamps in the timestamps list$/, ->
         cantTr = browser.execute((-> $('#timestamp-list tbody tr')))

@@ -9,7 +9,7 @@ Feature: Display most recent timestamps
         Given exists some timestamps generated
         When I am on the homepage
         And I wait 2 seconds
-        Then I can see 4 timestamps in the timestamps list
+        Then I can see 10 timestamps in the timestamps list
         And they are ordered in descendant by date
 
     Scenario: There is not timestamps in the most recent timestamps list
