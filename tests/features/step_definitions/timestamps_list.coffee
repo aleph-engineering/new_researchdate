@@ -28,6 +28,7 @@ module.exports = ->
         expect(cantTr.value.length).toBe 0
 
     @Then /^they are ordered in descendant by date$/, ->
+        browser.pause 2000
         TIMESTAMP_LIST_COUNT = require('../../../app/server/lib/system_parameters').TIMESTAMP_LIST_COUNT
 
         latestTimestamps = server.execute((count) ->
