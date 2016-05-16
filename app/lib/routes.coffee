@@ -18,7 +18,7 @@ configure = ->
         controller: 'TimestampController'
         where: 'server'
 
-    Router.route '/ux_home',
+    Router.route '/ux_timestamp',
         where: 'client'
 
 do configure
