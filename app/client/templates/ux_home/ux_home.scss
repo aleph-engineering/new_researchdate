@@ -1,0 +1,31 @@
+/*****************************************************************************/
+/* UxHome: Style */
+/*****************************************************************************/
+.ux-home {
+}
+
+.step-content {
+  vertical-align: middle;
+  height: 120px;
+}
+
+.step-content p {
+  margin-top: 8px;
+}
+
+.step-content .file-pick-opener {
+  vertical-align: middle;
+}
+
+div.file-drop {
+  border-radius: 4px;
+  height: 50px;
+  border: 1px #666 dashed;
+  text-align: center;
+}
+
+button.file-pick-opener {
+  margin-top: 6px;
+  height: 30px;
+  vertical-align: middle;
+}
