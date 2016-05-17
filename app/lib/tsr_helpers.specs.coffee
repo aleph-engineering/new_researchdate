@@ -78,3 +78,5 @@ describe 'TsrHelpers module', ->
                 @responseWithoutTSTStub.status.status = 'other status'
                 tsrWrapper = new tsrHelpers.TSRWrapper @tsaResponse
                 expect(tsrWrapper.encapsulatedContent).to.be.undefined
+
+
