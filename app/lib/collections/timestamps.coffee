@@ -4,8 +4,8 @@ TimestampIndex = new EasySearch.Index({
     collection: Timestamps,
     fields: ['hash', 'server'],
 #    defaultSearchOptions: { limit: 4  },
-    engine: new EasySearch.Minimongo({
-        sort: -> {creationDate: -1}
+    engine: new EasySearch.MongoDB({
+        sort: -> {creationDate: -1},
     }),
 })
 

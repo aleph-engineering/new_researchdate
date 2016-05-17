@@ -27,7 +27,4 @@ describe 'Publications', ->
             # act
             do queryFunction
             # assert
-            assert @timestampsFindSpy.calledWith(
-                {},
-                {limit: SystemParameters.TIMESTAMP_LIST_COUNT, sort: {creationDate: -1}}
-            )
+            assert @timestampsFindSpy.calledWith({})

@@ -35,3 +35,4 @@ i18n.map 'en', timestampList:
     hash_result: 'Hash Result'
     creation_date: 'Creation Date'
     server_used: 'Server used'
+    no_results: 'No results found!'
