@@ -1,6 +1,6 @@
 <template name="UxTimestamp">
 
-  <section id="timestamping">
+  <section id="ux-home">
 
     <div class="container">
       <div class="row">
@@ -15,48 +15,41 @@
           </nav>
         </header>
       </div>
+    </div>
 
 
-      <div class="row">
-        <section id="content-container">
-          <div class="tabs-container">
-            <div class="tab">
-              <h2>Generate</h2>
+    <section id="content-container">
 
-              <ul class="tab-content">
-                <li>
-                  <div class="step-number">
-                    <h3><span>1</span>st. STEP</h3>
-                  </div>
+      <div class="container">
+        <ul class="tabs">
+          <li class="tab col l6"><a href="#generate-tab">Generate</a></li>
+          <li class="divider"></li>
+          <li class="tab col l6"><a href="#verify-tab">Verify</a></li>
+        </ul>
+      </div>
+      <div id="underline"></div>
 
-                  <div class="step-check">
-                    <div class="step-checkbox"></div>
-                  </div>
-
-                  <div class="step-content">
-                    <h4>Choose the file what you want to timestamp</h4>
-
-                    <div class="step-content-container">
-                      <div class="dropzone"></div>
-
-                      <button class="btn">Pick</button>
-                    </div>
-                  </div>
-
-                </li>
-              </ul>
-            </div>
-
-
-            <div class="tab">
-              <h2>Verify</h2>
-
-            </div>
-          </div>
-        </section>
+      <div id="generate-tab" class="col s12">
+        <div class="container">
+          Generate
+        </div>
+      </div>
+      <div id="verify-tab" class="col s12">
+        <div class="container">
+          Test 2
+        </div>
       </div>
 
-    </div>
+    </section>
   </section>
+
+  <script type="text/javascript">
+    (function ($) {
+      $(function () {
+        $('ul.tabs').tabs();
+        $('.indicator').remove();
+      });
+    })(jQuery);
+  </script>
 
 </template>
