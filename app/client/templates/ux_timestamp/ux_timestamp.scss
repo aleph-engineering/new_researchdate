@@ -1,7 +1,20 @@
 /*****************************************************************************/
 /* UxHome: Style */
 /*****************************************************************************/
-.ux-home {
+#ux-home {
+  font-family: "Advent Pro";
+}
+
+.step button {
+  color: white;
+  font-weight: normal;
+  font-size: 1.2em;
+  border-radius: 0.3em;
+  border-width: 0;
+  padding: 0.5em 1.8em;
+  background: #02a349; /* fallback for old browsers */
+  background: -webkit-linear-gradient(bottom, #02a349, #02b449); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /* HEADER */
@@ -20,6 +33,7 @@
 #ux-home nav {
   background: transparent;
   box-shadow: none;
+  text-transform: uppercase;
 }
 
 #underline {
@@ -75,7 +89,9 @@
 
 #ux-home #content-container ul.tabs a {
   height: 70px;
+  text-transform: capitalize;
   line-height: 70px;
+  font-size: 30px;
   border: 1px solid transparent;
   border-bottom: 1px solid #515151;
   border-top: 1px solid #777777;
@@ -91,4 +107,41 @@
   border-bottom: 1px solid white;
   background: transparent;
   color: #333;
+}
+
+/* STEPS */
+.step {
+  border: 1px solid #dddddd;
+  margin: 1.5em 0.8em;
+  padding: 2em;
+}
+
+.step .number {
+  float: none;
+}
+
+.step .number h5 {
+  margin: 0;
+  padding: 0;
+}
+
+.step .number h5 span {
+  font-size: 1.5em;
+}
+
+.step .content-container {
+  margin-top: -2em;
+}
+
+.step .content-container .dropzone {
+  min-height: 5em;
+  float: left;
+  background-color: #dff7ec;
+  border-radius: 0.4em;
+}
+
+.step .content-container #pick-file {
+  margin-top: 1.4em;
+  margin-left: 5em;
+  box-shadow: none;
 }
