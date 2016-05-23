@@ -2,8 +2,49 @@
 /* Timestamp: Style */
 /*****************************************************************************/
 .timestamp {
-  margin-right: 100px;
+
 }
+
+/* STEPS */
+
+.step {
+  border: 1px solid #dddddd;
+  margin: 1.5em 0.8em;
+  padding: 2em;
+}
+
+.step .number {
+  float: none;
+}
+
+.step .number h5 {
+  margin: 0;
+  padding: 0;
+}
+
+.step .number h5 span {
+  font-size: 1.5em;
+}
+
+.step .content-container {
+  margin-top: -2em;
+}
+
+.dropzone {
+  border: 2px dashed #bbb;
+  width: 30em;
+  min-height: 5em;
+  float: left;
+  background-color: #dff7ec;
+  border-radius: 0.4em;
+}
+
+.step .content-container #pick-file {
+  margin-top: 1.4em;
+  margin-left: 5em;
+  box-shadow: none;
+}
+
 
 
 

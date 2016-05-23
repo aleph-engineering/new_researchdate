@@ -1,6 +1,6 @@
-/*****************************************************************************/
-/* UxHome: Style */
-/*****************************************************************************/
+///*****************************************************************************/
+///* UxHome: Style */
+///*****************************************************************************/
 #ux-home {
   font-family: "Advent Pro";
 }
@@ -17,18 +17,18 @@
   background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-/* HEADER */
-
-#ux-home header img {
-  height: 3em;
-  float: left;
-}
-
-#ux-home header {
-  margin: 2em 0;
-}
-
-/* NAVIGATION*/
+///* HEADER */
+//
+//#ux-home header img {
+//  height: 3em;
+//  float: left;
+//}
+//
+//#ux-home header {
+//  margin: 2em 0;
+//}
+//
+///* NAVIGATION*/
 
 #ux-home nav {
   background: transparent;
@@ -66,82 +66,82 @@
   border: 1px solid #333333;
 }
 
-/* TABS CONTAINER*/
-#ux-home #content-container {
-  margin-bottom: -1px;
-}
-
-#ux-home #content-container ul.tabs {
-  color: #333;
-  height: 70px;
-}
-
-#ux-home #content-container ul.tabs li {
-  height: 70px;
-}
-
-#ux-home #content-container ul.tabs li.divider {
-  height: 70px;
-  background: white;
-  border-bottom: 1px solid #cccccc;
-  width: 10px;
-}
-
-#ux-home #content-container ul.tabs a {
-  height: 70px;
-  text-transform: capitalize;
-  line-height: 70px;
-  font-size: 30px;
-  border: 1px solid transparent;
-  border-bottom: 1px solid #515151;
-  border-top: 1px solid #777777;
-  color: whitesmoke;
-  border-radius: 6px 6px 0 0;
-  background: #333333; /* fallback for old browsers */
-  background: -webkit-linear-gradient(bottom, #515151, #777777); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(bottom, #515151, #777777); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-#ux-home #content-container ul.tabs a.active {
-  border: 1px solid #cccccc;
-  border-bottom: 1px solid white;
-  background: transparent;
-  color: #333;
-}
+///* TABS CONTAINER*/
+//#ux-home #content-container {
+//  margin-bottom: -1px;
+//}
+//
+//#ux-home #content-container ul.tabs {
+//  color: #333;
+//  height: 70px;
+//}
+//
+//#ux-home #content-container ul.tabs li {
+//  height: 70px;
+//}
+//
+//#ux-home #content-container ul.tabs li.divider {
+//  height: 70px;
+//  background: white;
+//  border-bottom: 1px solid #cccccc;
+//  width: 10px;
+//}
+//
+//#ux-home #content-container ul.tabs a {
+//  height: 70px;
+//  text-transform: capitalize;
+//  line-height: 70px;
+//  font-size: 30px;
+//  border: 1px solid transparent;
+//  border-bottom: 1px solid #515151;
+//  border-top: 1px solid #777777;
+//  color: whitesmoke;
+//  border-radius: 6px 6px 0 0;
+//  background: #333333; /* fallback for old browsers */
+//  background: -webkit-linear-gradient(bottom, #515151, #777777); /* Chrome 10-25, Safari 5.1-6 */
+//  background: linear-gradient(bottom, #515151, #777777); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//}
+//
+//#ux-home #content-container ul.tabs a.active {
+//  border: 1px solid #cccccc;
+//  border-bottom: 1px solid white;
+//  background: transparent;
+//  color: #333;
+//}
 
 /* STEPS */
-.step {
-  border: 1px solid #dddddd;
-  margin: 1.5em 0.8em;
-  padding: 2em;
-}
+//.step {
+//  border: 1px solid #dddddd;
+//  margin: 1.5em 0.8em;
+//  padding: 2em;
+//}
+//
+//.step .number {
+//  float: none;
+//}
+//
+//.step .number h5 {
+//  margin: 0;
+//  padding: 0;
+//}
+//
+//.step .number h5 span {
+//  font-size: 1.5em;
+//}
+//
+//.step .content-container {
+//  margin-top: -2em;
+//}
+//
+//.step .content-container .dropzone {
+//  min-height: 5em;
+//  float: left;
+//  background-color: #dff7ec;
+//  border-radius: 0.4em;
+//}
 
-.step .number {
-  float: none;
-}
-
-.step .number h5 {
-  margin: 0;
-  padding: 0;
-}
-
-.step .number h5 span {
-  font-size: 1.5em;
-}
-
-.step .content-container {
-  margin-top: -2em;
-}
-
-.step .content-container .dropzone {
-  min-height: 5em;
-  float: left;
-  background-color: #dff7ec;
-  border-radius: 0.4em;
-}
-
-.step .content-container #pick-file {
-  margin-top: 1.4em;
-  margin-left: 5em;
-  box-shadow: none;
-}
+//.step .content-container #pick-file {
+//  margin-top: 1.4em;
+//  margin-left: 5em;
+//  box-shadow: none;
+//}

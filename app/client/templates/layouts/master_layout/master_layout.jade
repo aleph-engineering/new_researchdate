@@ -1,18 +1,28 @@
 template(name='MasterLayout')
+    nav.white(role='navigation')
+        .nav-wrapper.container
+            a#logo-container.brand-logo(href='#')
+                object#front-page-logo.responsive-img(width='170px', type='image/svg+xml', data='/img/logo.svg') Your browser does not support SVG.
+            ul#nav-mobile.right.hide-on-med-and-down
+                li
+                    a(href='#') STAMP YOUR STUFF
+                li
+                    a(href='#') ABOUT US CONTACT
+    div(class='container')
+        +yield
 
-
-    +if isBusy
-        +Loading
-    +else
-        nav(class='light-blue lighten-1' role='navigation')
-            div(class='nav-wrapper container')
-                a(class='brand-logo' href='{{ pathFor "home" }}') ResearchDate
-
-        div(class='container')
-            +yield
-        div(class='ui inverted vertical footer segment')
-        footer(class='page-footer orange')
-            div(class='container')
-                div(class='footer-copyright')
-                    div(class='container') {{i18n 'master_layout.made_by'}}
-                        a(class='orange-text text-lighten-' href='http://aleph.engineering') Aleph Engineering
+    //+if isBusy
+    //    +Loading
+    //+else
+    //    nav(class='light-blue lighten-1' role='navigation')
+    //        div(class='nav-wrapper container')
+    //            a(class='brand-logo' href='{{ pathFor "home" }}') ResearchDate
+    //
+    //    div(class='container')
+    //        +yield
+    //    div(class='ui inverted vertical footer segment')
+    //    footer(class='page-footer orange')
+    //        div(class='container')
+    //            div(class='footer-copyright')
+    //                div(class='container') {{i18n 'master_layout.made_by'}}
+    //                    a(class='orange-text text-lighten-' href='http://aleph.engineering') Aleph Engineering

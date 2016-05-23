@@ -1,8 +1,24 @@
 template(name='Home')
-    div(class="row home")
-        div(class="col m6")
-            +Timestamp
-        div(class="col s4 m6")
-            +Verification
-    div(class="row")
-        +TimestampList
+    section(id="content-container")
+        ul.tabs
+            li.tab.col.l6
+                a(href='#generate-tab') Generate
+            li.divider
+            li.tab.col.l6
+                a(href='#verify-tab') Verify
+        div(id="underline")
+    +Timestamp
+
+    //section(id="content-container")
+    //    ul.tabs
+    //        li.tab.col.l6
+    //            a(href='#generate-tab') Generate
+    //        li.divider
+    //        li.tab.col.l6
+    //            a(href='#verify-tab') Verify
+        #underline
+        +Timestamp
+    //    div(class="col s4 m6")
+    //        +Verification
+    //div(class="row")
+    //    +TimestampList
