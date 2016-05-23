@@ -20,6 +20,7 @@ configure = ->
 
     Router.route '/ux_timestamp',
         where: 'client'
+        layoutTemplate: null
 
 do configure
 
