@@ -4,7 +4,7 @@ digital data, but also it will provide a mechanism to proof that such
 data existed at a certain time.
 
 
-#### How to use it
+#### How to use it as engineer
 
 In order to start using the project there are some requirements to be
 fulfilled.
