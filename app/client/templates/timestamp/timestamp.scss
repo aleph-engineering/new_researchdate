@@ -13,6 +13,11 @@
 }
 
 #content-container {
+  .col {
+    input[type=radio]:checked + label:after {
+      background-color: #02a349;
+    }
+  }
 
   ul.tabs {
     color: #333;
