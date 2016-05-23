@@ -6,9 +6,9 @@ template(name='Timestamp')
                     span 1
                     | ST. STEP
             .check.col.s1.m1.l1
-                | C
+                img.materialboxed(src='/img/check.svg')
             .content-container.col.s10.m10.l10
-                h5 Choose the file you want to timestamp
+                h5 {{i18n 'timestamp.step_1_name'}}
                 +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick files here to upload'
 
                 form(id='artifact-form' method='post' action="{{pathFor 'timestamp'}}")
@@ -20,11 +20,37 @@ template(name='Timestamp')
                     span 2
                     | ND. STEP
             .check.col.s1.m1.l1
-                | C
+                img.materialboxed(src='/img/check.svg')
             .content-container.col.s10.m10.l10
-                h5 Choose the file you want to timestamp
-                +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick files here to upload'
+                h5 {{i18n 'timestamp.step_2_name'}}
+                .col
 
+                    p
+                        input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked)
+                        label(for='free_tsa') https://www.freetsa.org/index_en.php
+                    p
+                        input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')
+                        label(for='tsa_startssl') http://tsa.startssl.com/rfc3161
+                .col
+
+                    p
+                        input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/')
+                        label(for='time_certum') http://time.certum.pl/
+                    p
+                        input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
+                        label(for='zeitstempel') http://zeitstempel.dfn.de/
+
+
+        //.row.step
+        //    .number.col.s1.m1.l1.left
+        //        h5
+        //            span 3
+        //            | RD. STEP
+        //    .check.col.s1.m1.l1
+        //        img.materialboxed(src='/img/check.svg')
+        //    .content-container.col.s10.m10.l10
+        //        h5 {{i18n 'timestamp.step_3_name'}}
+        //        button(type='submit' class='btn' name='timestamp') {{i18n 'timestamp.timestamp_btn'}}
 
 
         //#verify-tab.col.s12

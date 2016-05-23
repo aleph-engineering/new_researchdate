@@ -7,6 +7,13 @@
 
 /* STEPS */
 
+.step button {
+  background: #02a349; /* fallback for old browsers */
+  background: -webkit-linear-gradient(bottom, #02a349, #02b449); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: none
+}
+
 .step {
   border: 1px solid #dddddd;
   margin: 1.5em 0.8em;
@@ -37,12 +44,6 @@
   float: left;
   background-color: #dff7ec;
   border-radius: 0.4em;
-}
-
-.step .content-container #pick-file {
-  margin-top: 1.4em;
-  margin-left: 5em;
-  box-shadow: none;
 }
 
 

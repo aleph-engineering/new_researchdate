@@ -2,10 +2,8 @@
 /* MasterLayout: Style */
 /*****************************************************************************/
 .container {
-  box-shadow: none;
   font-family: "Advent Pro";
   background: transparent;
-  box-shadow: none;
 
   #nav-mobile {
     li {
@@ -13,6 +11,10 @@
         color: black;
       }
     }
+  }
+
+  nav.nav-wrapper {
+    box-shadow: none;
   }
 }
 

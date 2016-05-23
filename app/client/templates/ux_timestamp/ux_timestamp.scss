@@ -1,22 +1,22 @@
 ///*****************************************************************************/
 ///* UxHome: Style */
 ///*****************************************************************************/
-#ux-home {
-  font-family: "Advent Pro";
-}
-
-.step button {
-  color: white;
-  font-weight: normal;
-  font-size: 1.2em;
-  border-radius: 0.3em;
-  border-width: 0;
-  padding: 0.5em 1.8em;
-  background: #02a349; /* fallback for old browsers */
-  background: -webkit-linear-gradient(bottom, #02a349, #02b449); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
+//#ux-home {
+//  font-family: "Advent Pro";
+//}
+//
+//.step button {
+//  color: white;
+//  font-weight: normal;
+//  font-size: 1.2em;
+//  border-radius: 0.3em;
+//  border-width: 0;
+//  padding: 0.5em 1.8em;
+//  background: #02a349; /* fallback for old browsers */
+//  background: -webkit-linear-gradient(bottom, #02a349, #02b449); /* Chrome 10-25, Safari 5.1-6 */
+//  background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//}
+//
 ///* HEADER */
 //
 //#ux-home header img {
@@ -29,42 +29,42 @@
 //}
 //
 ///* NAVIGATION*/
-
-#ux-home nav {
-  background: transparent;
-  box-shadow: none;
-  text-transform: uppercase;
-}
-
-#underline {
-  border-bottom: 1px solid #cccccc;
-  width: 100%;
-  margin-top: -1px;
-  z-index: -1;
-}
-
-#ux-home nav li {
-  float: right;
-}
-
-#ux-home nav li a {
-  font-size: 1.2em;
-  margin: 0 1em;
-  background: transparent;
-  display: inline;
-  color: #333333;
-  padding: 0.5em;
-  border: 0.1em dashed transparent;
-  border-radius: 0.5em;
-}
-
-#ux-home nav li a:hover {
-  border-color: #333333;
-}
-
-#ux-home nav li a.active {
-  border: 1px solid #333333;
-}
+//
+//#ux-home nav {
+//  background: transparent;
+//  box-shadow: none;
+//  text-transform: uppercase;
+//}
+//
+//#underline {
+//  border-bottom: 1px solid #cccccc;
+//  width: 100%;
+//  margin-top: -1px;
+//  z-index: -1;
+//}
+//
+//#ux-home nav li {
+//  float: right;
+//}
+//
+//#ux-home nav li a {
+//  font-size: 1.2em;
+//  margin: 0 1em;
+//  background: transparent;
+//  display: inline;
+//  color: #333333;
+//  padding: 0.5em;
+//  border: 0.1em dashed transparent;
+//  border-radius: 0.5em;
+//}
+//
+//#ux-home nav li a:hover {
+//  border-color: #333333;
+//}
+//
+//#ux-home nav li a.active {
+//  border: 1px solid #333333;
+//}
 
 ///* TABS CONTAINER*/
 //#ux-home #content-container {
