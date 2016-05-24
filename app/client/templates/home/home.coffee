@@ -6,5 +6,7 @@ Template.Home.helpers {}
 Template.Home.onCreated ->
 
 Template.Home.onRendered ->
+    $('ul.tabs').tabs();
+    $('.indicator').remove();
 
 Template.Home.onDestroyed ->
