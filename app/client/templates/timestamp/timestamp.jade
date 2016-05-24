@@ -1,5 +1,5 @@
 template(name='Timestamp')
-    #generate-tab.col.s12
+    #generate-tab.col.s12.container
         .row.step
             .number.col.s1.m1.l1.left
                 h5
@@ -27,18 +27,18 @@ template(name='Timestamp')
 
                     p
                         input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked)
-                        label(for='free_tsa') https://www.freetsa.org/index_en.php
+                        label(for='free_tsa') FreeTSA
                     p
                         input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')
-                        label(for='tsa_startssl') http://tsa.startssl.com/rfc3161
+                        label(for='tsa_startssl') Startssl
                 .col
 
                     p
                         input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/')
-                        label(for='time_certum') http://time.certum.pl/
+                        label(for='time_certum') Time.Certum
                     p
                         input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
-                        label(for='zeitstempel') http://zeitstempel.dfn.de/
+                        label(for='zeitstempel') Zeitstempel
 
 
         .row.step
