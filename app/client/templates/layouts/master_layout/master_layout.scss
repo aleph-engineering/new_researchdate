@@ -1,6 +1,16 @@
 /*****************************************************************************/
 /* MasterLayout: Style */
 /*****************************************************************************/
+nav {
+  box-shadow: none;
+  height: 7em;
+  line-height: 7em;
+}
+
+header#header {
+  height: 7em;
+}
+
 .container {
   font-family: "Advent Pro";
   background: transparent;
@@ -15,6 +25,11 @@
 
   nav.nav-wrapper {
     box-shadow: none;
+
+    a#logo-container {
+      line-height: 4em;
+      width: 4em;
+      z-index: 10;
+    }
   }
 }
-
