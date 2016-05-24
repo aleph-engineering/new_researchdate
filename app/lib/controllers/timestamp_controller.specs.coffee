@@ -16,81 +16,40 @@ describe 'TimestampController Module', ->
                 next: ->
 
 
-        describe 'onRun method', ->
-            it 'is defined', ->
-                expect(@timestampController.onRun).not.to.be.undefined
-
-
-            it 'forwards execution to context\'s next function', ->
-                @timestampController.onRun.call @fakeContext
-                assert @fakeContext.next.calledOnce, 'Call to context\'s next function was not done!'
-
-
-        describe 'onRerun method', ->
-            it 'is defined', ->
-                expect(@timestampController.onRerun).not.to.be.undefined
-
-
-            it 'forwards execution to context\'s "next" function', ->
-                @timestampController.onRerun.call @fakeContext
-                assert @fakeContext.next.calledOnce, 'Call to context\'s "next" function was not done!'
-
-
-        describe 'onBeforeAction method', ->
-            it 'is defined', ->
-                expect(@timestampController.onBeforeAction).not.to.be.undefined
-
-
-            it 'if request is POST, it forwards execution to context\'s "next" function', ->
-                fakeContext =
-                    request:
-                        method: 'POST'
-                    next: sinon.spy {next: ->}, 'next'
-
-                @timestampController.onBeforeAction.call fakeContext
-
-                assert fakeContext.next.calledOnce, 'Call to context\'s "next" function was not done!'
-
-
-            it 'if request is not POST, it ends response with 403 status code', ->
-                fakeContext =
-                    request:
-                        method: 'GET'
-                    response:
-                        statusCode: undefined
-                        end: sinon.spy {end: ->}, 'end'
-
-                @timestampController.onBeforeAction.call fakeContext
-
-                expect(fakeContext.response.statusCode).to.be.equal 403
-                assert fakeContext.response.end.calledOnce, 'Request was not ended'
-                assert(
-                    fakeContext.response.end.calledWithExactly 'Not allowed'
-                    'Request was not ended with correct message.'
-                )
-
-
         describe 'action method', ->
             beforeEach ->
                 @meteorCallFn = sinon.stub Meteor, 'call'
                 @expectedHash = '12311'
+
                 @fakeContext =
                     request:
                         body:
                             hash: @expectedHash
+                        method: 'POST'
                     response:
                         end: sinon.spy {end: (arg) -> 'good result' if arg instanceof Buffer}, 'end'
                         writeHead: sinon.stub {writeHead: ->}, 'writeHead'
+                    render: ->
+                @render = sinon.spy @fakeContext, 'render'
 
             afterEach ->
                 do @meteorCallFn.restore
+                do @render.restore
 
 
             it 'is defined', ->
                 expect(@timestampController.action).not.to.be.undefined
 
 
-            it "calls Meteor.call('#{SERVER_TIMESTAMP}', ...) with the correct arguments", ->
+            it "calls context's render method in case request method is not \'POST\'", ->
+                @fakeContext.request.method = 'GET'
+
+                @timestampController.action.call @fakeContext
+
+                assert @render.calledOnce, 'Ensure to call \'this.render()\' when the request method is not \'POST\''
+
+
+            it "calls Meteor.call('#{SERVER_TIMESTAMP}', ...) with the correct arguments if request method is \'POST\'", ->
                 @timestampController.action.call @fakeContext
 
                 assert @meteorCallFn.calledOnce, "Never was made the actual Meteor.call('#{SERVER_TIMESTAMP}', ...)"

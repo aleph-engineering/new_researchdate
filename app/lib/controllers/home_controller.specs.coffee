@@ -20,11 +20,14 @@ describe 'HomeController', ->
             method.apply @contextMock
             assert nextMethod.calledOnce
 
+
     afterEach ->
         do @meteorSubscribeMethod.restore if Meteor.isClient
 
+
     it 'should be defined', ->
         expect(HomeController).to.not.be.undefined
+
 
     # This should only run in the client, not available below Meteor functions in the server
     if Meteor.isClient
@@ -33,14 +36,6 @@ describe 'HomeController', ->
             assert @meteorSubscribeMethod.calledOnce
             assert @meteorSubscribeMethod.calledWith 'latestTimestamps'
 
-        it 'onRun calls next function in request handling pipeline', ->
-            @checkHomeControllerMethodCallsNextMethod @homeController.onRun
-
-        it 'onRerun calls next function in request handling pipeline', ->
-            @checkHomeControllerMethodCallsNextMethod @homeController.onRerun
-
-        it 'onBeforeAction calls next function in request handling pipeline', ->
-            @checkHomeControllerMethodCallsNextMethod @homeController.onBeforeAction
 
         it 'action calls next function in request handling pipeline', ->
             @checkHomeControllerMethodCallsNextMethod @homeController.action, 'render'
