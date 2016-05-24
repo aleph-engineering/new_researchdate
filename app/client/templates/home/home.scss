@@ -4,53 +4,5 @@
 .home {
 }
 
-#underline {
-  border-bottom: 1px solid #cccccc;
-  width: 100%;
-  margin-top: -1px;
-  z-index: -1;
-}
-
 ///* TABS CONTAINER*/
-#content-container {
-  margin-bottom: -1px;
 
-  ul.tabs {
-    color: #333;
-    height: 70px;
-
-    li {
-      height: 70px;
-    }
-
-    li.divider {
-      height: 70px;
-      background: white;
-      border-bottom: 1px solid #cccccc;
-      width: 10px;
-    }
-
-    a {
-      height: 70px;
-      text-transform: capitalize;
-      line-height: 70px;
-      font-size: 30px;
-      border: 1px solid transparent;
-      border-bottom: 1px solid #515151;
-      border-top: 1px solid #777777;
-      color: whitesmoke;
-      border-radius: 6px 6px 0 0;
-      background: #333333; /* fallback for old browsers */
-      background: -webkit-linear-gradient(bottom, #515151, #777777); /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(bottom, #515151, #777777); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    }
-
-    a.active {
-      border: 1px solid #cccccc;
-      border-bottom: 1px solid white;
-      background: transparent;
-      color: #333;
-    }
-  }
-
-}

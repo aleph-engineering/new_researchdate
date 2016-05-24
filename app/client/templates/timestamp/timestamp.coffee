@@ -42,6 +42,9 @@ Template.Timestamp.helpers {
 Template.Timestamp.onCreated ->
 
 Template.Timestamp.onRendered ->
+    $('ul.tabs').tabs();
+    $('.indicator').remove();
+
     Dropzone.forElement('#original-artifact').on 'addedfile', (file)->
         Session.set 'artifactHash', ''
         Session.set 'artifactFilename', ''

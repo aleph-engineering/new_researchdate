@@ -1,4 +1,14 @@
 template(name='Timestamp')
+    div.container
+        section(id="content-container")
+            ul.tabs
+                li.tab.col.l6
+                    a(href='#generate-tab') Generate
+                li.divider
+                li.tab.col.l6
+                    a(href='#verify-tab') Verify
+    div#underline
+
     #generate-tab.col.s12.container
         .row.step
             .number.col.s1.m1.l1.left
@@ -11,7 +21,7 @@ template(name='Timestamp')
                 h5 {{i18n 'timestamp.step_1_name'}}
                 +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick files here to upload'
 
-                form(id='artifact-form' method='post' action="{{pathFor 'timestamp'}}")
+                form(id='artifact-form' method='post' action="{{pathFor 'Timestamp'}}")
                     input(type='text' id='hash' name='hash' value='#{artifactHash}' hidden)
 
         .row.step
