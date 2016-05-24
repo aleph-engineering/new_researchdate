@@ -2,8 +2,50 @@
 /* Timestamp: Style */
 /*****************************************************************************/
 .timestamp {
-  margin-right: 100px;
+
 }
+
+/* STEPS */
+
+.step button {
+  background: #02a349; /* fallback for old browsers */
+  background: -webkit-linear-gradient(bottom, #02a349, #02b449); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: none
+}
+
+.step {
+  border: 1px solid #dddddd;
+  margin: 1.5em 0.8em;
+  padding: 2em;
+}
+
+.step .number {
+  float: none;
+}
+
+.step .number h5 {
+  margin: 0;
+  padding: 0;
+}
+
+.step .number h5 span {
+  font-size: 1.5em;
+}
+
+.step .content-container {
+  margin-top: -2em;
+}
+
+.dropzone {
+  border: 2px dashed #bbb;
+  width: 30em;
+  min-height: 5em;
+  float: left;
+  background-color: #dff7ec;
+  border-radius: 0.4em;
+}
+
 
 
 

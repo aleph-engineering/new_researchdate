@@ -10,7 +10,7 @@ makePublications = ->
 # This published the latest timestamps generated in te system
     Meteor.publish(
         'latestTimestamps',
-        -> Timestamps.find {}, {limit: SystemParameters.TIMESTAMP_LIST_COUNT, sort: {creationDate: -1}}
+        -> Timestamps.find {}
     )
 
 

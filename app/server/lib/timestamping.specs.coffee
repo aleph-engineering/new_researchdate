@@ -48,11 +48,12 @@ describe 'Timestamping Module', ->
 
             it 'inserts a new Timestamp record with correct information', ->
                 hash = "a4f56c8bba9" # arrange
+                tsaUrl = 'https://freetsa.org/'
                 date = new Date().getTime()
                 clock = sinon.useFakeTimers date
 
                 # act
-                @timestampGenerator._saveTimestampRecord hash
+                @timestampGenerator._saveTimestampRecord hash, tsaUrl
 
                 # assert
                 assert @timestampInsertMethod.calledOnce
@@ -142,6 +143,7 @@ describe 'Timestamping Module', ->
             it 'given hash, it returns the generated timestamp in TSA response body', ->
                 hash = 'u983nxuxusw30w3'
                 expectedResult = 190
+                tsaUrl = 'https://freetsa.org/tsr'
 
                 generatedBuffer = 'b'
                 genTimestampRequestMethod = @stubGenerateTimestampRequestMethod hash, generatedBuffer
@@ -155,7 +157,7 @@ describe 'Timestamping Module', ->
                 saveTimestampRecord = sinon.stub @timestampGenerator, '_saveTimestampRecord'
 
                 # act
-                result = @timestampGenerator.timestamp hash
+                result = @timestampGenerator.timestamp hash, tsaUrl
 
                 expect(result).to.equal expectedResult
                 do genTimestampRequestMethod.restore

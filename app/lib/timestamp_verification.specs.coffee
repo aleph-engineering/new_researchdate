@@ -11,6 +11,7 @@ describe 'TimestampVerification module', ->
     describe 'TimestampVerifier class', ->
         beforeEach ->
             @TimestampVerifier = tsv.TimestampVerifier
+            @timestampVerifierStub = sinon.createStubInstance @TimestampVerifier
 
 
         it 'is defined', ->
@@ -19,19 +20,23 @@ describe 'TimestampVerification module', ->
 
         describe '_getSignature', ->
             it 'is defined', ->
-                expect(new @TimestampVerifier()._getSignature).not.be.undefined
+                expect(@timestampVerifierStub._getSignature).not.to.be.undefined
 
 
-            it 'returns correct object', ->
-                timestampVerifier = new @TimestampVerifier()
-                actualSignature = timestampVerifier._getSignature()
+            it 'returns \'SHA1withRSA\' correct object when then hashing algorithm is SHA1', ->
+                verifier = sinon.createStubInstance(@TimestampVerifier);
+                verifier.responseWrapper =
+                    getHashAlgorithmForVerification: -> 'SHA1withRSA'
+
+                actualSignature = @TimestampVerifier.prototype._getSignature.call verifier
+
                 expect(actualSignature).to.be.instanceOf rsaSign.Signature
                 expect(actualSignature.algName).to.be.equal 'SHA1withRSA'
 
 
         describe 'verify method', ->
             it 'is defined', ->
-                expect(new @TimestampVerifier('a', 'b').verify).not.to.be.undefined
+                expect(@timestampVerifierStub.verify).not.to.be.undefined
 
 
             it 'artifact\'s hash and TSA\'s response hash do not match, returns false', ->

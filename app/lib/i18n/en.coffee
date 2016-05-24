@@ -25,12 +25,15 @@ i18n.map 'en', verification:
 i18n.map 'en', timestamp:
     title: 'Timestamp'
     file: 'File'
-    placeholder: 'Choose the file you want to timestamp'
     hash: 'SHA256 Hash'
-    timestamp_btn: 'Timestamp'
+    timestamp_btn: 'Stamp it!'
     tsr_comment: "This zip is used to verify the timestamp of your original file. It's very important that you don't lose this! (ResearchDate.net)"
+    step_1_name: 'Choose the file you want to timestamp.'
+    step_2_name: 'Select the TSA. (?)'
+    step_3_name: 'Time stamp.'
 
 i18n.map 'en', timestampList:
     hash_result: 'Hash Result'
     creation_date: 'Creation Date'
     server_used: 'Server used'
+    no_results: 'No results found!'

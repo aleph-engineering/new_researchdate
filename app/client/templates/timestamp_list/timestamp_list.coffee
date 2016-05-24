@@ -1,9 +1,9 @@
-queries = require '../../lib/queries'
-
+index = require '../../../lib/collections/timestamps'
 
 Template.TimestampList.helpers
-    'latestTimestamps': ->
-        ###
-            Returns the latest timestamps there were recently made in the system.
-        ###
-        do queries.getLatestTimestamps
+    timestampIndex: () => index.TimestampIndex
+    inputAttributes: ->
+        {
+        'name': 'search',
+        'type': 'search'
+        }

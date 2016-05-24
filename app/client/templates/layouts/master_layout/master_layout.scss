@@ -1,0 +1,20 @@
+/*****************************************************************************/
+/* MasterLayout: Style */
+/*****************************************************************************/
+.container {
+  font-family: "Advent Pro";
+  background: transparent;
+
+  #nav-mobile {
+    li {
+      a {
+        color: black;
+      }
+    }
+  }
+
+  nav.nav-wrapper {
+    box-shadow: none;
+  }
+}
+

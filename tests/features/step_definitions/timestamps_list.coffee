@@ -7,23 +7,28 @@ module.exports = ->
             {hash: '67yut45uioo6ytgfg', creationDate: '6/1/2016', server: 'https://freetsa.org/'}
             {hash: '67yut456lhgytgfg', creationDate: '7/1/2016', server: 'https://freetsa.org/'}
             {hash: '67yut456ythrrgfg', creationDate: '8/1/2016', server: 'https://freetsa.org/'}
-            {hash: '67yut456ythrrgfg', creationDate: '9/1/2016', server: 'https://freetsa.org/'}
-            {hash: '67yut456ythrrgfg', creationDate: '10/1/2016', server: 'https://freetsa.org/'}
+            { hash: '67yut456ythrrgfffg', creationDate: '9/1/2016', server: 'https://freetsa.org/' }
+            { hash: '67yut456ytqw34hrrgfg', creationDate: '10/1/2016', server: 'https://freetsa.org/' }
+            { hash: '67yut456yjuoothrrgfg', creationDate: '1/1/2016', server: 'https://freetsa.org/' }
+            { hash: '67yut456yth56dfrrgfg', creationDate: '2/1/2016', server: 'https://freetsa.org/' }
+            { hash: '67yut456ythde5rrgfg', creationDate: '3/1/2016', server: 'https://freetsa.org/' }
+            { hash: '67yut456ytdfhrrgfg', creationDate: '4/1/2016', server: 'https://freetsa.org/' }
         ]
         server.execute(((timestamps) -> Timestamps.insert(timestamp) for timestamp in timestamps), data)
 
     @Given /^not exist timestamps generated$/, ->
         server.execute(() -> Timestamps.remove({}))
 
-    @Then /^I can see 4 timestamps in the timestamps list$/, ->
+    @Then /^I can see 10 timestamps in the timestamps list$/, ->
         timestamps = browser.getText 'table#timestamp-list tbody tr td.hash-cell'
-        expect(timestamps.length).toBe 4
+        expect(timestamps.length).toBe 10
 
     @Then /^I can see there is not timestamps in the timestamps list$/, ->
         cantTr = browser.execute((-> $('#timestamp-list tbody tr')))
         expect(cantTr.value.length).toBe 0
 
     @Then /^they are ordered in descendant by date$/, ->
+        browser.pause 2000
         TIMESTAMP_LIST_COUNT = require('../../../app/server/lib/system_parameters').TIMESTAMP_LIST_COUNT
 
         latestTimestamps = server.execute((count) ->
