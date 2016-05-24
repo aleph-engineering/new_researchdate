@@ -9,27 +9,52 @@ nav {
 
 header#header {
   height: 7em;
-}
+  margin-bottom: 3em;
 
-.container {
-  font-family: "Advent Pro";
-  background: transparent;
+  .container {
+    background: transparent;
 
-  #nav-mobile {
-    li {
-      a {
-        color: black;
+    #nav-mobile {
+      li {
+        a {
+          color: black;
+        }
       }
     }
   }
 
-  nav.nav-wrapper {
-    box-shadow: none;
+  a {
+    padding: 0.5em 0;
 
-    a#logo-container {
-      line-height: 4em;
-      width: 4em;
-      z-index: 10;
+    img {
+      width: 10em;
+    }
+  }
+
+  nav {
+    li {
+      a {
+        font-size: 1.2em;
+        margin: 0 1em;
+        background: transparent;
+        display: inline;
+        color: #333333;
+        padding: 0.5em;
+        border: 0.1em dashed transparent;
+        border-radius: 0.5em;
+      }
+
+      a:hover {
+        border-color: #333333;
+      }
+
+      a.active {
+        border: 0.1em solid #333333;
+      }
+
+      a.active:hover {
+        border: 0.1em solid #333333;
+      }
     }
   }
 }

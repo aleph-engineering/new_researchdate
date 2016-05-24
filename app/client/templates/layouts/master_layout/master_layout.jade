@@ -3,10 +3,10 @@ template(name='MasterLayout')
         nav.white(role='navigation')
             .nav-wrapper
                 a#logo-container.brand-logo(href="{{ pathFor 'home' }}")
-                    object#front-page-logo.responsive-img(width='270px', type='image/svg+xml', data='/img/logo.svg') Your browser does not support SVG.
+                    img.responsive-img(src="/img/logo.svg")
                 ul#nav-mobile.right.hide-on-med-and-down
                     li
-                        a(href="{{ pathFor 'Timestamp' }}") STAMP YOUR STUFF
+                        a(id="timestamp-page-link" href="{{ pathFor 'Timestamp' }}") STAMP YOUR STUFF
                     li
                         a(href='#') ABOUT US CONTACT
     +yield
