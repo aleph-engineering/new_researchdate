@@ -4,5 +4,3 @@ Template.MasterLayout.helpers {
   isBusy: ->
     isBusy.get()
 }
-
-Template.MasterLayout.events {}
