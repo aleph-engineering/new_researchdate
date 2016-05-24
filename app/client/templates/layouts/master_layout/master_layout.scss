@@ -1,60 +1,138 @@
 /*****************************************************************************/
 /* MasterLayout: Style */
 /*****************************************************************************/
+@import "../../../stylesheets/main";
+
 nav {
   box-shadow: none;
-  height: 7em;
-  line-height: 7em;
+
+  li {
+    a {
+      font-size: 1.2em;
+      margin: 0 1em;
+      background: transparent;
+      display: inline;
+      color: #333333;
+      padding: 0.5em;
+      border: 0.1em dashed transparent;
+      border-radius: 0.5em;
+    }
+
+    a:last-child {
+      margin-right: 0;
+    }
+
+    a:hover {
+      border-color: #333333;
+      background: transparent;
+    }
+
+    a.active {
+      border: 0.1em solid #333333;
+    }
+
+    a.active:hover {
+      border: 0.1em solid #333333;
+      background: transparent;
+    }
+  }
 }
 
-header#header {
-  height: 7em;
-  margin-bottom: 3em;
+a#mobile-nav-icon {
+  display: none;
+}
 
-  .container {
-    background: transparent;
+a img {
+  vertical-align: middle;
+}
 
-    #nav-mobile {
+@media only screen and (min-width: $big-screen-min-width) {
+  nav {
+    height: 7em;
+    line-height: 7em;
+
+    ul {
       li {
-        a {
-          color: black;
-        }
+        padding-top: 0.2em;
       }
     }
   }
 
-  a {
-    padding: 0.5em 0;
+  header#header {
+    height: 6em;
+    margin-bottom: 3em;
 
+    a {
+      img {
+        width: 10em;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $middle-screen-min-width) and (max-width: $middle-screen-max-width) {
+  header#header {
+    height: 6em;
+  }
+
+  a {
     img {
-      width: 10em;
+      width: 8em;
     }
   }
 
   nav {
-    li {
-      a {
-        font-size: 1.2em;
-        margin: 0 1em;
-        background: transparent;
-        display: inline;
-        color: #333333;
-        padding: 0.5em;
-        border: 0.1em dashed transparent;
-        border-radius: 0.5em;
+    ul {
+      li {
+        padding-top: 0.3em;
       }
+    }
+  }
+}
 
-      a:hover {
-        border-color: #333333;
-      }
+@media only screen and (min-width: $small-screen-min-width) and (max-width: $small-screen-max-width) {
+  header#header {
+    height: 6em;
 
-      a.active {
-        border: 0.1em solid #333333;
-      }
+    ul#normal-nav {
+      display: none;
+    }
 
-      a.active:hover {
-        border: 0.1em solid #333333;
+    a#mobile-nav-icon {
+      display: block;
+      margin-top: 0.2em;
+      margin-right: 2em;
+    }
+  }
+
+  a {
+    img {
+      width: 8em;
+    }
+  }
+
+  nav {
+    ul {
+      li {
+        padding-top: 0.3em;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: $mobile-screen-max-width) {
+  header#header {
+    height: 3em;
+
+    a {
+      img {
+        width: 6em;
+        margin-top: 0.6em;
+      }
+    }
+
+    #mobile-nav-icon {
+      margin-right: 2em;
     }
   }
 }

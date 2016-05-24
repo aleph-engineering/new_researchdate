@@ -2,9 +2,18 @@ template(name='MasterLayout')
     header#header.container
         nav.white(role='navigation')
             .nav-wrapper
-                a#logo-container.brand-logo(href="{{ pathFor 'home' }}")
+                a#logo-container.brand-logo.left(href="{{ pathFor 'home' }}")
                     img.responsive-img(src="/img/logo.svg")
-                ul#nav-mobile.right.hide-on-med-and-down
+                a#mobile-nav-icon.right.button-collapse(href="#", data-activates="mobile-nav")
+                    i.material-icons(class="grey-text text-darken-5") menu
+
+                ul#normal-nav.right.hide-on-down
+                    li
+                        a(id="timestamp-page-link" href="{{ pathFor 'Timestamp' }}") STAMP YOUR STUFF
+                    li
+                        a(href='#') ABOUT US CONTACT
+
+                ul#mobile-nav.side-nav
                     li
                         a(id="timestamp-page-link" href="{{ pathFor 'Timestamp' }}") STAMP YOUR STUFF
                     li

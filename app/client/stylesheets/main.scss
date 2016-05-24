@@ -1,8 +1,22 @@
 /*****************************************************************************/
 /* main: Style */
 /*****************************************************************************/
+
+// Variables
+$big-screen-min-width: 768px;
+
+$middle-screen-max-width: 767px;
+$middle-screen-min-width: 681px;
+
+$small-screen-max-width: 680px;
+$small-screen-min-width: 400px;
+
+$mobile-screen-max-width: 399px;
+
+
 html {
   font-family: "Advent Pro";
+  min-width: 400px;
 }
 
 
@@ -12,4 +26,10 @@ html {
 .error {
   border: 2px dashed #F34141;
   color: #cc0000;
+}
+
+@media only screen and (max-width: $middle-screen-max-width) {
+  .container {
+    width: 100%;
+  }
 }
