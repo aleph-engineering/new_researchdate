@@ -42,8 +42,10 @@ Template.Timestamp.helpers {
 Template.Timestamp.onCreated ->
 
 Template.Timestamp.onRendered ->
-    $('ul.tabs').tabs();
-    $('.indicator').remove();
+    $('#timestamp-page-link').addClass 'active'
+
+    do $('ul.tabs').tabs;
+    do $('.indicator').remove;
 
     Dropzone.forElement('#original-artifact').on 'addedfile', (file)->
         Session.set 'artifactHash', ''
@@ -66,3 +68,4 @@ Template.Timestamp.onRendered ->
 
 
 Template.Timestamp.onDestroyed ->
+    $('#timestamp-page-link').removeClass 'active'
