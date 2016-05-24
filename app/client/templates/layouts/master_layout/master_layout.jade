@@ -6,7 +6,7 @@ template(name='MasterLayout')
                     object#front-page-logo.responsive-img(width='270px', type='image/svg+xml', data='/img/logo.svg') Your browser does not support SVG.
                 ul#nav-mobile.right.hide-on-med-and-down
                     li
-                        a(href='#') STAMP YOUR STUFF
+                        a(href="{{ pathFor 'Timestamp' }}") STAMP YOUR STUFF
                     li
                         a(href='#') ABOUT US CONTACT
     +yield
