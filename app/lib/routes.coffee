@@ -14,9 +14,9 @@ configure = ->
 
     # This one leads is to the timestamping action
     Router.route '/timestamp',
-        name: 'timestamp'
+        name: 'Timestamp'
         controller: 'TimestampController'
-        where: 'server'
+
 
 do configure
 
