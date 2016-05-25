@@ -7,7 +7,7 @@ configure = ->
 
     # This is the home route, the one leading to the home page
     Router.route '/',
-        name: 'home'
+        name: 'Home'
         controller: 'HomeController'
         where: 'client'
 

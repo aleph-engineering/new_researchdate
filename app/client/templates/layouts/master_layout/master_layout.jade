@@ -2,7 +2,7 @@ template(name='MasterLayout')
     header#header.container
         nav.white(role='navigation')
             .nav-wrapper
-                a#logo-container.brand-logo.left(href="{{ pathFor 'home' }}")
+                a#logo-container.brand-logo.left(href="{{ pathFor 'Home' }}")
                     img.responsive-img(src="/img/logo.svg")
                 a#mobile-nav-icon.right.button-collapse(href="#", data-activates="mobile-nav")
                     i.material-icons(class="grey-text text-darken-5") menu
@@ -14,6 +14,8 @@ template(name='MasterLayout')
                         a(href='#') ABOUT US CONTACT
 
                 ul#mobile-nav.side-nav
+                    li
+                        a(href="{{ pathFor 'Home' }}") Home
                     li
                         a(id="timestamp-page-link" href="{{ pathFor 'Timestamp' }}") STAMP YOUR STUFF
                     li

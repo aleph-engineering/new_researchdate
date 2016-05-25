@@ -27,7 +27,7 @@ describe 'Routes module', ->
 
     it 'sets up the home controller route', ->
         assert(
-            @routerRoute.calledWithExactly '/', name: 'home', controller: 'HomeController', where: 'client'
+            @routerRoute.calledWithExactly '/', name: 'Home', controller: 'HomeController', where: 'client'
             'Was not configured the home controller route'
         )
 
