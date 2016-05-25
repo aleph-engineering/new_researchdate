@@ -30,19 +30,19 @@ template(name='Timestamp')
                     img.materialboxed(src='/img/check.svg')
                 .content-container.col
                     h5 {{i18n 'timestamp.step_2_name'}}
-                    .col.s6.m4.l4
+                    .col.s6.m4.l3
                         p
                             input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked)
                             label(for='free_tsa') FreeTSA
-                    .col.s6.m4.l4
+                    .col.s6.m4.l3
                         p
                             input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')
                             label(for='tsa_startssl') Startssl
-                    .col.s6.m4.l4
+                    .col.s6.m4.l3
                         p
                             input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/')
                             label(for='time_certum') Time.Certum
-                    .col.s6.m4.l4
+                    .col.s6.m4.l3
                         p
                             input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
                             label(for='zeitstempel') Zeitstempel
