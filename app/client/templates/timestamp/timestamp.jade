@@ -21,7 +21,7 @@ template(name='Timestamp')
                 h5 {{i18n 'timestamp.step_1_name'}}
                 +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick files here to upload'
         .row.step
-            form(id='artifact-form' method='post' action="{{pathFor 'timestamp'}}")
+            form(id='artifact-form' method='post' action="{{pathFor 'Timestamp'}}")
                 .number.col.s2.m2.l2.left
                     h5
                         span 2
@@ -48,32 +48,29 @@ template(name='Timestamp')
                             label(for='zeitstempel') Zeitstempel
 
         .row.step
-            .number.col.s1.m1.l1.left
+            .number.col.s2.m2.l2.left
                 h5
                     span 3
                     | RD. STEP
-            .check.col.s1.m1.l1
+            .check.col.s2.m2.l2
                 img.materialboxed(src='/img/check.svg')
-            .content-container.col.s10.m10.l0
+            .content-container.col
                 h5 {{i18n 'timestamp.step_3_name'}}
-                .col.s5.m5.l5
-                    input(id='save' type='save' placeholder='Route.../')
-                .col.s5.m5.l5
-                button(type='submit' class='btn' name='timestamp') {{i18n 'timestamp.save_btn'}}
+                input.col.s8.m8.l8(id='save' type='save' placeholder='Route.../')
+                button.col.s3.m3.l3.push-s1.push-m1.push-l1(type='submit' class='btn' name='timestamp') {{i18n 'timestamp.save_btn'}}
 
         .row.step
-            .number.col.s1.m1.l1.left
+            .number.col.s2.m2.l2.left
                 h5
                     span 4
                     | TH. STEP
-            .check.col.s1.m1.l1
+            .check.col.s2.m2.l2
                 img.materialboxed(src='/img/check.svg')
-            .content-container.col.s10.m10.l10
+            .content-container.col
                 h5 {{i18n 'timestamp.step_4_name'}}
-                .col.s3.m3.l3
-                    button(type='submit' class='btn' name='timestamp') {{i18n 'timestamp.submit_btn'}}
-                .col.s7.m7.l7.progress
-                    div(class='indeterminate')
+                button.col.s3.m3.l3(type='submit' class='btn' name='timestamp') {{i18n 'timestamp.submit_btn'}}
+                div.col.s8.m8.l8.progress.push-s1.push-m1.push-l1
+                    .indeterminate
 
         //#verify-tab.col.s12
         //    .container

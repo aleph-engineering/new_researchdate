@@ -95,9 +95,14 @@
   border: 2px dashed #bbb;
   width: 100%;
   min-height: 0.1em;
+  height: 60px;
   float: left;
   background-color: #dff7ec;
   border-radius: 0.4em;
+}
+
+.step .dz-message {
+  margin: 0;
 }
 
 .content-container {
@@ -117,6 +122,13 @@
   .progress {
     height: 36px;
     margin: 0;
+  }
+}
+
+#generate-tab {
+  input[type="save"] {
+    border-radius: 4px;
+    border: 1px solid #6a6a6a;
   }
 }
 
