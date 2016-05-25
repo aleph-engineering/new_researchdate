@@ -9,7 +9,7 @@ template(name='Timestamp')
                     a(href='#verify-tab') Verify
     div#underline.col.s12.m12.l12
 
-    #generate-tab.col.s12
+    #generate-tab.col.s12.container
         .col
             .row.step
                 .number.col.s2.m2.l2.left
@@ -35,20 +35,20 @@ template(name='Timestamp')
                             h5 {{i18n 'timestamp.step_2_name'}}
                             .col
 
-                    p
-                        input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked)
-                        label(for='free_tsa') FreeTSA
-                    p
-                        input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')
-                        label(for='tsa_startssl') Startssl
-                .col
+                                p
+                                    input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked)
+                                    label(for='free_tsa') FreeTSA
+                                p
+                                    input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')
+                                    label(for='tsa_startssl') Startssl
+                            .col
 
-                    p
-                        input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/')
-                        label(for='time_certum') Time.Certum
-                    p
-                        input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
-                        label(for='zeitstempel') Zeitstempel
+                                p
+                                    input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/')
+                                    label(for='time_certum') Time.Certum
+                                p
+                                    input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
+                                    label(for='zeitstempel') Zeitstempel
 
                     .row.step
                         .number.col.s1.m1.l1.left
