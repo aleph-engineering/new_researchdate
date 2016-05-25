@@ -28,21 +28,21 @@ template(name='Timestamp')
                         | ND. STEP
                 .check.col.s2.m2.l2
                     img.materialboxed(src='/img/check.svg')
-                .content-container.col.s10.m10.l10
+                .content-container.col
                     h5 {{i18n 'timestamp.step_2_name'}}
-                    .col
-
+                    .col.s6.m4.l4
                         p
                             input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked)
                             label(for='free_tsa') FreeTSA
+                    .col.s6.m4.l4
                         p
                             input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')
                             label(for='tsa_startssl') Startssl
-                    .col
-
+                    .col.s6.m4.l4
                         p
                             input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/')
                             label(for='time_certum') Time.Certum
+                    .col.s6.m4.l4
                         p
                             input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
                             label(for='zeitstempel') Zeitstempel
