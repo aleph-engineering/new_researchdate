@@ -40,6 +40,10 @@ header#header {
   }
 }
 
+section#page-content {
+  min-height: 700px;
+}
+
 a#mobile-nav-icon {
   display: none;
 }
@@ -145,5 +149,6 @@ a img {
 
 footer.page-footer {
   background-color: #00ac77;
+  min-height: 150px;
 }
 
