@@ -3,22 +3,21 @@
 /*****************************************************************************/
 @import "../../stylesheets/main";
 
-
 .timestamp {
 }
 
 #underline {
   border-bottom: 1px solid #cccccc;
   width: 100%;
-  margin-top: -1px;
   z-index: -1;
 }
 
 #content-container {
-  margin-bottom: -1px;
 
   ul.tabs {
     color: #333;
+    font-size: 14px;
+    margin-bottom: -1px;
 
     li.divider {
       background: white;
@@ -124,8 +123,21 @@
     a {
       height: 60px;
       line-height: 60px;
-      font-size: 24px;
+      font-size: 25px;
       border-radius: 4px 4px 0 0;
+    }
+  }
+}
+
+@media only screen and (max-width: $small-screen-max-width) {
+  ul.tabs {
+
+    li.divider {
+      height: 48px;
+    }
+
+    a {
+      font-size: 25px;
     }
   }
 }
