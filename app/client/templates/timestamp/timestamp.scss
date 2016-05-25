@@ -62,8 +62,20 @@
 
 .step {
   border: 1px solid #dddddd;
-  margin: 1.5em 1em;
   padding: 2em;
+}
+
+.step.row {
+  margin: 0 auto;
+  padding: 3em auto;
+}
+
+.step.row:first-child {
+  margin-top: 1.5em;
+}
+
+.step.row:last-child {
+  margin-bottom: 1.5em;
 }
 
 .step .number {
@@ -79,20 +91,18 @@
   font-size: 1.5em;
 }
 
-.step .content-container {
-  margin-top: -2em;
-}
-
-.dropzone {
+.step .dropzone {
   border: 2px dashed #bbb;
-  width: 30em;
+  width: 100%;
   min-height: 0.1em;
   float: left;
   background-color: #dff7ec;
   border-radius: 0.4em;
 }
 
-.content-container.col {
+.content-container {
+  width: 60%;
+
   input[type=radio]:checked + label:after {
     background-color: #02a349;
     border: #02a349;
@@ -109,6 +119,7 @@
     margin: 0;
   }
 }
+
 @media only screen and (min-width: $big-screen-min-width) {
   ul.tabs {
     height: 5em;
