@@ -1,6 +1,9 @@
 /*****************************************************************************/
 /* Timestamp: Style */
 /*****************************************************************************/
+@import "../../stylesheets/main";
+
+
 .timestamp {
 }
 
@@ -16,32 +19,22 @@
 
   ul.tabs {
     color: #333;
-    height: 70px;
-
-    li {
-      height: 70px;
-    }
 
     li.divider {
-      height: 70px;
       background: white;
       border-bottom: 1px solid #cccccc;
       width: 10px;
     }
 
     a {
-      height: 70px;
       text-transform: capitalize;
-      line-height: 70px;
-      font-size: 30px;
       border: 1px solid transparent;
       border-bottom: 1px solid #515151;
       border-top: 1px solid #777777;
       color: whitesmoke;
-      border-radius: 6px 6px 0 0;
       background: #333333; /* fallback for old browsers */
-      background: -webkit-linear-gradient(bottom, #515151, #777777); /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(bottom, #515151, #777777); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: -webkit-linear-gradient(bottom, #333333, #4f4f4f); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(bottom, #333333, #4f4f4f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
 
     a.active {
@@ -65,7 +58,7 @@
 
 .step {
   border: 1px solid #dddddd;
-  margin: 1.5em 0.8em;
+  margin: 1.5em 1em;
   padding: 2em;
 }
 
@@ -95,6 +88,44 @@
   border-radius: 0.4em;
 }
 
+@media only screen and (min-width: $big-screen-min-width) {
+  ul.tabs {
+    height: 5em;
 
+    li.tab {
+      height: 70px;
+    }
 
+    li.divider {
+      height: 70px;
+    }
 
+    a {
+      height: 70px;
+      line-height: 70px;
+      font-size: 30px;
+      border-radius: 6px 6px 0 0;
+    }
+  }
+}
+
+@media only screen and (min-width: $middle-screen-min-width) and (max-width: $middle-screen-max-width) {
+  ul.tabs {
+    height: 60px;
+
+    li.tab {
+      height: 60px;
+    }
+
+    li.divider {
+      height: 60px;
+    }
+
+    a {
+      height: 60px;
+      line-height: 60px;
+      font-size: 24px;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+}
