@@ -26,11 +26,13 @@ i18n.map 'en', timestamp:
     title: 'Timestamp'
     file: 'File'
     hash: 'SHA256 Hash'
-    timestamp_btn: 'Stamp it!'
+    submit_btn: 'Stamp it!'
+    save_btn: 'Save'
     tsr_comment: "This zip is used to verify the timestamp of your original file. It's very important that you don't lose this! (ResearchDate.net)"
     step_1_name: 'Choose the file you want to timestamp.'
     step_2_name: 'Select the TSA. (?)'
-    step_3_name: 'Time stamp.'
+    step_4_name: 'Time stamp.'
+    step_3_name: 'Store your TSR file.'
 
 i18n.map 'en', timestampList:
     hash_result: 'Hash Result'

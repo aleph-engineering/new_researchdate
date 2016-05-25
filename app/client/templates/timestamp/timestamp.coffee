@@ -7,16 +7,14 @@ Session.setDefault 'artifactFilename', ''
 
 reactiveStamper = new ReactiveVar(new timestamper.Timestamper())
 
-
 Template.Timestamp.events {
     'submit #artifact-form': (e) ->
         e.preventDefault()
 
         form = e.target
-        hash = $(form).find('input[name="hash"]').val()
+        hash = Session.get 'artifactHash'
         tsaUrl = $(form).find('input[name="tsa_server"]:checked').val()
         artifactFilename = Session.get 'artifactFilename'
-
         isBusy.set true
 
         stamper = reactiveStamper.get()

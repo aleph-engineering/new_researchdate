@@ -86,12 +86,29 @@
 .dropzone {
   border: 2px dashed #bbb;
   width: 30em;
-  min-height: 5em;
+  min-height: 0.1em;
   float: left;
   background-color: #dff7ec;
   border-radius: 0.4em;
 }
 
+.content-container.col {
+  input[type=radio]:checked + label:after {
+    background-color: #02a349;
+    border: #02a349;
+  }
+
+  input[type=save] {
+    width: 20em;
+    height: 36px;
+    padding: 8px;
+  }
+
+  .progress {
+    height: 36px;
+    margin: 0;
+  }
+}
 @media only screen and (min-width: $big-screen-min-width) {
   ul.tabs {
     height: 5em;
