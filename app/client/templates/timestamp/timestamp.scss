@@ -53,56 +53,58 @@
 
 /* STEPS */
 
-.step button {
-  background: #02a349; /* fallback for old browsers */
-  background: -webkit-linear-gradient(bottom, #02a349, #02b449); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  box-shadow: none
-}
-
 .step {
   border: 1px solid #dddddd;
   padding: 2em;
+  min-height: 200px;
+
+  button {
+    background: #02a349; /* fallback for old browsers */
+    background: -webkit-linear-gradient(bottom, #02a349, #02b449); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: none
+  }
+
+  .number {
+    float: none;
+
+    h5 {
+      margin: 0;
+      padding: 0;
+
+      span {
+        font-size: 1.5em;
+      }
+    }
+  }
+
+  .check {
+    margin-top: 1.5em;
+  }
+
+  .dropzone {
+    border: 2px dashed #bbb;
+    width: 100%;
+    min-height: 0.1em;
+    height: 60px;
+    float: left;
+    background-color: #dff7ec;
+    border-radius: 0.4em;
+  }
+
+  .dz-message {
+    margin: 0;
+  }
 }
 
 .step.row {
-  margin: 0 auto;
+  margin: 0 auto -1px auto;
   padding: 3em auto;
 }
 
-.step.row:first-child {
-  margin-top: 1.5em;
-}
-
 .step.row:last-child {
-  margin-bottom: 1.5em;
-}
-
-.step .number {
-  float: none;
-}
-
-.step .number h5 {
-  margin: 0;
-  padding: 0;
-}
-
-.step .number h5 span {
-  font-size: 1.5em;
-}
-
-.step .dropzone {
-  border: 2px dashed #bbb;
-  width: 100%;
-  min-height: 0.1em;
-  height: 60px;
-  float: left;
-  background-color: #dff7ec;
-  border-radius: 0.4em;
-}
-
-.step .dz-message {
-  margin: 0;
+  margin: 0 auto;
+  padding: 3em auto;
 }
 
 .content-container {
@@ -126,6 +128,10 @@
 }
 
 #generate-tab {
+  overflow-y: scroll;
+  max-height: 600px;
+  margin: 1em auto;
+
   input[type="save"] {
     border-radius: 4px;
     border: 1px solid #6a6a6a;
@@ -183,6 +189,19 @@
 
     a {
       font-size: 25px;
+    }
+  }
+
+  #generate-tab {
+    #timestamp-button {
+      width: 100%;
+      margin-bottom: 1em;
+      float: left;
+    }
+
+    #timestamp-progress-bar {
+      left: 0;
+      width: 100%;
     }
   }
 }

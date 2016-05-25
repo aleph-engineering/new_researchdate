@@ -16,7 +16,7 @@ template(name='Timestamp')
                     span 1
                     | ST. STEP
             .check.col.s2.m2.l2
-                img.materialboxed(src='/img/check.svg')
+                img.materialboxed(src='/img/empty-check.svg')
             .content-container.col
                 h5 {{i18n 'timestamp.step_1_name'}}
                 +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick files here to upload'
@@ -68,8 +68,8 @@ template(name='Timestamp')
                 img.materialboxed(src='/img/check.svg')
             .content-container.col
                 h5 {{i18n 'timestamp.step_4_name'}}
-                button.col.s3.m3.l3(type='submit' class='btn' name='timestamp') {{i18n 'timestamp.submit_btn'}}
-                div.col.s8.m8.l8.progress.push-s1.push-m1.push-l1
+                button.col.s3.m3.l3(id='timestamp-button' type='submit' class='btn' name='timestamp') {{i18n 'timestamp.submit_btn'}}
+                div.col.s8.m8.l8.progress.push-s1.push-m1.push-l1#timestamp-progress-bar
                     .indeterminate
 
         //#verify-tab.col.s12
