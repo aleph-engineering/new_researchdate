@@ -43,17 +43,17 @@ Template.Timestamp.onCreated ->
 Template.Timestamp.onRendered ->
     $('#step-number').on 'click', ->
         $('#step-number .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/no-check.svg', '/img/check.svg'
+            attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     $('#step-servers').on 'click', ->
         $('#step-servers .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/no-check.svg', '/img/check.svg'
+            attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     $('#step-button').on 'click', ->
         $('#step-servers .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/no-check.svg', '/img/check.svg'
+            attr.replace '/img/empty-check.svg', '/img/check.svg'
         $('#step-button .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/no-check.svg', '/img/check.svg'
+            attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     $('#timestamp-page-link').addClass 'active'
 
@@ -89,9 +89,9 @@ Template.Timestamp.onRendered ->
         $('#step-button :button').prop('disabled', true)
 
         $('#step-servers .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/check.svg', '/img/no-check.svg'
+            attr.replace '/img/check.svg', '/img/empty-check.svg'
         $('#step-button .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/check.svg', '/img/no-check.svg'
+            attr.replace '/img/check.svg', '/img/empty-check.svg'
 
 
 Template.Timestamp.onDestroyed ->

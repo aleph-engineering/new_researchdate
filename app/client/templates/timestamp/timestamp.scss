@@ -84,7 +84,7 @@
 
   .dropzone {
     border: 2px dashed #bbb;
-    width: 100%;
+    width: 30em;
     min-height: 0.1em;
     height: 60px;
     float: left;
@@ -128,8 +128,6 @@
 }
 
 #generate-tab {
-  overflow-y: scroll;
-  max-height: 600px;
   margin: 1em auto;
 
   input[type="save"] {

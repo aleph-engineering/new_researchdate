@@ -10,8 +10,8 @@ template(name='Timestamp')
     div#underline.col.s12.m12.l12
 
     #generate-tab.col.s12.container
-        .row.step
-            #step-number.number.col.s2.m2.l2.left
+        #step-number.row.step
+            .number.col.s2.m2.l2.left
                 h5
                     span 1
                     | ST. STEP
@@ -20,31 +20,32 @@ template(name='Timestamp')
             .content-container.col
                 h5 {{i18n 'timestamp.step_1_name'}}
                 +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick files here to upload'
-        .row.step
+
+        #step-servers.row.step
             form(id='artifact-form' method='post' action="{{pathFor 'Timestamp'}}")
                 .number.col.s2.m2.l2.left
                     h5
                         span 2
                         | ND. STEP
                 .check.col.s2.m2.l2
-                    img.materialboxed(src='/img/check.svg')
+                    img.materialboxed(src='/img/empty-check.svg')
                 .content-container.col
                     h5 {{i18n 'timestamp.step_2_name'}}
                     .col.s6.m4.l3
                         p
-                            input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked)
+                            input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked disabled)
                             label(for='free_tsa') FreeTSA
                     .col.s6.m4.l3
                         p
-                            input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')
+                            input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161' disabled)
                             label(for='tsa_startssl') Startssl
                     .col.s6.m4.l3
                         p
-                            input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/')
+                            input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/' disabled)
                             label(for='time_certum') Time.Certum
                     .col.s6.m4.l3
                         p
-                            input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
+                            input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/' disabled)
                             label(for='zeitstempel') Zeitstempel
 
 
@@ -52,12 +53,12 @@ template(name='Timestamp')
             .number.col.s2.m2.l2.left
                 h5
                     span 3
-                        | RD. STEP
+                    | RD. STEP
             .check.col.s2.m2.l2
-                img.materialboxed(src='/img/check.svg')
+                img.materialboxed(src='/img/empty-check.svg')
             .content-container.col
                 h5 {{i18n 'timestamp.step_4_name'}}
-                button.col.s3.m3.l3(id='timestamp-button' type='submit' class='btn' name='timestamp') {{i18n 'timestamp.submit_btn'}}
+                button.col.s3.m3.l3(id='timestamp-button' type='submit' class='btn' name='timestamp' disabled) {{i18n 'timestamp.submit_btn'}}
                 div.col.s8.m8.l8.progress.push-s1.push-m1.push-l1#timestamp-progress-bar
                     .indeterminate
 
