@@ -1,9 +1,9 @@
-@isBusy = new ReactiveVar false
+#@isBusy = new ReactiveVar false
 
 
 Template.MasterLayout.helpers {
-    isBusy: ->
-        isBusy.get()
+#    isBusy: ->
+#        isBusy.get()
 }
 
 

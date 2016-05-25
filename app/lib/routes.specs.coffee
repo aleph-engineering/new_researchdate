@@ -36,7 +36,7 @@ describe 'Routes module', ->
         assert(
             @routerRoute.calledWithExactly
             '/Timestamp',
-            name: 'timestamp',
+            name: 'Timestamp',
             controller: 'TimestampController',
             'Was not configured the timestamp controller route'
         )

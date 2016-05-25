@@ -11,7 +11,7 @@ template(name='Timestamp')
 
     #generate-tab.col.s12.container
         .row.step
-            .number.col.s2.m2.l2.left
+            #step-number.number.col.s2.m2.l2.left
                 h5
                     span 1
                     | ST. STEP
@@ -47,23 +47,12 @@ template(name='Timestamp')
                             input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
                             label(for='zeitstempel') Zeitstempel
 
-        .row.step
+
+        #step-button.row.step
             .number.col.s2.m2.l2.left
                 h5
                     span 3
-                    | RD. STEP
-            .check.col.s2.m2.l2
-                img.materialboxed(src='/img/check.svg')
-            .content-container.col
-                h5 {{i18n 'timestamp.step_3_name'}}
-                input.col.s8.m8.l8(id='save' type='save' placeholder='Route.../')
-                button.col.s3.m3.l3.push-s1.push-m1.push-l1(type='submit' class='btn' name='timestamp') {{i18n 'timestamp.save_btn'}}
-
-        .row.step
-            .number.col.s2.m2.l2.left
-                h5
-                    span 4
-                    | TH. STEP
+                        | RD. STEP
             .check.col.s2.m2.l2
                 img.materialboxed(src='/img/check.svg')
             .content-container.col
@@ -72,34 +61,3 @@ template(name='Timestamp')
                 div.col.s8.m8.l8.progress.push-s1.push-m1.push-l1#timestamp-progress-bar
                     .indeterminate
 
-        //#verify-tab.col.s12
-        //    .container
-        //        Test 2
-    //div(class='timestamp')
-    //    h4 {{i18n 'timestamp.title'}}
-    //    div(class='timestamp row')
-    //        +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop a file or pick one'
-    //        form(id='artifact-form' method='post' action="{{pathFor 'timestamp'}}" class='col s12')
-    //            div(id='hash-container' class='row')
-    //                div(class='input-field')
-    //                    label(for='hash' class='active') {{i18n 'timestamp.hash'}}
-    //                    input(type='text' id='hash' name='hash' value='#{artifactHash}' readonly)
-    //    div(id='servers-container' class='row')
-                            //h6 {{i18n 'timestamp.tsa_servers_title'}}
-                            //p
-                            //    input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked)
-                            //    label(for='free_tsa') https://www.freetsa.org/index_en.php
-                            //p
-                            //    input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161')
-                            //    label(for='tsa_startssl') http://tsa.startssl.com/rfc3161
-                            //p
-                            //    input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/')
-                            //    label(for='time_certum') http://time.certum.pl/
-                            //p
-                            //    input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/')
-                            //    label(for='zeitstempel') http://zeitstempel.dfn.de/
-                            //p
-                            //    input(type='radio' id='dse200_ncipher' name='tsa_server' value='http://dse200.ncipher.com/TSS/HttpTspServer')
-                            //    label(for='dse200_ncipher') http://dse200.ncipher.com/TSS/HttpTspServer
-    //            div(class='row')
-    //                button(type='submit' class='btn waves-effect waves-light light-blue lighten-1' name='timestamp') {{i18n 'timestamp.timestamp_btn'}}

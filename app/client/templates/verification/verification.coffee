@@ -10,16 +10,16 @@ Template.Verification.events {
 
         ver = new verificator.Verificator()
 
-        isBusy.set true
+        #        isBusy.set true
 
         ver.verify(files[0]).then((result) ->
-            isBusy.set false
+#            isBusy.set false
             if result is true
                 Toast.info(i18n('verification.messages.info'), '', {width: 800})
             else
                 Toast.error(i18n('verification.messages.error'), '', {width: 800})
         ).catch((error) ->
-            isBusy.set false
+#            isBusy.set false
             if error is 'TSR_MISSING'
                 Toast.error(i18n('verification.messages.not_tsr'), '', {width: 800})
             else if error is 'ARTIFACT_MISSING'
