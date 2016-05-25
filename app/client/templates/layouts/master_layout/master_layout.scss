@@ -3,37 +3,39 @@
 /*****************************************************************************/
 @import "../../../stylesheets/main";
 
-nav {
-  box-shadow: none;
+header#header {
+  nav {
+    box-shadow: none;
 
-  li {
-    a {
-      font-size: 1.2em;
-      margin: 0 1em;
-      background: transparent;
-      display: inline;
-      color: #333333;
-      padding: 0.5em;
-      border: 0.1em dashed transparent;
-      border-radius: 0.5em;
-    }
+    li {
+      a {
+        font-size: 1.2em;
+        margin: 0 1em;
+        background: transparent;
+        display: inline;
+        color: #333333;
+        padding: 0.5em;
+        border: 0.1em dashed transparent;
+        border-radius: 0.5em;
+      }
 
-    a:last-child {
-      margin-right: 0;
-    }
+      a:last-child {
+        margin-right: 0;
+      }
 
-    a:hover {
-      border-color: #333333;
-      background: transparent;
-    }
+      a:hover {
+        border-color: #333333;
+        background: transparent;
+      }
 
-    a.active {
-      border: 0.1em solid #333333;
-    }
+      a.active {
+        border: 0.1em solid #333333;
+      }
 
-    a.active:hover {
-      border: 0.1em solid #333333;
-      background: transparent;
+      a.active:hover {
+        border: 0.1em solid #333333;
+        background: transparent;
+      }
     }
   }
 }
