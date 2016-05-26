@@ -25,6 +25,10 @@ fulfilled.
 3.  You need the Meteor web framework, which relays in Node.JS to work. The
     following site will also tell how to install it:
     https://www.meteor.com/.
+    
+4.  Since ResearchDate has some Node.JS libraries, they need to also be
+    downloaded to the project's directory. To do that make sure to run
+    the command: <code>npm install</code>.
 
 Both technologies are available for Windows, Linux and Mac,
 so feel comfortable to install them wherever you desire.
