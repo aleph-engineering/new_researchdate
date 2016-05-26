@@ -72,6 +72,7 @@ mongo@1.1.7
 mongo-id@1.0.4
 mquandalle:jade@0.4.9
 mquandalle:jade-compiler@0.4.5
+mrt:nprogress@0.2.0
 mrt:toastjs@2.0.6
 npm-mongo@1.4.43
 observe-sequence@1.0.11

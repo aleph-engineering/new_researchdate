@@ -40,6 +40,7 @@ class Timestamper
                             $.each result, (name, value) ->
                                 resultArr[name] = value
 
+                            NProgress.inc()
                             zipGen.addBuffer "timestamp.tsr", resultArr
                             zipGen.generate().then (blob) ->
                                 zipName = filename.substr(0, filename.lastIndexOf('.')) or filename
@@ -48,6 +49,7 @@ class Timestamper
                                     data: blob,
                                     zipName: zipName
                                 }
+                                NProgress.inc()
                             , (err) ->
                                 reject err
                         else

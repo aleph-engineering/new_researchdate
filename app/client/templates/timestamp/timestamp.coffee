@@ -21,6 +21,8 @@ Template.Timestamp.events {
         stamper = reactiveStamper.get()
         stamper.timestamp(hash, artifactFilename, tsaUrl, save).then((result)->
 #            isBusy.set false
+            NProgress.inc()
+            NProgress.done()
             FileSaver.saveAs result.data, result.zipName
         ).catch((error) ->
 #            isBusy.set false
@@ -41,19 +43,28 @@ Template.Timestamp.helpers {
 Template.Timestamp.onCreated ->
 
 Template.Timestamp.onRendered ->
+    $('#timestamp-button').on 'click', ->
+        $('#timestamp-progress-bar').css("display", "block")
+
+        # Init the progress bar 'nprogress
+        NProgress.start()
+
     $('#step-number').on 'click', ->
         $('#step-number .materialboxed').attr 'src', (index, attr) ->
             attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     $('#step-servers').on 'click', ->
-        $('#step-servers .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/empty-check.svg', '/img/check.svg'
+        if Dropzone.forElement('#original-artifact').files.length != 0
+            $('#step-servers .materialboxed').attr 'src', (index, attr) ->
+                attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     $('#step-button').on 'click', ->
-        $('#step-servers .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/empty-check.svg', '/img/check.svg'
-        $('#step-button .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/empty-check.svg', '/img/check.svg'
+        if Dropzone.forElement('#original-artifact').files.length != 0
+            $('#step-servers .materialboxed').attr 'src', (index, attr) ->
+                attr.replace '/img/empty-check.svg', '/img/check.svg'
+
+            $('#step-button .materialboxed').attr 'src', (index, attr) ->
+                attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     $('#timestamp-page-link').addClass 'active'
 
@@ -84,12 +95,14 @@ Template.Timestamp.onRendered ->
 
     Dropzone.forElement('#original-artifact').on 'removedfile', (file)->
         $('#original-artifact').addClass('error')
+        $('#timestamp-progress-bar').css("display", "none")
 
         $('#step-servers :input').prop('disabled', true)
         $('#step-button :button').prop('disabled', true)
 
         $('#step-servers .materialboxed').attr 'src', (index, attr) ->
             attr.replace '/img/check.svg', '/img/empty-check.svg'
+
         $('#step-button .materialboxed').attr 'src', (index, attr) ->
             attr.replace '/img/check.svg', '/img/empty-check.svg'
 
