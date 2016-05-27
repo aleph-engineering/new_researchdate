@@ -1,5 +1,6 @@
 FileSaver = require 'browser-filesaver'
 timestamper = require '../../lib/timestamper'
+validator = require '../../lib/validator'
 
 
 Session.setDefault 'artifactHash', 'NONE'
@@ -16,16 +17,13 @@ Template.Timestamp.events {
         tsaUrl = $(form).find('input[name="tsa_server"]:checked').val()
         artifactFilename = Session.get 'artifactFilename'
         save = $(form).find('input[name="save"]').val()
-        #        isBusy.set true
 
         stamper = reactiveStamper.get()
         stamper.timestamp(hash, artifactFilename, tsaUrl, save).then((result)->
-#            isBusy.set false
             NProgress.inc()
             NProgress.done()
             FileSaver.saveAs result.data, result.zipName
         ).catch((error) ->
-#            isBusy.set false
             if (error)
                 Toast.error(error, '', {width: 800})
             else
@@ -43,6 +41,8 @@ Template.Timestamp.helpers {
 Template.Timestamp.onCreated ->
 
 Template.Timestamp.onRendered ->
+    dropzone = Dropzone.forElement('#original-artifact')
+
     $('#timestamp-button').on 'click', ->
         $('#timestamp-progress-bar').css("display", "block")
 
@@ -54,12 +54,17 @@ Template.Timestamp.onRendered ->
             attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     $('#step-servers').on 'click', ->
-        if Dropzone.forElement('#original-artifact').files.length != 0
+        if validator.dropzoneEmpty(dropzone)
+            $('#original-artifact').addClass('error')
+        else
             $('#step-servers .materialboxed').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 
+
     $('#step-button').on 'click', ->
-        if Dropzone.forElement('#original-artifact').files.length != 0
+        if validator.dropzoneEmpty(dropzone)
+            $('#original-artifact').addClass('error')
+        else
             $('#step-servers .materialboxed').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 
@@ -71,7 +76,7 @@ Template.Timestamp.onRendered ->
     do $('ul.tabs').tabs;
     do $('.indicator').remove;
 
-    Dropzone.forElement('#original-artifact').on 'addedfile', (file)->
+    dropzone.on 'addedfile', (file)->
         $('#step-servers :input').prop('disabled', false)
         $('#step-button :button').prop('disabled', false)
 
@@ -79,21 +84,16 @@ Template.Timestamp.onRendered ->
         Session.set 'artifactHash', ''
         Session.set 'artifactFilename', ''
 
-        #        isBusy.set true
         stamper = reactiveStamper.get()
         stamper.generateHash(file).then((result) ->
             Session.set 'artifactHash', result
             Session.set 'artifactFilename', file.name
-
-#            isBusy.set false
         ).catch((error) ->
             Session.set 'artifactHash', 'NONE'
             console.log error
-
-#            isBusy.set false
         )
 
-    Dropzone.forElement('#original-artifact').on 'removedfile', (file)->
+    dropzone.on 'removedfile', (file)->
         $('#original-artifact').addClass('error')
         $('#timestamp-progress-bar').css("display", "none")
 
@@ -106,6 +106,10 @@ Template.Timestamp.onRendered ->
         $('#step-button .materialboxed').attr 'src', (index, attr) ->
             attr.replace '/img/check.svg', '/img/empty-check.svg'
 
-
 Template.Timestamp.onDestroyed ->
     $('#timestamp-page-link').removeClass 'active'
+
+
+
+
+

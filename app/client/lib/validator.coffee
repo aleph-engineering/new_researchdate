@@ -10,7 +10,11 @@ fileExist = (file) ->
 fileIsValid = (file) ->
     file?.size <= 266454270
 
+dropzoneEmpty = (dropzone) ->
+    dropzone.files.length is 0
+
 exports.validArgsForTimestamp = validArgsForTimestamp
 exports.validArgsForVerification = validArgsForVerification
 exports.fileExist = fileExist
 exports.fileIsValid = fileIsValid
+exports.dropzoneEmpty = dropzoneEmpty

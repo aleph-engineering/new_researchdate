@@ -1,6 +1,5 @@
 zipGenerator = require './zip/zip_generator'
 FileReaderStream = require 'filereader-stream'
-
 validator = require './validator'
 digest = require './digest_generator'
 
@@ -49,7 +48,7 @@ class Timestamper
                                     data: blob,
                                     zipName: zipName
                                 }
-                                NProgress.inc()
+                                NProgress.set(0.9)
                             , (err) ->
                                 reject err
                         else

@@ -58,13 +58,6 @@
   padding: 2em;
   min-height: 200px;
 
-  button {
-    background: #02a349; /* fallback for old browsers */
-    background: -webkit-linear-gradient(bottom, #02a349, #02b449); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    box-shadow: none
-  }
-
   .number {
     float: none;
 
@@ -97,6 +90,14 @@
   .dz-message {
     margin: 0;
   }
+}
+
+.btn {
+  width: 140px;
+  box-shadow: none;
+  background: #02a349; /* fallback for old browsers */
+  background: -webkit-linear-gradient(bottom, #02a349, #02b449); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(bottom, #02a349, #02b449); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .step.row {
