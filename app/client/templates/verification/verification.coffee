@@ -50,11 +50,19 @@ Template.Verification.onRendered ->
             $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 
-    dropzoneForZip.on 'addedfile', ->
+    dropzoneForZip.on 'addedfile', (file)->
+        $('#step-button-verify :button').prop('disabled', false)
         $('#zipInput').removeClass('error')
         $('#step-button-verify :button').prop('disabled', false)
 
-    dropzoneForZip.on 'removedfile', ()->
+        dropzoneForZip.on 'error', (file, response)->
+            $('#zipInput').addClass('error')
+            $('#step-button-verify :button').prop('disabled', true)
+
+            $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
+                attr.replace '/img/check.svg', '/img/empty-check.svg'
+
+    dropzoneForZip.on 'removedfile', (file)->
         $('#zipInput').addClass('error')
 
         $('#step-button-verify :button').prop('disabled', true)

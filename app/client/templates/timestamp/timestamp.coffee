@@ -91,7 +91,7 @@ Template.Timestamp.onRendered ->
             console.log error
         )
 
-    dropzone.on 'removedfile', ()->
+    dropzone.on 'removedfile', (file)->
         $('#original-artifact').addClass('error')
         $('#timestamp-progress-bar').css("display", "none")
 

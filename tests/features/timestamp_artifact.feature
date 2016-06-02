@@ -6,15 +6,18 @@ Feature: Timestamp an artifact
 
 
     Background:
-        Given I am on the homepage
+        Given I am on the timestamp page
 
     Scenario: Generate timestamp an artifact
-        And I provide a digital artifact
+        And I provide a valid digital artifact
         When I submit the form
         Then the site returns to me a zip file containing the timestamp
-        And returns the encrypted hash
 
-    Scenario: Generate timestamp with empty form
-        When I submit the timestamp empty form
+    Scenario: Generate timestamp with an artifact bigger than 256 MB
+        When I provide a digital artifact bigger than 256 MB
         Then I can see the require areas focused
-        And no returns the encrypted hash
+        And  I can see a message saying remove the file
+
+#    Scenario: Generate timestamp with empty form
+#        When I submit the timestamp empty form
+#        Then I can see the require areas focused

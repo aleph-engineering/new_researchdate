@@ -6,7 +6,7 @@ Feature: Timestamp verification
 
 
     Background:
-        Given I am on the homepage
+        Given I am on the verify tab
 
     Scenario: Successful verification
         And I provide a valid zip file
