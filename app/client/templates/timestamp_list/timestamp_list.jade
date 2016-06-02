@@ -1,24 +1,28 @@
 template(name='TimestampList')
 
-    .input-field
-        +EasySearch.Input(index=timestampIndex attributes=inputAttributes)
-        label: i.mdi-action-search
-        i.mdi-navigation-close.close
+    .col.s12.container
+        .row
+            .input-field.col.s4.offset-s8
+                +EasySearch.Input(index=timestampIndex attributes=inputAttributes)
+                label: i.mdi-action-search.flow-text
+                //i.mdi-navigation-close
 
-    table(id='timestamp-list' class="striped bordered")
-        thead
-            tr
-                th {{i18n 'timestampList.hash_result'}}
-                th {{i18n 'timestampList.creation_date'}}
-                th {{i18n 'timestampList.server_used'}}
-        tbody
-            +EasySearch.Each(index=timestampIndex)
+        table(id='timestamp-list' class="striped bordered centered responsive-table")
+            thead
                 tr
-                    td(class='hash-cell') #{hash}
-                    td #{creationDate}
-                    td #{server}
+                    th {{i18n 'timestampList.hash_result'}}
+                    th {{i18n 'timestampList.creation_date'}}
+                    th {{i18n 'timestampList.server_used'}}
+            tbody
+                +EasySearch.Each(index=timestampIndex)
+                    tr
+                        td(class='hash-cell') #{hash}
+                        td #{creationDate}
+                        td #{server}
 
-    +EasySearch.Pagination(index=timestampIndex)
+        .row
+            .col.s4.offset-s8
+                +EasySearch.Pagination(index=timestampIndex)
 
-    +EasySearch.IfNoResults(index=timestampIndex)
-        div(class="no-results") {{i18n 'timestampList.no_results'}}
+        +EasySearch.IfNoResults(index=timestampIndex)
+            div(class="no-results") {{i18n 'timestampList.no_results'}}
