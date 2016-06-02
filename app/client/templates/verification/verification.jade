@@ -1,28 +1,27 @@
 template(name='Verification')
-    #verify-tab.col.s12.container
-        .col
-            form(id='verify-form' method='post')
-                #step-number.row.step
-                    .number.col.s2.m2.l2.left
-                        h5
-                            span 1
-                            | ST. STEP
-                    .check.col.s2.m2.l2
-                        img.materialboxed(src='/img/empty-check.svg')
-                    .content-container.col
-                        h5 {{i18n 'verification.step_1_name'}}
-                        +dropzone class='dropzone' id='zipInput' name='zip' dictDefaultMessage='Drop or pick zip file containing the timestamp'
+    .col
+        form(id='verify-form' method='post')
+            #step-dropzone-verify.row.step
+                .number.col.s2.m2.l2.left
+                    h5
+                        span 1
+                        | ST. STEP
+                .check.col.s2.m2.l2
+                    img.materialboxed(src='/img/empty-check.svg')
+                .content-container.col
+                    h5 {{i18n 'verification.step_1_name'}}
+                    +dropzone class='dropzone' id='zipInput' name='zip' dictDefaultMessage='Drop or pick zip file containing the timestamp'
 
 
-                #step-button.row.step
-                    .number.col.s2.m2.l2.left
-                        h5
-                            span 2
-                            | ND. STEP
-                    .check.col.s2.m2.l2
-                        img.materialboxed(src='/img/empty-check.svg')
-                    .content-container.col
-                        .row
-                            h5 {{i18n 'verification.step_2_name'}}
-                            .col.s3.m3.l3.left
-                                button(id='verify' type='submit' class='btn' name='verify' disabled) {{i18n 'verification.btn_verify'}}
+            #step-button-verify.row.step
+                .number.col.s2.m2.l2.left
+                    h5
+                        span 2
+                        | ND. STEP
+                .check.col.s2.m2.l2
+                    img.materialboxed(src='/img/empty-check.svg')
+                .content-container.col
+                    .row
+                        h5 {{i18n 'verification.step_2_name'}}
+                        .col.s3.m3.l3.left
+                            button(id='verify' type='submit' class='btn' name='verify' disabled) {{i18n 'verification.submit_btn'}}
