@@ -2,7 +2,6 @@ FileSaver = require 'browser-filesaver'
 timestamper = require '../../lib/timestamper'
 validator = require '../../lib/validator'
 
-
 Session.setDefault 'artifactHash', 'NONE'
 Session.setDefault 'artifactFilename', ''
 
@@ -60,7 +59,6 @@ Template.Timestamp.onRendered ->
             $('#step-servers .materialboxed').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 
-
     $('#step-button').on 'click', ->
         if validator.dropzoneEmpty(dropzone)
             $('#original-artifact').addClass('error')
@@ -93,7 +91,7 @@ Template.Timestamp.onRendered ->
             console.log error
         )
 
-    dropzone.on 'removedfile', (file)->
+    dropzone.on 'removedfile', ()->
         $('#original-artifact').addClass('error')
         $('#timestamp-progress-bar').css("display", "none")
 

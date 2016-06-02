@@ -1,5 +1,5 @@
 verificator = require '../../lib/verificator'
-
+validator = require '../../lib/validator'
 
 Template.Verification.events {
 
@@ -39,27 +39,31 @@ Template.Verification.onRendered ->
     dropzoneForZip = Dropzone.forElement('#zipInput')
     dropzoneForZip.options.acceptedFiles = '.zip'
 
-    $('#step-number').on 'click', ->
-        $('#step-number .materialboxed').attr 'src', (index, attr) ->
+    $('#step-dropzone-verify').on 'click', ->
+        $('#step-dropzone-verify .materialboxed').attr 'src', (index, attr) ->
             attr.replace '/img/empty-check.svg', '/img/check.svg'
 
-    $('#step-button').on 'click', ->
+    $('#step-button-verify').on 'click', ->
         if validator.dropzoneEmpty(dropzoneForZip)
             $('#zipInput').addClass('error')
         else
-            $('#step-button .materialboxed').attr 'src', (index, attr) ->
+            $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     dropzoneForZip.on 'addedfile', ->
         $('#zipInput').removeClass('error')
-        $('#step-button :button').prop('disabled', false)
+        $('#step-button-verify :button').prop('disabled', false)
 
-    dropzoneForZip.on 'removedfile', (file)->
+    dropzoneForZip.on 'removedfile', ()->
         $('#zipInput').addClass('error')
 
-        $('#step-button :button').prop('disabled', true)
+        $('#step-button-verify :button').prop('disabled', true)
 
-        $('#step-button .materialboxed').attr 'src', (index, attr) ->
+        $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
             attr.replace '/img/check.svg', '/img/empty-check.svg'
+
+    $('#step-button-verify').on 'click', ->
+        $('#step-number .materialboxed').attr 'src', (index, attr) ->
+            attr.replace '/img/empty-check.svg', '/img/check.svg'
 
 Template.Verification.onDestroyed ->
