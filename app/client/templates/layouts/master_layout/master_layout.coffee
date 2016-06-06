@@ -4,4 +4,4 @@ Template.MasterLayout.helpers {
 
 
 Template.MasterLayout.onRendered ->
-    do $(".button-collapse").sideNav;
+    do $(".button-collapse").sideNav

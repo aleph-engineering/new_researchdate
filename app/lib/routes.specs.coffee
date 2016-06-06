@@ -18,7 +18,6 @@ describe 'Routes module', ->
         assert(
             @routerConfigure.calledWith(
                 layoutTemplate: 'MasterLayout'
-                loadingTemplate: 'Loading'
                 notFoundTemplate: 'NotFound'
             )
             'Router configure was not called correctly'

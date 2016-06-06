@@ -5,7 +5,7 @@ template(name='TimestampList')
             .input-field.col.s4.offset-s8
                 +EasySearch.Input(index=timestampIndex attributes=inputAttributes)
                 label: i.mdi-action-search.flow-text
-                //i.mdi-navigation-close
+                i.mdi-navigation-close
 
         table(id='timestamp-list' class="striped bordered centered responsive-table")
             thead
@@ -20,7 +20,7 @@ template(name='TimestampList')
                         td #{creationDate}
                         td #{server}
 
-        .row
+        #paginated.row
             .col.s4.offset-s8
                 +EasySearch.Pagination(index=timestampIndex)
 

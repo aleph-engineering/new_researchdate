@@ -3,3 +3,14 @@
 /*****************************************************************************/
 .timestamp-list {
 }
+
+.pagination {
+
+  .disabled {
+    color: #cccccc;
+  }
+
+  .current {
+    background-color: #02a349;
+  }
+}

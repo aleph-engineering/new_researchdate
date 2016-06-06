@@ -5,10 +5,6 @@ i18n.map 'en', master_layout:
 i18n.map 'en', not_found:
     message: "Not found"
 
-i18n.map 'en', loading:
-    message: 'Please wait while we finish the operation'
-
-
 # FEATURES TEMPLATES
 i18n.map 'en', verification:
     step_1_name: 'Choose the file you want to verify.'
