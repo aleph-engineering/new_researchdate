@@ -18,3 +18,8 @@
 label.active {
   visibility: hidden;
 }
+
+.input-field input[type=search]:focus {
+  border-bottom: 1px solid #cc0000;
+}
+

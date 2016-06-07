@@ -26,6 +26,18 @@ Template.Verification.events {
                 zipZone.addClass('error')
         )
 
+    'click #step-dropzone-verify': (e) ->
+        $('#step-dropzone-verify .materialboxed').attr 'src', (index, attr) ->
+            attr.replace '/img/empty-check.svg', '/img/check.svg'
+
+    'click #step-button-verify': (e) ->
+        dropzoneForZip = Dropzone.forElement('#zipInput')
+
+        if validator.dropzoneEmpty dropzoneForZip
+            $('#zipInput').addClass 'error'
+        else
+            $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
+                attr.replace '/img/empty-check.svg', '/img/check.svg'
 }
 
 Template.Verification.helpers {
@@ -39,20 +51,9 @@ Template.Verification.onRendered ->
     dropzoneForZip = Dropzone.forElement('#zipInput')
     dropzoneForZip.options.acceptedFiles = '.zip'
 
-    $('#step-dropzone-verify').on 'click', ->
-        $('#step-dropzone-verify .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/empty-check.svg', '/img/check.svg'
-
-    $('#step-button-verify').on 'click', ->
-        if validator.dropzoneEmpty(dropzoneForZip)
-            $('#zipInput').addClass('error')
-        else
-            $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
-                attr.replace '/img/empty-check.svg', '/img/check.svg'
-
     dropzoneForZip.on 'addedfile', (file)->
         $('#step-button-verify :button').prop('disabled', false)
-        $('#zipInput').removeClass('error')
+        $('#zipInput').removeClass 'error'
         $('#step-button-verify :button').prop('disabled', false)
 
         dropzoneForZip.on 'error', (file, response)->
@@ -69,9 +70,5 @@ Template.Verification.onRendered ->
 
         $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
             attr.replace '/img/check.svg', '/img/empty-check.svg'
-
-    $('#step-button-verify').on 'click', ->
-        $('#step-number .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/empty-check.svg', '/img/check.svg'
 
 Template.Verification.onDestroyed ->
