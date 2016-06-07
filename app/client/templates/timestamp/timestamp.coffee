@@ -39,6 +39,7 @@ Template.Timestamp.events {
             attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     'click #step-servers': (e) ->
+        dropzone = Dropzone.forElement('#original-artifact')
         if validator.dropzoneEmpty(dropzone)
             $('#original-artifact').addClass('error')
         else
@@ -46,6 +47,7 @@ Template.Timestamp.events {
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     'click #step-button': (e) ->
+        dropzone = Dropzone.forElement('#original-artifact')
         if validator.dropzoneEmpty(dropzone)
             $('#original-artifact').addClass('error')
         else
