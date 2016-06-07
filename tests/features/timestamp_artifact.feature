@@ -16,8 +16,3 @@ Feature: Timestamp an artifact
     Scenario: Generate timestamp with an artifact bigger than 256 MB
         When I provide a digital artifact bigger than 256 MB
         Then I can see the require areas focused
-        And  I can see a message saying remove the file
-
-#    Scenario: Generate timestamp with empty form
-#        When I submit the timestamp empty form
-#        Then I can see the require areas focused

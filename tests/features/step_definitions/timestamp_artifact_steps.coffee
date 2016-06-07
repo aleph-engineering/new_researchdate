@@ -16,11 +16,13 @@ module.exports = ->
         browser.waitForExist '#artifact-form', 3000
         browser.submitForm '#artifact-form'
 
-    @And /^I provide a digital artifact$/, ->
-        browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
-        browser.waitForExist 'input[type="file"]', 3000
-        browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'artifact')))
-        browser.chooseFile 'input[id="artifact"]', './tests/media/TEST.txt'
+    @And /^I provide a valid digital artifact$/, ->
+        do @setIdToInput
+        browser.chooseFile 'input[id="file"]', './tests/media/TEST.txt'
+
+    @When /^I provide a digital artifact bigger than 256 MB$/, ->
+        do @setIdToInput
+        browser.chooseFile 'input[id="file"]', './tests/media/file512.txt'
 
     @When /^I submit the form$/, ->
         do clickTimestampButton
@@ -31,22 +33,8 @@ module.exports = ->
         # Assert that there is .tsr file in the Downloads folder
         expect(_.any(files, isZipExtension)).toBeTruthy()
 
-    @Then /^returns the encrypted hash$/, ->
-        browser.waitForExist '#hash', 10000
-        hashValue = browser.getValue '#hash'
-
-        # Assert that there is currently a hash in the page, as result of the timestamping process
-        expect(hashValue).toMatch /^[a-f0-9]{64}$/
-
     @When /^I submit the timestamp empty form$/, ->
         do clickTimestampButton
 
     @When /^I can see the require areas focused$/, ->
         browser.waitForExist '.dropzone.dz-clickable.error', 5000
-
-    @Then /^no returns the encrypted hash$/, ->
-        browser.waitForExist '#hash', 5000
-        hashValue = browser.getValue '#hash'
-
-        # Assert that there is not a hash in the page
-        expect(hashValue).toBe 'NONE'

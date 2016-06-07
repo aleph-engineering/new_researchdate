@@ -6,15 +6,16 @@ module.exports = ->
     @And = @Given
 
     @Before ->
-        @generalUpload = (id, filename) =>
-            browser.chooseFile id, filename
-
         do clearServer
 
         ### This will be executed each time the e2e tests are executed ###
         @userProfileFolder = process.env.HOME || process.env.USERPROFILE
         @downloadsFolder = @userProfileFolder.concat '/Downloads'
 
+        @setIdToInput = ->
+            browser.execute((-> $('input[type="file"]').css('visibility', 'visible')))
+            browser.waitForExist 'input[type="file"]', 3000
+            browser.execute((-> $('input[type="file"]')[0].setAttribute('id', 'file')))
 
     @After ->
         do clearServer

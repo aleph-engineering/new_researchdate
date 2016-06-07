@@ -18,11 +18,6 @@ Feature: Timestamp verification
         When I submit the verify form
         Then I can see a message saying that the verification was unsuccessful
 
-    Scenario: Verification with empty form
-        When I submit the verify empty form
-        Then I can see the require areas focused
-        And no returns the encrypted hash
-
     Scenario: Error in verification when .zip file not contain .tsr file
         And I provide a zip file that does not contain .tsr file
         When I submit the verify form

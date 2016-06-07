@@ -88,7 +88,10 @@ Template.Timestamp.onRendered ->
             Session.set 'artifactFilename', file.name
         ).catch((error) ->
             Session.set 'artifactHash', 'NONE'
-            console.log error
+
+            $('#original-artifact').addClass('error')
+            $('#step-servers :input').prop('disabled', true)
+            $('#step-button :button').prop('disabled', true)
         )
 
     dropzone.on 'removedfile', (file)->
