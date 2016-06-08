@@ -23,8 +23,8 @@ body {
 }
 
 .error {
-  border: 2px dashed #F34141 !important;
-  color: #cc0000;
+  border: 2px dashed $color-red1 !important;
+  color: $color-red1;
 }
 
 @media only screen and (max-width: $middle-screen-max-width) {

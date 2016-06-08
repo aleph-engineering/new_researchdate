@@ -27,7 +27,7 @@ class Timestamper
                     reject 'Hash could not be generated. Check that the input file is correct.'
         )
 
-    timestamp: (hash, filename, tsaUrl, save) ->
+    timestamp: (hash, filename, tsaUrl) ->
 #        Returns a promise
         zipGen = @zipHandler
         return new Promise(

@@ -8,30 +8,34 @@ Session.setDefault 'artifactFilename', ''
 reactiveStamper = new ReactiveVar(new timestamper.Timestamper())
 
 Template.Timestamp.events {
+
     'submit #artifact-form': (e) ->
         e.preventDefault()
 
         $('#timestamp-progress-bar').css("display", "block")
 
-        # Init the progress bar 'nprogress
+        # Init the progress bar nprogress
         NProgress.start()
 
         form = e.target
         hash = Session.get 'artifactHash'
-        tsaUrl = $(form).find('input[name="tsa_server"]:checked').val()
+
+        tsaUrls = $(form).find('input[name="tsa_server"]:checked')
+
+        onlyUrlsInArr = []
+        $.each tsaUrls, (name, value) ->
+            onlyUrlsInArr[name] = value.value
+
         artifactFilename = Session.get 'artifactFilename'
-        save = $(form).find('input[name="save"]').val()
 
         stamper = reactiveStamper.get()
-        stamper.timestamp(hash, artifactFilename, tsaUrl, save).then((result)->
+        stamper.timestamp(hash, artifactFilename, onlyUrlsInArr).then((result)->
             NProgress.inc()
             NProgress.done()
             FileSaver.saveAs result.data, result.zipName
         ).catch((error) ->
-            if (error)
-                Toast.error(error, '', {width: 800})
-            else
-                $('#original-artifact').addClass('error')
+            Toast.error(error, '', {width: 800})
+#            $('#original-artifact').addClass('error')
         )
 
     'click #step-number': (e) ->

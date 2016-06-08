@@ -7,11 +7,11 @@
 .pagination {
 
   .disabled {
-    color: #cccccc;
+    color: $color-grey1;
   }
 
   .current {
-    background-color: #02a349;
+    background-color: $color-green1;
   }
 }
 
@@ -20,6 +20,6 @@ label.active {
 }
 
 .input-field input[type=search]:focus {
-  border-bottom: 1px solid #cc0000;
+  border-bottom: 1px solid $color-red2;
 }
 

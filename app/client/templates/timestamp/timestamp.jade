@@ -1,5 +1,5 @@
 template(name='Timestamp')
-    div.container
+    .container
         section(id="content-container")
             ul.tabs
                 li.tab.col.l6
@@ -8,7 +8,7 @@ template(name='Timestamp')
                 li.tab.col.l6
                     a(href='#verify-tab') Verify
 
-    div#underline.col.s12.m12.l12
+    #underline.col.s12.m12.l12
 
     #verify-tab.col.s12.container
         +Verification
@@ -41,21 +41,20 @@ template(name='Timestamp')
                         h5 {{i18n 'timestamp.step_2_name'}}
                         .col.s6.m4.l3
                             p
-                                input(type='radio' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked disabled)
+                                input(type='checkbox' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked disabled)
                                 label(for='free_tsa') FreeTSA
                         .col.s6.m4.l3
                             p
-                                input(type='radio' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161' disabled)
+                                input(type='checkbox' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161' disabled)
                                 label(for='tsa_startssl') Startssl
                         .col.s6.m4.l3
                             p
-                                input(type='radio' id='time_certum' name='tsa_server' value='http://time.certum.pl/' disabled)
+                                input(type='checkbox' id='time_certum' name='tsa_server' value='http://time.certum.pl/' disabled)
                                 label(for='time_certum') Time.Certum
                         .col.s6.m4.l3
                             p
-                                input(type='radio' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/' disabled)
+                                input(type='checkbox' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de/' disabled)
                                 label(for='zeitstempel') Zeitstempel
-
 
                 #step-button.row.step
                     .number.col.s2.m2.l2.left
