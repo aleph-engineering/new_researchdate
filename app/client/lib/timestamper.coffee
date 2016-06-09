@@ -2,6 +2,7 @@ zipGenerator = require './zip/zip_generator'
 FileReaderStream = require 'filereader-stream'
 validator = require './validator'
 digest = require './digest_generator'
+servers = require '../../lib/asn1/tsa_servers.coffee'
 
 
 class Timestamper
@@ -27,20 +28,22 @@ class Timestamper
                     reject 'Hash could not be generated. Check that the input file is correct.'
         )
 
-    timestamp: (hash, filename, tsaUrl) ->
+    timestamp: (hash, filename, tsaUrls) ->
 #        Returns a promise
         zipGen = @zipHandler
         return new Promise(
             (resolve, reject) ->
                 if validator.validArgsForTimestamp(hash)
-                    Meteor.call 'server/timestamp', hash, tsaUrl, (error, result) ->
+                    Meteor.call 'server/timestamp', hash, tsaUrls, (error, result) ->
                         if not error
-                            resultArr = []
-                            $.each result, (name, value) ->
-                                resultArr[name] = value
-
                             NProgress.inc()
-                            zipGen.addBuffer "timestamp.tsr", resultArr
+                            for item in result
+                                resultArr = []
+                                for key, value of item.response
+                                    resultArr[key] = value
+                                bufferName = servers.tsa_servers[item.tsa] + '.tsr'
+                                zipGen.addBuffer bufferName, resultArr
+
                             zipGen.generate().then (blob) ->
                                 zipName = filename.substr(0, filename.lastIndexOf('.')) or filename
                                 zipName += ' - Timestamped by ResearchDate.zip'

@@ -1,6 +1,6 @@
 timestamping = require './lib/timestamping'
 
-newMethod = (hash, tsaUrl)->
+timestampGeneratorPromise = (hash, tsaUrl)->
     return new Promise(
         (resolve, reject) ->
             try
@@ -17,7 +17,7 @@ registerMethods = ->
             do @unblock
             promises = []
             tsaUrls.forEach (tsaUrl) ->
-                promises.push newMethod(hash, tsaUrl)
+                promises.push timestampGeneratorPromise(hash, tsaUrl)
 
             Promise.all promises
 
