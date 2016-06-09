@@ -22,14 +22,15 @@ Template.Timestamp.events {
 
         tsaUrls = $(form).find('input[name="tsa_server"]:checked')
 
-        onlyUrlsInArr = []
+        urls = []
         $.each tsaUrls, (name, value) ->
-            onlyUrlsInArr[name] = value.value
+            urls[name] = value.value
 
         artifactFilename = Session.get 'artifactFilename'
 
         stamper = reactiveStamper.get()
-        stamper.timestamp(hash, artifactFilename, onlyUrlsInArr).then((result)->
+
+        stamper.timestamp(hash, artifactFilename, urls).then((result)->
             NProgress.inc()
             NProgress.done()
             FileSaver.saveAs result.data, result.zipName
