@@ -15,30 +15,27 @@ class Verificator
             (resolve, reject) ->
                 if validator.validArgsForVerification(zipFile)
                     reader.load(zipFile).then((files) ->
-                        tsrZippedFile = null
+                        tsrZippedFiles = []
                         originalZippedFile = null
                         files.forEach (element, index, array) ->
                             fileExt = element.substr(element.lastIndexOf('.'), element.length)
                             if fileExt is '.tsr'
-                                tsrZippedFile = reader.getFile element, false
+                                tsrZippedFiles.push reader.getFile element, false
                             else if not originalZippedFile?
                                 originalZippedFile = reader.getFile element, true
-
-                        if not tsrZippedFile?
+                        if tsrZippedFiles.length is 0
                             reject 'TSR_MISSING'
                         else if not originalZippedFile?
                             reject 'ARTIFACT_MISSING'
                         else
-                            Promise.all([tsrZippedFile, originalZippedFile]).then((values)->
-                                tsrBuffer = values[0]
+                            Promise.all([tsrZippedFiles, originalZippedFile]).then((values) ->
                                 artifactStream = values[1]
-
-                                digest.generateDigestWithStream artifactStream, (error, result)->
+                                digest.generateDigestWithStream artifactStream, (error, result) ->
                                     if error
                                         reject error
                                     else
-                                        tsVerifier = new verifier.TimestampVerifier result, tsrBuffer
-                                        resolve tsVerifier.verify()
+                                        tsrVerifier = ((new verifier.TimestampVerifier result, tsrBuffer._result).verify() for tsrBuffer in values[0])
+                                        resolve tsrVerifier
                             ).catch((error) ->
                                 reject error
                             )

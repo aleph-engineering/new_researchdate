@@ -11,10 +11,10 @@ Template.Verification.events {
         ver = new verificator.Verificator()
 
         ver.verify(files[0]).then((result) ->
-            if result is true
-                Toast.info(i18n('verification.messages.info'), '', {width: 800})
-            else
+            if false in result
                 Toast.error(i18n('verification.messages.error'), '', {width: 800})
+            else
+                Toast.info(i18n('verification.messages.info'), '', {width: 800})
         ).catch((error) ->
             if error is 'TSR_MISSING'
                 Toast.error(i18n('verification.messages.not_tsr'), '', {width: 800})
