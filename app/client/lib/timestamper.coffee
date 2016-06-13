@@ -26,6 +26,7 @@ class Timestamper
                             resolve result
                 else
                     reject 'Hash could not be generated. Check that the input file is correct.'
+#                    i18n('verification.messages.not_artifact')
         )
 
     timestamp: (hash, filename, tsaUrls) ->
@@ -38,9 +39,7 @@ class Timestamper
                         if not error
                             NProgress.inc()
                             for item in result
-                                resultArr = []
-                                for key, value of item.response
-                                    resultArr[key] = value
+                                resultArr = (value for _, value of item.response)
                                 bufferName = servers.tsa_servers[item.tsa] + '.tsr'
                                 zipGen.addBuffer bufferName, resultArr
 

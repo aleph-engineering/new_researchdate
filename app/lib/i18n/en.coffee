@@ -26,6 +26,7 @@ i18n.map 'en', timestamp:
     step_1_name: 'Choose the file you want to timestamp.'
     step_2_name: 'Select the TSA. (?)'
     step_3_name: 'Time stamp.'
+    not_hash_generated: 'Hash could not be generated. Check that the input file is correct.'
 
 i18n.map 'en', timestampList:
     hash_result: 'Hash Result'
