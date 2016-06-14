@@ -52,13 +52,13 @@ Template.Verification.onRendered ->
     dropzoneForZip.options.acceptedFiles = '.zip'
 
     dropzoneForZip.on 'addedfile', (file)->
-        $('#step-button-verify :button').prop('disabled', false)
+        $('#step-button-verify :button').prop 'disabled', false
         $('#zipInput').removeClass 'error'
-        $('#step-button-verify :button').prop('disabled', false)
+        $('#step-button-verify :button').prop 'disabled', false
 
         dropzoneForZip.on 'error', (file, response)->
             $('#zipInput').addClass('error')
-            $('#step-button-verify :button').prop('disabled', true)
+            $('#step-button-verify :button').prop 'disabled', true
 
             $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
                 attr.replace '/img/check.svg', '/img/empty-check.svg'

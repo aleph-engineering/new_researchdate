@@ -7,5 +7,6 @@ Meteor.startup ->
         maxFiles: 1
     }
 
+
     NProgress.configure({parent: "#timestamp-progress-bar", showSpinner: false, minimum: 0.3})
 

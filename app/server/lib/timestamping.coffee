@@ -21,7 +21,6 @@ class TimestampGenerator
             @param hash: The hash to extract the information to save from.
         ###
         date = new Date()
-        # TODO:(Helen Garcia Glez) Replace server when selection TSA implemented.
         Timestamps.insert hash: hash, creationDate: date, server: tsaUrl
 
     _makeTimestampRequest: (tsaUrl, requestOptions) =>
@@ -61,9 +60,6 @@ class TimestampGenerator
         catch e
             console.log e
             throw e
-
-
-    _freeTSA: 'https://freetsa.org/tsr'
 
 
 exports.TimestampGenerator = TimestampGenerator

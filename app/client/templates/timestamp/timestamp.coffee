@@ -12,7 +12,7 @@ Template.Timestamp.events {
     'submit #artifact-form': (e) ->
         e.preventDefault()
 
-        $('#timestamp-progress-bar').css("display", "block")
+        $('#timestamp-progress-bar').css 'display', 'block'
 
         # Init the progress bar nprogress
         NProgress.start()
@@ -36,7 +36,6 @@ Template.Timestamp.events {
             FileSaver.saveAs result.data, result.zipName
         ).catch((error) ->
             Toast.error(error, '', {width: 800})
-#            $('#original-artifact').addClass('error')
         )
 
     'click #step-number': (e) ->
@@ -45,8 +44,10 @@ Template.Timestamp.events {
 
     'click #step-servers': (e) ->
         dropzone = Dropzone.forElement('#original-artifact')
+
+        $('#step-button :button').prop 'disabled', true if $('input[name="tsa_server"]:checked').length is 0
         if validator.dropzoneEmpty(dropzone)
-            $('#original-artifact').addClass('error')
+            $('#original-artifact').addClass 'error'
         else
             $('#step-servers .materialboxed').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
@@ -61,7 +62,6 @@ Template.Timestamp.events {
 
             $('#step-button .materialboxed').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
-
 }
 
 Template.Timestamp.helpers {
@@ -72,7 +72,10 @@ Template.Timestamp.helpers {
 # Timestamp: Lifecycle Hooks
 Template.Timestamp.onCreated ->
 
+
 Template.Timestamp.onRendered ->
+    $('.tooltipped').tooltip({delay: 50})
+
     dropzone = Dropzone.forElement('#original-artifact')
     $('#timestamp-page-link').addClass 'active'
 
@@ -80,8 +83,8 @@ Template.Timestamp.onRendered ->
     do $('.indicator').remove;
 
     dropzone.on 'addedfile', (file) ->
-        $('#step-servers :input').prop('disabled', false)
-        $('#step-button :button').prop('disabled', false)
+        $('#step-servers :input').prop 'disabled', false
+        $('#step-button :button').prop 'disabled', false
 
         $('#original-artifact').removeClass('error')
         Session.set 'artifactHash', ''
@@ -94,28 +97,26 @@ Template.Timestamp.onRendered ->
         ).catch((error) ->
             Session.set 'artifactHash', 'NONE'
 
-            $('#original-artifact').addClass('error')
-            $('#step-servers :input').prop('disabled', true)
-            $('#step-button :button').prop('disabled', true)
+            $('#original-artifact').addClass 'error'
+            $('#step-servers :input').prop 'disabled', true
+            $('#step-button :button').prop 'disabled', true
         )
 
     dropzone.on 'removedfile', (file) ->
-        $('#original-artifact').addClass('error')
-        $('#timestamp-progress-bar').css("display", "none")
-
-        $('#step-servers :input').prop('disabled', true)
-        $('#step-button :button').prop('disabled', true)
-
-        $('#step-servers .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/check.svg', '/img/empty-check.svg'
-
-        $('#step-button .materialboxed').attr 'src', (index, attr) ->
-            attr.replace '/img/check.svg', '/img/empty-check.svg'
+        do disablingSteps
 
 Template.Timestamp.onDestroyed ->
     $('#timestamp-page-link').removeClass 'active'
 
+disablingSteps = ->
+    $('#original-artifact').addClass 'error'
+    $('#timestamp-progress-bar').css 'display', 'none'
 
+    $('#step-servers :input').prop 'disabled', true
+    $('#step-button :button').prop 'disabled', true
 
+    $('#step-servers .materialboxed').attr 'src', (index, attr) ->
+        attr.replace '/img/check.svg', '/img/empty-check.svg'
 
-
+    $('#step-button .materialboxed').attr 'src', (index, attr) ->
+        attr.replace '/img/check.svg', '/img/empty-check.svg'

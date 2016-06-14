@@ -24,11 +24,9 @@ template(name='Timestamp')
                     img.materialboxed(src='/img/empty-check.svg')
                 .content-container.col
                     h5 {{i18n 'timestamp.step_1_name'}}
-                    +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick files here to upload'
-
+                    +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick file here to upload (the file is not loaded on the server)'
         .col
             form(id='artifact-form' method='post' action="{{pathFor 'Timestamp'}}")
-
                 #step-servers.row.step
 
                     .number.col.s2.m2.l2.left
@@ -40,19 +38,19 @@ template(name='Timestamp')
                     .content-container.col
                         h5 {{i18n 'timestamp.step_2_name'}}
                         .col.s6.m4.l3
-                            p
-                                input(type='checkbox' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked disabled)
+                            p(class="tooltipped" data-position="bottom" data-delay="300" data-tooltip='https://freetsa.org/tsr')
+                                input(type='checkbox' id='free_tsa' name='tsa_server' value='https://freetsa.org/tsr' checked disabled class="btn tooltipped" data-position="top" data-delay="50" data-tooltip="I am in top!")
                                 label(for='free_tsa') FreeTSA
                         .col.s6.m4.l3
-                            p
+                            p(class="tooltipped" data-position="bottom" data-delay="300" data-tooltip='Canada: http://tsa.startssl.com/rfc3161')
                                 input(type='checkbox' id='tsa_startssl' name='tsa_server' value='http://tsa.startssl.com/rfc3161' disabled)
                                 label(for='tsa_startssl') Startssl
                         .col.s6.m4.l3
-                            p
+                            p(class="tooltipped" data-position="bottom" data-delay="300" data-tooltip='Poland: http://time.certum.pl')
                                 input(type='checkbox' id='time_certum' name='tsa_server' value='http://time.certum.pl' disabled)
                                 label(for='time_certum') Time.Certum
                         .col.s6.m4.l3
-                            p
+                            p(class="tooltipped" data-position="bottom" data-delay="300" data-tooltip='Germany: http://zeitstempel.dfn.de/')
                                 input(type='checkbox' id='zeitstempel' name='tsa_server' value='http://zeitstempel.dfn.de' disabled)
                                 label(for='zeitstempel') Zeitstempel
 
@@ -68,5 +66,5 @@ template(name='Timestamp')
                             h5 {{i18n 'timestamp.step_3_name'}}
                             #tmp-btn.col.s3.m3.l3.left
                                 button(id='timestamp-button' type='submit' class='btn' name='timestamp' disabled) {{i18n 'timestamp.submit_btn'}}
-                            .col.s9.m9.l9
+                            #progress-bar.col.s9.m9.l9
                                 #timestamp-progress-bar
