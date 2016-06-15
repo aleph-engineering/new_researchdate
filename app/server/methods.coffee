@@ -15,10 +15,7 @@ registerMethods = ->
     Meteor.methods
         'server/timestamp': (hash, tsaUrls) ->
             do @unblock
-            promises = []
-            tsaUrls.forEach (tsaUrl) ->
-                promises.push timestampGeneratorPromise(hash, tsaUrl)
-
+            promises = (timestampGeneratorPromise(hash, tsaUrl) for tsaUrl in tsaUrls)
             Promise.all promises
 
 do registerMethods

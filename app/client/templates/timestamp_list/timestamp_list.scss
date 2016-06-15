@@ -15,6 +15,11 @@
   .current {
     background-color: $color-green1;
   }
+
+  li.page:not(.disabled):hover {
+    background-color: $color-grey1;
+    cursor: pointer;
+  }
 }
 
 label.active {
