@@ -34,6 +34,8 @@ Template.Timestamp.events {
             NProgress.inc()
             NProgress.done()
             FileSaver.saveAs result.data, result.zipName
+
+            Meteor._reload.reload()
         ).catch((error) ->
             Toast.error(error, '', {width: 800})
         )
