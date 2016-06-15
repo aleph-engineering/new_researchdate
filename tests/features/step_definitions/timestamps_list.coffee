@@ -20,7 +20,7 @@ module.exports = ->
         server.execute(() -> Timestamps.remove({}))
 
     @Then /^I can see 10 timestamps in the timestamps list$/, ->
-        timestamps = browser.getText 'table#timestamp-list tbody tr td.hash-cell'
+        timestamps = browser.getText '#timestamp-list tbody tr td.hash-cell'
         expect(timestamps.length).toBe 10
 
     @Then /^I can see there is not timestamps in the timestamps list$/, ->
