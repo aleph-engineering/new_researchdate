@@ -71,4 +71,7 @@ Template.Verification.onRendered ->
         $('#step-button-verify img').attr 'src', (index, attr) ->
             attr.replace '/img/check.svg', '/img/empty-check.svg'
 
+    dropzoneForZip.on 'uploadprogress', () ->
+        $(".dz-progress").remove();
+
 Template.Verification.onDestroyed ->

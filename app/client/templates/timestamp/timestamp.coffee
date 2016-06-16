@@ -69,6 +69,8 @@ Template.Timestamp.events {
 Template.Timestamp.helpers {
     artifactHash: ->
         Session.get 'artifactHash'
+
+
 }
 
 # Timestamp: Lifecycle Hooks
@@ -106,6 +108,9 @@ Template.Timestamp.onRendered ->
 
     dropzone.on 'removedfile', (file) ->
         do disablingSteps
+
+    dropzone.on 'uploadprogress', () ->
+        $(".dz-progress").remove();
 
 Template.Timestamp.onDestroyed ->
     $('#timestamp-page-link').removeClass 'active'

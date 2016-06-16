@@ -1,8 +1,8 @@
 template(name='TimestampList')
 
-    .col.s12.container
+    .col.s12.m12.l12.container
         .row
-            .input-field.col.s4.offset-s8
+            .input-field.col.s4.offset-s8.m4.offset-m8.l4.offset-l8
                 +EasySearch.Input(index=timestampIndex attributes=inputAttributes)
                 label: i.mdi-action-search.flow-text
                 i.mdi-navigation-close
@@ -21,7 +21,7 @@ template(name='TimestampList')
                         td #{server}
 
         #paginated.row
-            .col.s4.offset-s8
+            .col.s4.offset-s8.m4.offset-m8.l4.offset-l8
                 +EasySearch.Pagination(index=timestampIndex)
 
         +EasySearch.IfNoResults(index=timestampIndex)

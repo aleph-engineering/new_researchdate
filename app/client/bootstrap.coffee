@@ -4,7 +4,7 @@ Meteor.startup ->
         url: '#',
         addRemoveLinks: true,
         uploadMultiple: false,
-        maxFiles: 1
+        maxFiles: 1,
     }
 
 
