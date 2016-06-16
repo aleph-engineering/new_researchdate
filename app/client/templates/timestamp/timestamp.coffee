@@ -41,8 +41,7 @@ Template.Timestamp.events {
         )
 
     'click #step-number': (e) ->
-        $('#step-number img').attr 'src', (index, attr) ->
-            attr.replace '/img/empty-check.svg', '/img/check.svg'
+        Template.instance().image.set '/img/check.svg'
 
     'click #step-servers': (e) ->
         dropzone = Dropzone.forElement('#original-artifact')
@@ -70,11 +69,13 @@ Template.Timestamp.helpers {
     artifactHash: ->
         Session.get 'artifactHash'
 
-
+    image: ->
+        return Template.instance().image.get()
 }
 
 # Timestamp: Lifecycle Hooks
 Template.Timestamp.onCreated ->
+    @image = new ReactiveVar '/img/empty-check.svg'
 
 
 Template.Timestamp.onRendered ->

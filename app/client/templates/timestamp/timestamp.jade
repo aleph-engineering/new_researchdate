@@ -21,7 +21,7 @@ template(name='Timestamp')
                         span 1
                         | ST. STEP
                 .check.col.s2.m2.l2
-                    img(src='/img/empty-check.svg')
+                    img(src='{{image}}')
                 .content-container.col
                     h5 {{i18n 'timestamp.step_1_name'}}
                     +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick file here to upload (the file is not loaded on the server)'
