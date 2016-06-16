@@ -41,7 +41,7 @@ Template.Timestamp.events {
         )
 
     'click #step-number': (e) ->
-        $('#step-number .materialboxed').attr 'src', (index, attr) ->
+        $('#step-number img').attr 'src', (index, attr) ->
             attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     'click #step-servers': (e) ->
@@ -51,7 +51,7 @@ Template.Timestamp.events {
         if validator.dropzoneEmpty(dropzone)
             $('#original-artifact').addClass 'error'
         else
-            $('#step-servers .materialboxed').attr 'src', (index, attr) ->
+            $('#step-servers img').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     'click #step-button': (e) ->
@@ -59,10 +59,10 @@ Template.Timestamp.events {
         if validator.dropzoneEmpty(dropzone)
             $('#original-artifact').addClass('error')
         else
-            $('#step-servers .materialboxed').attr 'src', (index, attr) ->
+            $('#step-servers img').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 
-            $('#step-button .materialboxed').attr 'src', (index, attr) ->
+            $('#step-button img').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 }
 
@@ -117,8 +117,8 @@ disablingSteps = ->
     $('#step-servers :input').prop 'disabled', true
     $('#step-button :button').prop 'disabled', true
 
-    $('#step-servers .materialboxed').attr 'src', (index, attr) ->
+    $('#step-servers img').attr 'src', (index, attr) ->
         attr.replace '/img/check.svg', '/img/empty-check.svg'
 
-    $('#step-button .materialboxed').attr 'src', (index, attr) ->
+    $('#step-button img').attr 'src', (index, attr) ->
         attr.replace '/img/check.svg', '/img/empty-check.svg'

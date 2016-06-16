@@ -27,7 +27,7 @@ Template.Verification.events {
         )
 
     'click #step-dropzone-verify': (e) ->
-        $('#step-dropzone-verify .materialboxed').attr 'src', (index, attr) ->
+        $('#step-dropzone-verify img').attr 'src', (index, attr) ->
             attr.replace '/img/empty-check.svg', '/img/check.svg'
 
     'click #step-button-verify': (e) ->
@@ -36,7 +36,7 @@ Template.Verification.events {
         if validator.dropzoneEmpty dropzoneForZip
             $('#zipInput').addClass 'error'
         else
-            $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
+            $('#step-button-verify img').attr 'src', (index, attr) ->
                 attr.replace '/img/empty-check.svg', '/img/check.svg'
 }
 
@@ -60,7 +60,7 @@ Template.Verification.onRendered ->
             $('#zipInput').addClass('error')
             $('#step-button-verify :button').prop 'disabled', true
 
-            $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
+            $('#step-button-verify img').attr 'src', (index, attr) ->
                 attr.replace '/img/check.svg', '/img/empty-check.svg'
 
     dropzoneForZip.on 'removedfile', (file)->
@@ -68,7 +68,7 @@ Template.Verification.onRendered ->
 
         $('#step-button-verify :button').prop('disabled', true)
 
-        $('#step-button-verify .materialboxed').attr 'src', (index, attr) ->
+        $('#step-button-verify img').attr 'src', (index, attr) ->
             attr.replace '/img/check.svg', '/img/empty-check.svg'
 
 Template.Verification.onDestroyed ->

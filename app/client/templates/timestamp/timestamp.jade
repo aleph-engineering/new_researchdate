@@ -21,7 +21,7 @@ template(name='Timestamp')
                         span 1
                         | ST. STEP
                 .check.col.s2.m2.l2
-                    img.materialboxed(src='/img/empty-check.svg')
+                    img(src='/img/empty-check.svg')
                 .content-container.col
                     h5 {{i18n 'timestamp.step_1_name'}}
                     +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick file here to upload (the file is not loaded on the server)'
@@ -34,7 +34,7 @@ template(name='Timestamp')
                             span 2
                             | ND. STEP
                     .check.col.s2.m2.l2
-                        img.materialboxed(src='/img/empty-check.svg')
+                        img(src='/img/empty-check.svg')
                     .content-container.col
                         h5 {{i18n 'timestamp.step_2_name'}}
                         .col.s6.m4.l3
@@ -60,7 +60,7 @@ template(name='Timestamp')
                             span 3
                             | RD. STEP
                     .check.col.s2.m2.l2
-                        img.materialboxed(src='/img/empty-check.svg')
+                        img(src='/img/empty-check.svg')
                     .content-container.col
                         .row
                             h5 {{i18n 'timestamp.step_3_name'}}
