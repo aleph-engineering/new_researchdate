@@ -3,11 +3,11 @@ template(name='TimestampList')
     .col.s12.m12.l12.container
         .row
             .input-field.col.s4.offset-s8.m4.offset-m8.l4.offset-l8
+                i.material-icons.prefix search
                 +EasySearch.Input(index=timestampIndex attributes=inputAttributes)
-                label: i.mdi-action-search.flow-text
-                i.mdi-navigation-close
+                label {{i18n 'timestampList.search'}}
 
-        table(id='timestamp-list' class="striped bordered centered responsive-table")
+        table#timestamp-list.striped.bordered.centered.responsive-table
             thead
                 tr
                     th {{i18n 'timestampList.hash_result'}}
@@ -25,4 +25,4 @@ template(name='TimestampList')
                 +EasySearch.Pagination(index=timestampIndex)
 
         +EasySearch.IfNoResults(index=timestampIndex)
-            div(class="no-results") {{i18n 'timestampList.no_results'}}
+            .no-results {{i18n 'timestampList.no_results'}}

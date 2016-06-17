@@ -22,11 +22,30 @@
   }
 }
 
-label.active {
-  visibility: hidden;
+.input-field .prefix.active {
+  color: $color-green1;
 }
 
-.input-field input[type=search]:focus {
-  border-bottom: 1px solid $color-red2;
+.input-field .prefix.active {
+  color: $color-green1;
+}
+
+.input-field {
+
+  input[type=search] {
+    padding-left: inherit;
+
+    &:focus {
+      border-bottom: 1px solid $color-red2;
+
+      &:not([readonly]) + label {
+        color: $color-green1;
+      }
+    }
+  }
+}
+
+.no-results {
+  color: $color-green1;
 }
 

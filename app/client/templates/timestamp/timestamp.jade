@@ -26,7 +26,7 @@ template(name='Timestamp')
                     h5 {{i18n 'timestamp.step_1_name'}}
                     +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick file here to upload (the file is not loaded on the server)'
         .col
-            form(id='artifact-form' method='post' action="{{pathFor 'Timestamp'}}")
+            form#artifact-form(method='post' action="{{pathFor 'Timestamp'}}")
                 #step-servers.row.step
 
                     .number.col.s2.m2.l2.left
@@ -65,6 +65,6 @@ template(name='Timestamp')
                         .row
                             h5 {{i18n 'timestamp.step_3_name'}}
                             #tmp-btn.col.s3.m3.l3.left
-                                button(id='timestamp-button' type='submit' class='btn' name='timestamp' disabled) {{i18n 'timestamp.submit_btn'}}
+                                button#timestamp-button(type='submit' class='btn' name='timestamp' disabled) {{i18n 'timestamp.submit_btn'}}
                             #progress-bar.col.s9.m9.l9
                                 #timestamp-progress-bar

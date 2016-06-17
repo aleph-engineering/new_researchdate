@@ -119,15 +119,6 @@ input[type="checkbox"] + label:before {
   padding: 3em auto;
 }
 
-.content-container {
-  width: 60%;
-
-  input[type=radio]:checked + label:after {
-    background-color: $color-green;
-    border: $color-green;
-  }
-}
-
 @media only screen and (min-width: $big-screen-min-width) {
   ul.tabs {
     height: 5em;
@@ -181,15 +172,15 @@ input[type="checkbox"] + label:before {
       font-size: 25px;
     }
   }
-
-  #generate-tab {
-    padding-top: 20px;
-    #timestamp-button {
-      width: 100%;
-      margin-bottom: 1em;
-      float: left;
-    }
+  #timestamp-button {
+    width: 100%;
+    margin-bottom: 1em;
+    float: left;
   }
+}
+
+#generate-tab {
+  padding-top: 20px;
 }
 
 #timestamp-progress-bar {

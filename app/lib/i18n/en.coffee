@@ -33,3 +33,4 @@ i18n.map 'en', timestampList:
     creation_date: 'Creation Date'
     server_used: 'Server used'
     no_results: 'No results found!'
+    search: 'Search'
