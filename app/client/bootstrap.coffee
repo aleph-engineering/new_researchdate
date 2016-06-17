@@ -5,6 +5,7 @@ Meteor.startup ->
         addRemoveLinks: true,
         uploadMultiple: false,
         maxFiles: 1,
+        dictCancelUpload: ''
     }
 
 
