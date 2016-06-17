@@ -7,6 +7,10 @@ Session.setDefault 'artifactFilename', ''
 
 reactiveStamper = new ReactiveVar(new timestamper.Timestamper())
 
+imageT1 = new ReactiveVar '/img/empty-check.svg'
+imageT2 = new ReactiveVar '/img/empty-check.svg'
+imageT3 = new ReactiveVar '/img/empty-check.svg'
+
 Template.Timestamp.events {
 
     'submit #artifact-form': (e) ->
@@ -40,8 +44,8 @@ Template.Timestamp.events {
             Toast.error(error, '', {width: 800})
         )
 
-    'click #step-number': (e) ->
-        Template.instance().image.set '/img/check.svg'
+    'click #step-dropzone': (e) ->
+        imageT1.set '/img/check.svg'
 
     'click #step-servers': (e) ->
         dropzone = Dropzone.forElement('#original-artifact')
@@ -50,33 +54,31 @@ Template.Timestamp.events {
         if validator.dropzoneEmpty(dropzone)
             $('#original-artifact').addClass 'error'
         else
-            $('#step-servers img').attr 'src', (index, attr) ->
-                attr.replace '/img/empty-check.svg', '/img/check.svg'
+            imageT2.set '/img/check.svg'
 
     'click #step-button': (e) ->
         dropzone = Dropzone.forElement('#original-artifact')
         if validator.dropzoneEmpty(dropzone)
             $('#original-artifact').addClass('error')
         else
-            $('#step-servers img').attr 'src', (index, attr) ->
-                attr.replace '/img/empty-check.svg', '/img/check.svg'
-
-            $('#step-button img').attr 'src', (index, attr) ->
-                attr.replace '/img/empty-check.svg', '/img/check.svg'
+            imageT2.set '/img/check.svg'
+            imageT3.set '/img/check.svg'
 }
 
 Template.Timestamp.helpers {
     artifactHash: ->
         Session.get 'artifactHash'
 
-    image: ->
-        return Template.instance().image.get()
+    imageStepT1: ->
+        imageT1.get()
+    imageStepT2: ->
+        imageT2.get()
+    imageStepT3: ->
+        imageT3.get()
 }
 
 # Timestamp: Lifecycle Hooks
 Template.Timestamp.onCreated ->
-    @image = new ReactiveVar '/img/empty-check.svg'
-
 
 Template.Timestamp.onRendered ->
     $('.tooltipped').tooltip({delay: 50})
@@ -108,23 +110,17 @@ Template.Timestamp.onRendered ->
         )
 
     dropzone.on 'removedfile', (file) ->
-        do disablingSteps
+        $('#original-artifact').addClass 'error'
+        $('#timestamp-progress-bar').css 'display', 'none'
+
+        $('#step-servers :input').prop 'disabled', true
+        $('#step-button :button').prop 'disabled', true
+
+        imageT2.set('/img/empty-check.svg')
+        imageT3.set('/img/empty-check.svg')
 
     dropzone.on 'uploadprogress', () ->
         $(".dz-progress").remove();
 
 Template.Timestamp.onDestroyed ->
     $('#timestamp-page-link').removeClass 'active'
-
-disablingSteps = ->
-    $('#original-artifact').addClass 'error'
-    $('#timestamp-progress-bar').css 'display', 'none'
-
-    $('#step-servers :input').prop 'disabled', true
-    $('#step-button :button').prop 'disabled', true
-
-    $('#step-servers img').attr 'src', (index, attr) ->
-        attr.replace '/img/check.svg', '/img/empty-check.svg'
-
-    $('#step-button img').attr 'src', (index, attr) ->
-        attr.replace '/img/check.svg', '/img/empty-check.svg'

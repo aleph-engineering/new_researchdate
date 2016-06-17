@@ -7,7 +7,7 @@ template(name='Verification')
                         span 1
                         | ST. STEP
                 .check.col.s2.m2.l2
-                    img(src='/img/empty-check.svg')
+                    img(src='{{imageStepV1}}')
                 .content-container.col
                     h5 {{i18n 'verification.step_1_name'}}
                     +dropzone class='dropzone' id='zipInput' name='zip' dictDefaultMessage='Drop or pick zip file containing the timestamp'
@@ -19,7 +19,7 @@ template(name='Verification')
                         span 2
                         | ND. STEP
                 .check.col.s2.m2.l2
-                    img(src='/img/empty-check.svg')
+                    img(src='{{imageStepV2}}')
                 .content-container.col
                     .row
                         h5 {{i18n 'verification.step_2_name'}}

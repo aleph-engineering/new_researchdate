@@ -1,6 +1,9 @@
 verificator = require '../../lib/verificator'
 validator = require '../../lib/validator'
 
+imageV1 = new ReactiveVar '/img/empty-check.svg'
+imageV2 = new ReactiveVar '/img/empty-check.svg'
+
 Template.Verification.events {
 
     'submit #verify-form': (e) ->
@@ -27,8 +30,7 @@ Template.Verification.events {
         )
 
     'click #step-dropzone-verify': (e) ->
-        $('#step-dropzone-verify img').attr 'src', (index, attr) ->
-            attr.replace '/img/empty-check.svg', '/img/check.svg'
+        imageV1.set('/img/check.svg')
 
     'click #step-button-verify': (e) ->
         dropzoneForZip = Dropzone.forElement('#zipInput')
@@ -36,11 +38,15 @@ Template.Verification.events {
         if validator.dropzoneEmpty dropzoneForZip
             $('#zipInput').addClass 'error'
         else
-            $('#step-button-verify img').attr 'src', (index, attr) ->
-                attr.replace '/img/empty-check.svg', '/img/check.svg'
+            imageV2.set('/img/check.svg')
 }
 
 Template.Verification.helpers {
+
+    imageStepV1: ->
+        imageV1.get()
+    imageStepV2: ->
+        imageV2.get()
 
 }
 
@@ -60,16 +66,14 @@ Template.Verification.onRendered ->
             $('#zipInput').addClass('error')
             $('#step-button-verify :button').prop 'disabled', true
 
-            $('#step-button-verify img').attr 'src', (index, attr) ->
-                attr.replace '/img/check.svg', '/img/empty-check.svg'
+            imageV2.set('/img/empty-check.svg')
 
     dropzoneForZip.on 'removedfile', (file)->
         $('#zipInput').addClass('error')
 
         $('#step-button-verify :button').prop('disabled', true)
 
-        $('#step-button-verify img').attr 'src', (index, attr) ->
-            attr.replace '/img/check.svg', '/img/empty-check.svg'
+        imageV2.set('/img/empty-check.svg')
 
     dropzoneForZip.on 'uploadprogress', () ->
         $(".dz-progress").remove();
