@@ -90,6 +90,7 @@ Template.Timestamp.onRendered ->
     do $('.indicator').remove;
 
     dropzone.on 'addedfile', (file) ->
+        $(".dz-progress").remove();
         $('#step-servers :input').prop 'disabled', false
         $('#step-button :button').prop 'disabled', false
 
@@ -118,9 +119,6 @@ Template.Timestamp.onRendered ->
 
         imageT2.set('/img/empty-check.svg')
         imageT3.set('/img/empty-check.svg')
-
-    dropzone.on 'uploadprogress', () ->
-        $(".dz-progress").remove();
 
 Template.Timestamp.onDestroyed ->
     $('#timestamp-page-link').removeClass 'active'

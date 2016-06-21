@@ -161,6 +161,10 @@ input[type="checkbox"] + label:before {
   }
 }
 
+.content-container {
+  width: 60%;
+}
+
 @media only screen and (max-width: $small-screen-max-width) {
   ul.tabs {
 

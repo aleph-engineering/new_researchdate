@@ -8,7 +8,7 @@ fileExist = (file) ->
     file?.length > 0
 
 fileIsValid = (file) ->
-    file?.size <= 266454270
+    file?.size <= 251658240
 
 dropzoneEmpty = (dropzone) ->
     dropzone.files.length is 0

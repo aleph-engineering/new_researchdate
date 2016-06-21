@@ -2,10 +2,12 @@ Meteor.startup ->
 
     Meteor.Dropzone.options = {
         url: '#',
+        autoProcessQueue: false,
         addRemoveLinks: true,
         uploadMultiple: false,
+        parallelUploads: 1,
         maxFiles: 1,
-        dictCancelUpload: ''
+        maxFilesize: 256
     }
 
 

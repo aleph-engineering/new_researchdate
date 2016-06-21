@@ -26,7 +26,6 @@ class Timestamper
                             resolve result
                 else
                     reject 'Hash could not be generated. Check that the input file is correct.'
-#                    i18n('verification.messages.not_artifact')
         )
 
     timestamp: (hash, filename, tsaUrls) ->
