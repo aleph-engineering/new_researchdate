@@ -22,7 +22,7 @@ template(name='TimestampList')
 
         #paginated.row
             .col.s4.offset-s8.m4.offset-m8.l4.offset-l8
-                +EasySearch.Pagination(index=timestampIndex)
+                +EasySearch.Pagination(index=timestampIndex maxPages=6)
 
         +EasySearch.IfNoResults(index=timestampIndex)
             .no-results {{i18n 'timestampList.no_results'}}
