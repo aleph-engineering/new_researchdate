@@ -39,7 +39,7 @@ Template.Timestamp.events {
             NProgress.done()
             FileSaver.saveAs result.data, result.zipName
 
-            Meteor._reload.reload()
+#            Meteor._reload.reload()
         ).catch((error) ->
             Toast.error(error, '', {width: 800})
         )
@@ -92,7 +92,6 @@ Template.Timestamp.onRendered ->
     dropzone.on 'addedfile', (file) ->
         $(".dz-progress").remove();
         $('#step-servers :input').prop 'disabled', false
-        $('#step-button :button').prop 'disabled', false
 
         $('#original-artifact').removeClass('error')
         Session.set 'artifactHash', ''
@@ -102,6 +101,7 @@ Template.Timestamp.onRendered ->
         stamper.generateHash(file).then((result) ->
             Session.set 'artifactHash', result
             Session.set 'artifactFilename', file.name
+            $('#step-button :button').prop 'disabled', false
         ).catch((error) ->
             Session.set 'artifactHash', 'NONE'
 

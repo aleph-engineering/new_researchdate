@@ -58,6 +58,7 @@ Template.Verification.onRendered ->
     dropzoneForZip.options.acceptedFiles = '.zip'
 
     dropzoneForZip.on 'addedfile', (file)->
+        $(".dz-progress").remove();
         $('#step-button-verify :button').prop 'disabled', false
         $('#zipInput').removeClass 'error'
         $('#step-button-verify :button').prop 'disabled', false

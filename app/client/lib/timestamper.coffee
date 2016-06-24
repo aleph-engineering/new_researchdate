@@ -15,17 +15,17 @@ class Timestamper
         zipGen = @zipHandler
         return new Promise(
             (resolve, reject) ->
-                if validator.fileIsValid(file)
-                    zipGen.addFile file
+#                if validator.fileIsValid(file)
+                zipGen.addFile file
 
-                    digestStream = FileReaderStream file
-                    digest.generateDigestWithStream digestStream, (error, result) ->
-                        if error
-                            reject error
-                        else
-                            resolve result
-                else
-                    reject 'Hash could not be generated. Check that the input file is correct.'
+                digestStream = FileReaderStream file
+                digest.generateDigestWithStream digestStream, (error, result) ->
+                    if error
+                        reject error
+                    else
+                        resolve result
+#                else
+#                    reject 'Hash could not be generated. Check that the input file is correct.'
         )
 
     timestamp: (hash, filename, tsaUrls) ->
