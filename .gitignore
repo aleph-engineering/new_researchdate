@@ -2,4 +2,5 @@
 *.log
 app/node_modules
 test/media
-
+config/development/settings.json
+config/production/settings.json
