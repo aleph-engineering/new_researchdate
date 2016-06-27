@@ -43,3 +43,6 @@ aldeed:simple-schema
 aldeed:collection2
 easy:search
 mrt:nprogress
+accounts-google
+service-configuration
+accounts-ui
