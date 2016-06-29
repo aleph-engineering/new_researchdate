@@ -44,6 +44,39 @@ Template.Timestamp.events {
             Toast.error(error, '', {width: 800})
         )
 
+    'click #googledrive-button': (e) ->
+        googleUser = Meteor.users.findOne()
+
+        drv = "drive/v2/files/"
+        #        folder =  drv + "0Bx3dTZ_Sau1gaENic0FZcGJKdDA"
+
+        #        GoogleApi.get(folder + '/children', user: googleUser).then((result)->
+
+        body =
+            'mimeType': 'TEST.txt'
+            'title': 'test'
+        #            'parents': [ { 'id': '0Bx3dTZ_Sau1gaENic0FZcGJKdDA' } ]
+
+        GoogleApi.post(drv,
+            user: googleUser
+            data: body).then((result)->
+
+            Toast.info('Successful', '', {width: 800})
+        ).catch((error) ->
+            Toast.error(error, '', {width: 800})
+        )
+
+#            for item in result.items
+#                GoogleApi.get(drv + item.id, user: googleUser).then((result)->
+#                    console.log result.title
+#                ).catch((error) ->
+#                    console.log error
+#                )
+#
+#        ).catch((error) ->
+#            console.log error
+#        )
+
     'click #step-dropzone': (e) ->
         imageT1.set '/img/check.svg'
 

@@ -13,6 +13,11 @@ makePublications = ->
         -> Timestamps.find {}
     )
 
+    Meteor.publish(
+        'usersList',
+        -> Meteor.users.find {}
+    )
+
 
 # Do the actual publications process
 do makePublications

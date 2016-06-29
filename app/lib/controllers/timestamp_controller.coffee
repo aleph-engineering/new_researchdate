@@ -3,6 +3,9 @@ class TimestampController extends RouteController
     constructor: ->
         super
 
+    waitOn: ->
+        Meteor.subscribe 'usersList'
+
 
     action: ->
         if @request.method is 'POST'

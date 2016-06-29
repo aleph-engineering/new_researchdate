@@ -82,6 +82,7 @@ mongo-id@1.0.4
 mquandalle:jade@0.4.9
 mquandalle:jade-compiler@0.4.5
 mrt:nprogress@0.2.0
+mrt:q@1.0.1
 mrt:toastjs@2.0.6
 npm-mongo@1.4.43
 oauth@1.1.10
@@ -95,6 +96,7 @@ peerlibrary:blaze-components@0.16.2
 peerlibrary:computed-field@0.3.1
 peerlibrary:data-lookup@0.1.0
 peerlibrary:reactive-field@0.1.0
+percolate:google-api@1.0.3
 practicalmeteor:chai@2.1.0_1
 practicalmeteor:loglevel@1.2.0_2
 practicalmeteor:mocha@2.4.5_2

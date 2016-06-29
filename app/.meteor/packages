@@ -46,3 +46,4 @@ mrt:nprogress
 accounts-google
 service-configuration
 accounts-ui
+percolate:google-api
