@@ -68,8 +68,7 @@ template(name='Timestamp')
                             #tmp-btn.col.s3.m3.l3.left
                                 button#timestamp-button(type='submit' class='btn' name='timestamp' disabled) {{i18n 'timestamp.submit_btn'}}
                                 if currentUser
-                                    #drive
-                                        i.mdi.mdi-folder-google-drive.medium
+                                    i#googledrive-button.mdi.mdi-folder-google-drive.medium
                                     //button#googledrive-button(type='submit' class='btn' name='drive') Save Drive
                             #progress-bar.col.s9.m9.l9
                                 #timestamp-progress-bar

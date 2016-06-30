@@ -11,7 +11,7 @@ imageT1 = new ReactiveVar '/img/empty-check.svg'
 imageT2 = new ReactiveVar '/img/empty-check.svg'
 imageT3 = new ReactiveVar '/img/empty-check.svg'
 
-prueba = new ReactiveVar()
+elementDrive = new ReactiveVar()
 
 Template.Timestamp.events {
 
@@ -42,19 +42,29 @@ Template.Timestamp.events {
 
             FileSaver.saveAs result.data, result.zipName
 
+            elementDrive.set(result)
+
 #            Meteor._reload.reload()
         ).catch((error) ->
             Toast.error(error, '', {width: 800})
         )
 
-    'click #drive': (e) ->
-        body = 'mimeType': prueba.data 'title': prueba.zipName
+    'click #googledrive-button': (e) ->
+        drv = "drive/v2/files/"
 
-        GoogleApi.post("drive/v2/files/", user: Meteor.users.findOne() data: body).then((result)->
+        googleUser = Meteor.users.findOne()
 
-            Toast.info('Successful', '', {width: 800})
+        body =
+            'mimeType': elementDrive.get().data
+            'title': elementDrive.get().zipName
+            'content': elementDrive.get().data
+
+        GoogleApi.post(drv,
+            user: googleUser
+            data: body).then((result)->
+            Toast.info(i18n('timestamp.messages.info'), '', {width: 800})
         ).catch((error) ->
-            Toast.error(error, '', {width: 800})
+            console.log error
         )
 
     'click #step-dropzone': (e) ->

@@ -152,13 +152,17 @@ footer.page-footer {
   background-color: #00ac77;
   min-height: 150px;
 
-  .mdi-dropbox {
-    padding-left: 25px;
+  .mdi {
+    padding-left: 10px;
   }
 ;
 
-  .mdi-amazon {
-    padding-left: 25px;
+  #googlebtn {
+    cursor: all-scroll;
+  }
+
+  #facebookbtn {
+    cursor: all-scroll;
   }
 }
 
