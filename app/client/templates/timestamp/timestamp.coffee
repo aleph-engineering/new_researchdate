@@ -55,9 +55,8 @@ Template.Timestamp.events {
         googleUser = Meteor.users.findOne()
 
         body =
-            'mimeType': elementDrive.get().data
+            'mimeType': 'application/octet-stream'
             'title': elementDrive.get().zipName
-            'content': elementDrive.get().data
 
         GoogleApi.post(drv,
             user: googleUser
@@ -66,6 +65,7 @@ Template.Timestamp.events {
         ).catch((error) ->
             console.log error
         )
+
 
     'click #step-dropzone': (e) ->
         imageT1.set '/img/check.svg'

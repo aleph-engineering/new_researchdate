@@ -39,10 +39,12 @@ class Timestamper
                             NProgress.inc()
                             for item in result
                                 resultArr = (value for _, value of item.response)
+
                                 bufferName = servers.tsa_servers[item.tsa] + '.tsr'
                                 zipGen.addBuffer bufferName, resultArr
 
                             zipGen.generate().then (blob) ->
+                                console.log blob
                                 zipName = filename.substr(0, filename.lastIndexOf('.')) or filename
                                 zipName += ' - Timestamped by ResearchDate.zip'
                                 resolve {
