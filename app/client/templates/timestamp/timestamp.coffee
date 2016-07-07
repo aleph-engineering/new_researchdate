@@ -90,35 +90,47 @@ Template.Timestamp.onRendered ->
     do $('.indicator').remove;
 
     dropzone.on 'addedfile', (file) ->
-        $(".dz-progress").remove();
-        $('#step-servers :input').prop 'disabled', false
+        if validator.dropzoneValid dropzone
+            $('#original-artifact').addClass('error') isnt file.accepted
+            $('#original-artifact').removeClass('error') is file.accepted
 
-        $('#original-artifact').removeClass('error')
-        Session.set 'artifactHash', ''
-        Session.set 'artifactFilename', ''
+            $(".dz-progress").remove();
+            $('#step-servers :input').prop 'disabled', false
 
-        stamper = reactiveStamper.get()
-        stamper.generateHash(file).then((result) ->
-            Session.set 'artifactHash', result
-            Session.set 'artifactFilename', file.name
-            $('#step-button :button').prop 'disabled', false
-        ).catch((error) ->
-            Session.set 'artifactHash', 'NONE'
+            Session.set 'artifactHash', ''
+            Session.set 'artifactFilename', ''
 
+            stamper = reactiveStamper.get()
+            stamper.generateHash(file).then((result) ->
+                Session.set 'artifactHash', result
+                Session.set 'artifactFilename', file.name
+                $('#step-button :button').prop 'disabled', false
+            ).catch((error) ->
+                Session.set 'artifactHash', 'NONE'
+
+                $('#original-artifact').addClass 'error'
+                $('#step-servers :input').prop 'disabled', true
+                $('#step-button :button').prop 'disabled', true
+            )
+        else
             $('#original-artifact').addClass 'error'
             $('#step-servers :input').prop 'disabled', true
             $('#step-button :button').prop 'disabled', true
-        )
 
     dropzone.on 'removedfile', (file) ->
-        $('#original-artifact').addClass 'error'
-        $('#timestamp-progress-bar').css 'display', 'none'
+        if validator.dropzoneValid dropzone
+            $('#step-button :button').prop 'disabled', false
+            $('#step-servers :input').prop 'disabled', false
+            $('#original-artifact').removeClass 'error'
+        else
+            $('#original-artifact').addClass 'error'
+            $('#timestamp-progress-bar').css 'display', 'none'
 
-        $('#step-servers :input').prop 'disabled', true
-        $('#step-button :button').prop 'disabled', true
+            $('#step-servers :input').prop 'disabled', true
+            $('#step-button :button').prop 'disabled', true
 
-        imageT2.set('/img/empty-check.svg')
-        imageT3.set('/img/empty-check.svg')
+            imageT2.set('/img/empty-check.svg')
+            imageT3.set('/img/empty-check.svg')
 
 Template.Timestamp.onDestroyed ->
     $('#timestamp-page-link').removeClass 'active'

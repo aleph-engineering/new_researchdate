@@ -7,7 +7,7 @@ Meteor.startup ->
         uploadMultiple: false,
         parallelUploads: 1,
         maxFiles: 1,
-        maxFilesize: 900
+        maxFilesize: 520
     }
 
 

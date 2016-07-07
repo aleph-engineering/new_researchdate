@@ -6,5 +6,6 @@ Template.Home.helpers {}
 Template.Home.onCreated ->
 
 Template.Home.onRendered ->
+    console.log 'pepe'
 
 Template.Home.onDestroyed ->

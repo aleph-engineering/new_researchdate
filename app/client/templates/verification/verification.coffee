@@ -63,18 +63,20 @@ Template.Verification.onRendered ->
         $('#zipInput').removeClass 'error'
         $('#step-button-verify :button').prop 'disabled', false
 
-        dropzoneForZip.on 'error', (file, response)->
-            $('#zipInput').addClass('error')
-            $('#step-button-verify :button').prop 'disabled', true
-
-            imageV2.set('/img/empty-check.svg')
-
-    dropzoneForZip.on 'removedfile', (file)->
+    dropzoneForZip.on 'error', (file, response)->
         $('#zipInput').addClass('error')
-
-        $('#step-button-verify :button').prop('disabled', true)
+        $('#step-button-verify :button').prop 'disabled', true
 
         imageV2.set('/img/empty-check.svg')
+
+    dropzoneForZip.on 'removedfile', (file)->
+        if validator.dropzoneValid dropzoneForZip
+            $('#step-button-verify :button').prop 'disabled', false
+            $('#zipInput').removeClass 'error'
+        else
+            $('#step-button-verify :button').prop('disabled', true)
+            $('#zipInput').addClass('error')
+            imageV2.set('/img/empty-check.svg')
 
     dropzoneForZip.on 'uploadprogress', () ->
         $(".dz-progress").remove();
