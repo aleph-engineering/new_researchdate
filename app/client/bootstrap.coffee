@@ -1,4 +1,5 @@
 Meteor.startup ->
+    Session.setDefault 'process', true
 
     Meteor.Dropzone.options = {
         url: '#',
