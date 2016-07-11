@@ -217,13 +217,14 @@ input[type="checkbox"] + label:before {
   padding-top: 10px;
 }
 
-#progress-prueba-bar {
-  padding-top: 15px;
-}
+//#progress-prueba-bar {
+//  padding-top: 15px;
+//}
 
 #dropzone-progress-bar {
   display: none;
   min-height: 37px;
   border: 1px;
   background-color: $color-grey1;
+  margin: 0.90rem 0 0 0.60rem;
 }
