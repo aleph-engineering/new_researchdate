@@ -24,8 +24,12 @@ template(name='Timestamp')
                 .check.col.s2.m2.l2
                     img(src='{{imageStepT1}}')
                 .content-container.col
-                    h5 {{i18n 'timestamp.step_1_name'}}
-                    +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick file here to upload (the file is not loaded on the server)'
+                    .row
+                        .col
+                            h5 {{i18n 'timestamp.step_1_name'}}
+                            +dropzone class='dropzone' id='original-artifact' dictDefaultMessage='Drop or pick file here to upload (the file is not loaded on the server)'
+                        #progress-prueba-bar.col.s9.m9.l9
+                            #dropzone-progress-bar
         .col
             form#artifact-form(method='post' action="{{pathFor 'Timestamp'}}")
                 #step-servers.row.step

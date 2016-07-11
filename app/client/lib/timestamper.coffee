@@ -19,6 +19,7 @@ class Timestamper
                     zipGen.addFile file
 
                     digestStream = FileReaderStream file
+                    NProgress.inc()
                     digest.generateDigestWithStream digestStream, (error, result) ->
                         if error
                             reject error

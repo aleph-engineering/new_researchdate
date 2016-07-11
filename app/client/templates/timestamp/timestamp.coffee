@@ -14,6 +14,8 @@ imageT3 = new ReactiveVar '/img/empty-check.svg'
 Template.Timestamp.events {
 
     'submit #artifact-form': (e) ->
+        NProgress.configure({parent: "#timestamp-progress-bar", showSpinner: false, minimum: 0.3})
+
         e.preventDefault()
 
         $('#timestamp-progress-bar').css 'display', 'block'
@@ -39,7 +41,7 @@ Template.Timestamp.events {
             NProgress.done()
             FileSaver.saveAs result.data, result.zipName
 
-#            Meteor._reload.reload()
+            Meteor._reload.reload()
         ).catch((error) ->
             Toast.error(error, '', {width: 800})
         )
@@ -90,7 +92,10 @@ Template.Timestamp.onRendered ->
     do $('.indicator').remove;
 
     dropzone.on 'addedfile', (file) ->
+        NProgress.configure({parent: "#dropzone-progress-bar", showSpinner: false, minimum: 0.3})
+
         if validator.dropzoneValid dropzone
+
             $('#original-artifact').addClass('error') isnt file.accepted
             $('#original-artifact').removeClass('error') is file.accepted
 
@@ -101,10 +106,15 @@ Template.Timestamp.onRendered ->
             Session.set 'artifactFilename', ''
 
             stamper = reactiveStamper.get()
+            $('#dropzone-progress-bar').css 'display', 'block'
+            NProgress.start()
             stamper.generateHash(file).then((result) ->
+                NProgress.inc()
                 Session.set 'artifactHash', result
                 Session.set 'artifactFilename', file.name
+                NProgress.done()
                 $('#step-button :button').prop 'disabled', false
+                $('#dropzone-progress-bar').css 'display', 'none'
             ).catch((error) ->
                 Session.set 'artifactHash', 'NONE'
 

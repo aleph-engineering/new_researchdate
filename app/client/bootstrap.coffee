@@ -11,6 +11,3 @@ Meteor.startup ->
         maxFilesize: 520
     }
 
-
-    NProgress.configure({parent: "#timestamp-progress-bar", showSpinner: false, minimum: 0.3})
-
