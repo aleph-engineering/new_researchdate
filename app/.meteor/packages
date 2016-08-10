@@ -34,7 +34,6 @@ anti:i18n
 practicalmeteor:mocha
 practicalmeteor:chai
 practicalmeteor:sinon
-promise
 velocity:meteor-stubs
 mrt:toastjs
 dapearce:material-icons
@@ -48,3 +47,4 @@ service-configuration
 accounts-ui
 sacha:spin
 session
+promise

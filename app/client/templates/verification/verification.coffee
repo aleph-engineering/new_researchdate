@@ -3,6 +3,7 @@ validator = require '../../lib/validator'
 
 imageV1 = new ReactiveVar '/img/empty-check.svg'
 imageV2 = new ReactiveVar '/img/empty-check.svg'
+label= new ReactiveVar 'pepe'
 
 Template.Verification.events {
 
@@ -15,16 +16,21 @@ Template.Verification.events {
 
         ver.verify(files[0]).then((result) ->
             if false in result
-                Toast.error(i18n('verification.messages.error'), '', {width: 800})
+                label.set i18n('verification.messages.error')
+                $('#step-messages').css 'background-color', '#cc0000'
             else
-                Toast.info(i18n('verification.messages.info'), '', {width: 800})
+                label.set i18n('verification.messages.info')
+                $('#step-messages').css 'background-color', '#02a349'
         ).catch((error) ->
             if error is 'TSR_MISSING'
-                Toast.error(i18n('verification.messages.not_tsr'), '', {width: 800})
+                label.set i18n('verification.messages.not_tsr')
+                $('#step-messages').css 'background-color', '#cc0000'
             else if error is 'ARTIFACT_MISSING'
-                Toast.error(i18n('verification.messages.not_artifact'), '', {width: 800})
+                label.set i18n('verification.messages.not_artifact')
+                $('#step-messages').css 'background-color', '#cc0000'
             else if error.toString().length > 0
-                Toast.error(error, '', {width: 800})
+                label.set(error)
+                $('#step-messages').css 'background-color', '#cc0000'
             else
                 zipZone.addClass('error')
         )
@@ -48,6 +54,8 @@ Template.Verification.helpers {
     imageStepV2: ->
         imageV2.get()
 
+    labelMsg: ->
+        label.get()
 }
 
 # Verification: Lifecycle Hooks

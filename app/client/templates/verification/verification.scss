@@ -1,6 +1,7 @@
 /*****************************************************************************/
 /* Verification: Style */
 /*****************************************************************************/
+@import "../../stylesheets/colors.scss";
 
 .verification {
   margin-left: 13px;
@@ -14,3 +15,17 @@
 #verify-btn {
   padding-top: 10px;
 }
+
+#step-messages {
+  border: 1px solid $color-grey2;
+  padding: 0.5em;
+  min-height: 20px;
+  text-align: center;
+
+  .properties {
+    color: white;
+    font-size: large;
+  }
+}
+
+
