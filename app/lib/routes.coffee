@@ -15,6 +15,11 @@ configure = ->
         name: 'Timestamp'
         controller: 'TimestampController'
 
+    #  This is the Contact an About us route.
+    Router.route '/contact',
+        name: 'Contact'
+        controller: 'ContactController'
+
 
 do configure
 

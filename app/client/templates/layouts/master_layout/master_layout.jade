@@ -11,7 +11,7 @@ template(name='MasterLayout')
                     li
                         a(id="timestamp-page-link" href="{{ pathFor 'Timestamp' }}") STAMP YOUR STUFF
                     li
-                        a(href='#') ABOUT US CONTACT
+                        a(id="contact-page-link" href="{{ pathFor 'Contact' }}") ABOUT US CONTACT
 
     ul#mobile-nav.side-nav
         li
@@ -19,7 +19,7 @@ template(name='MasterLayout')
         li
             a(id="timestamp-page-link" href="{{ pathFor 'Timestamp' }}") STAMP YOUR STUFF
         li
-            a(href='#') ABOUT US CONTACT
+            a(id="contact-page-link" href="{{ pathFor 'Contact' }}") ABOUT US CONTACT
 
     section#page-content
         +yield
