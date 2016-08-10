@@ -17,20 +17,20 @@ Template.Verification.events {
         ver.verify(files[0]).then((result) ->
             if false in result
                 label.set i18n('verification.messages.error')
-                $('#step-messages').css 'background-color', '#cc0000'
+                $('#step-messages').addClass 'msg-error'
             else
                 label.set i18n('verification.messages.info')
-                $('#step-messages').css 'background-color', '#02a349'
+                $('#step-messages').addClass 'msg-info'
         ).catch((error) ->
             if error is 'TSR_MISSING'
                 label.set i18n('verification.messages.not_tsr')
-                $('#step-messages').css 'background-color', '#cc0000'
+                $('#step-messages').addClass 'msg-error'
             else if error is 'ARTIFACT_MISSING'
                 label.set i18n('verification.messages.not_artifact')
-                $('#step-messages').css 'background-color', '#cc0000'
+                $('#step-messages').addClass 'msg-error'
             else if error.toString().length > 0
                 label.set(error)
-                $('#step-messages').css 'background-color', '#cc0000'
+                $('#step-messages').addClass 'msg-error'
             else
                 zipZone.addClass('error')
         )
@@ -67,7 +67,6 @@ Template.Verification.onRendered ->
 
     dropzoneForZip.on 'addedfile', (file)->
         $(".dz-progress").remove();
-        $('#step-button-verify :button').prop 'disabled', false
         $('#zipInput').removeClass 'error'
         $('#step-button-verify :button').prop 'disabled', false
 
@@ -82,9 +81,11 @@ Template.Verification.onRendered ->
             $('#step-button-verify :button').prop 'disabled', false
             $('#zipInput').removeClass 'error'
         else
-            $('#step-button-verify :button').prop('disabled', true)
-            $('#zipInput').addClass('error')
-            imageV2.set('/img/empty-check.svg')
+            $('#step-button-verify :button').prop 'disabled', true
+            $('#step-messages').removeClass 'msg-info'
+            $('#step-messages').removeClass 'msg-error'
+            $('#zipInput').addClass 'error'
+            imageV2.set '/img/empty-check.svg'
 
     dropzoneForZip.on 'uploadprogress', () ->
         $(".dz-progress").remove();

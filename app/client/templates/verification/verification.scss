@@ -21,11 +21,22 @@
   padding: 0.5em;
   min-height: 20px;
   text-align: center;
+  display: none;
 
   .properties {
     color: white;
     font-size: large;
   }
+}
+
+.msg-info {
+  display: block !important;
+  background-color: $color-green1
+}
+
+.msg-error {
+  display: block !important;
+  background-color: $color-red2
 }
 
 
