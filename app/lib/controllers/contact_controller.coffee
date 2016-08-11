@@ -6,5 +6,4 @@ class ContactController extends RouteController
     action: ->
         do @render
 
-
 exports.ContactController = @ContactController = ContactController
