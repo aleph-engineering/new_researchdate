@@ -3,3 +3,36 @@
 /*****************************************************************************/
 @import "../../stylesheets/main";
 @import "../../stylesheets/colors.scss";
+
+#contactForm fieldset {
+    border: none !important;
+
+  label {
+    color: black;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+
+  input {
+    margin-top: 10px;
+    border: 1px solid;
+    border-radius: 0.4em;
+    border-color: #cccccc;
+  }
+
+  textarea {
+    margin-top: 10px;
+    border-radius: 0.4em;
+    height: 6rem;
+    border-color: #cccccc;
+    margin-bottom: 15px;
+
+    .control-label {
+      color: #02b449;
+    }
+  }
+}
+
+a {
+  color: black;
+}

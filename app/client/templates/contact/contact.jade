@@ -1,15 +1,18 @@
 template(name='Contact')
-    .container.divider
+    #underline.col.s12.m12.l12
+    .row
     .row.container
-        .col.s8.m8.l8
+        .col.s6.m6.l6
             .row
-                h5.left-align Contact Us
+                h5.left-align {{i18n 'contact.contact'}}
             .row
-                h6 We are happy to answer any questions you have. Just send us message in the form below with any questions you have.
+                h6 {{i18n 'contact.text'}}
             .row
-                +contactForm
-        .col.s4.m4.l4
+            #step-contact.row
+                | {{>contactForm}}
+        .col.s1.m1.l1
+        .col.s5.m5.l5
             .row
-                h5.left-align About Us
+                h5.left-align {{i18n 'contact.about'}}
             .row
-                a(id="aleph-url" href="http://mobile-legends.eu/alephWP-sandbox2/excellentpeople/") http://mobile-legends.eu/alephWP-sandbox2/excellentpeople/
+                a(id="aleph-url" href="http://mobile-legends.eu/alephWP-sandbox2/excellentpeople/") {{i18n 'contact.aleph_site'}}
