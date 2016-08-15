@@ -14,8 +14,12 @@ $small-screen-min-width: 400px;
 
 $mobile-screen-max-width: 399px;
 
-body {
+header{
   font-family: "Advent Pro";
+}
+
+body {
+  font-family: Helvetica;
   min-width: 440px;
 }
 
