@@ -39,4 +39,4 @@ i18n.map 'en', contact:
     contact: 'Contact Us'
     text: 'We are happy to answer any questions you have. Just send us message in the form below with any questions you have.'
     about: 'About Us'
-    aleph_site: 'http://mobile-legends.eu/alephWP-sandbox2/excellentpeople/'
+    aleph_site: 'http://aleph.engineering/'
